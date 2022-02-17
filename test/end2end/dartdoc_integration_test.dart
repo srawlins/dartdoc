@@ -171,7 +171,7 @@ void main() {
       ],
       workingDirectory: packageDir.io.path,
     );
-    await process.shouldExit(1);
+    await process.shouldExit(isNot(0));
   });
 
   test('with missing FLUTTER_ROOT exception reports an error', () async {
