@@ -351,28 +351,6 @@ class _Renderer_Accessor extends RendererBase<Accessor> {
                         getters: _invisibleGetters['CommentReferable']!));
                   },
                 ),
-                'sourceCode': Property(
-                  getValue: (CT_ c) => c.sourceCode,
-                  renderVariable:
-                      (CT_ c, Property<CT_> self, List<String> remainingNames) {
-                    if (remainingNames.isEmpty) {
-                      return self.getValue(c).toString();
-                    }
-                    var name = remainingNames.first;
-                    var nextProperty =
-                        _Renderer_String.propertyMap().getValue(name);
-                    return nextProperty.renderVariable(
-                        self.getValue(c) as String,
-                        nextProperty,
-                        [...remainingNames.skip(1)]);
-                  },
-                  isNullValue: (CT_ c) => false,
-                  renderValue: (CT_ c, RendererBase<CT_> r,
-                      List<MustachioNode> ast, StringSink sink) {
-                    _render_String(c.sourceCode, ast, r.template, sink,
-                        parent: r);
-                  },
-                ),
               }) as Map<String, Property<CT_>>;
 
   _Renderer_Accessor(Accessor context, RendererBase<Object>? parent,
@@ -5976,28 +5954,6 @@ class _Renderer_Field extends RendererBase<Field> {
                         parent: r);
                   },
                 ),
-                'sourceCode': Property(
-                  getValue: (CT_ c) => c.sourceCode,
-                  renderVariable:
-                      (CT_ c, Property<CT_> self, List<String> remainingNames) {
-                    if (remainingNames.isEmpty) {
-                      return self.getValue(c).toString();
-                    }
-                    var name = remainingNames.first;
-                    var nextProperty =
-                        _Renderer_String.propertyMap().getValue(name);
-                    return nextProperty.renderVariable(
-                        self.getValue(c) as String,
-                        nextProperty,
-                        [...remainingNames.skip(1)]);
-                  },
-                  isNullValue: (CT_ c) => false,
-                  renderValue: (CT_ c, RendererBase<CT_> r,
-                      List<MustachioNode> ast, StringSink sink) {
-                    _render_String(c.sourceCode, ast, r.template, sink,
-                        parent: r);
-                  },
-                ),
               }) as Map<String, Property<CT_>>;
 
   _Renderer_Field(Field context, RendererBase<Object>? parent,
@@ -10784,28 +10740,6 @@ class _Renderer_ModelElement extends RendererBase<ModelElement> {
                         parent: r);
                   },
                 ),
-                'sourceCode': Property(
-                  getValue: (CT_ c) => c.sourceCode,
-                  renderVariable:
-                      (CT_ c, Property<CT_> self, List<String> remainingNames) {
-                    if (remainingNames.isEmpty) {
-                      return self.getValue(c).toString();
-                    }
-                    var name = remainingNames.first;
-                    var nextProperty =
-                        _Renderer_String.propertyMap().getValue(name);
-                    return nextProperty.renderVariable(
-                        self.getValue(c) as String,
-                        nextProperty,
-                        [...remainingNames.skip(1)]);
-                  },
-                  isNullValue: (CT_ c) => false,
-                  renderValue: (CT_ c, RendererBase<CT_> r,
-                      List<MustachioNode> ast, StringSink sink) {
-                    _render_String(c.sourceCode, ast, r.template, sink,
-                        parent: r);
-                  },
-                ),
                 'sourceFileName': Property(
                   getValue: (CT_ c) => c.sourceFileName,
                   renderVariable:
@@ -13168,13 +13102,6 @@ class _Renderer_SourceCode extends RendererBase<SourceCode> {
                         parent: r, getters: _invisibleGetters['Element']!);
                   },
                 ),
-                'hasSourceCode': Property(
-                  getValue: (CT_ c) => c.hasSourceCode,
-                  renderVariable: (CT_ c, Property<CT_> self,
-                          List<String> remainingNames) =>
-                      self.renderSimpleVariable(c, remainingNames, 'bool'),
-                  getBool: (CT_ c) => c.hasSourceCode,
-                ),
                 'library': Property(
                   getValue: (CT_ c) => c.library,
                   renderVariable:
@@ -13207,28 +13134,6 @@ class _Renderer_SourceCode extends RendererBase<SourceCode> {
                       List<MustachioNode> ast, StringSink sink) {
                     renderSimple(c.modelNode, ast, r.template, sink,
                         parent: r, getters: _invisibleGetters['ModelNode']!);
-                  },
-                ),
-                'sourceCode': Property(
-                  getValue: (CT_ c) => c.sourceCode,
-                  renderVariable:
-                      (CT_ c, Property<CT_> self, List<String> remainingNames) {
-                    if (remainingNames.isEmpty) {
-                      return self.getValue(c).toString();
-                    }
-                    var name = remainingNames.first;
-                    var nextProperty =
-                        _Renderer_String.propertyMap().getValue(name);
-                    return nextProperty.renderVariable(
-                        self.getValue(c) as String,
-                        nextProperty,
-                        [...remainingNames.skip(1)]);
-                  },
-                  isNullValue: (CT_ c) => false,
-                  renderValue: (CT_ c, RendererBase<CT_> r,
-                      List<MustachioNode> ast, StringSink sink) {
-                    _render_String(c.sourceCode, ast, r.template, sink,
-                        parent: r);
                   },
                 ),
               }) as Map<String, Property<CT_>>;
@@ -16359,7 +16264,7 @@ const _invisibleGetters = {
     'runtimeType',
     'superclassConstraints'
   },
-  'ModelNode': {'commentData', 'hashCode', 'runtimeType', 'sourceCode'},
+  'ModelNode': {'commentData', 'hashCode', 'runtimeType'},
   'PackageGraph': {
     'allConstructedModelElements',
     'allExtensionsAdded',

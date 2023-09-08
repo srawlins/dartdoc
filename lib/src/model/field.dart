@@ -169,32 +169,6 @@ class Field extends ModelElement
   @override
   String? get belowSidebarPath => null;
 
-  late final String _sourceCode = () {
-    // We could use a set to figure the dupes out, but that would lose ordering.
-    var fieldSourceCode = modelNode?.sourceCode ?? '';
-    var getterSourceCode = getter?.sourceCode ?? '';
-    var setterSourceCode = setter?.sourceCode ?? '';
-    var buffer = StringBuffer();
-    if (fieldSourceCode.isNotEmpty) {
-      fieldSourceCode = const HtmlEscape().convert(fieldSourceCode);
-      buffer.write(fieldSourceCode);
-    }
-    if (buffer.isNotEmpty) buffer.write('\n\n');
-    if (fieldSourceCode != getterSourceCode) {
-      if (getterSourceCode != setterSourceCode) {
-        buffer.write(getterSourceCode);
-        if (buffer.isNotEmpty) buffer.write('\n\n');
-      }
-    }
-    if (fieldSourceCode != setterSourceCode) {
-      buffer.write(setterSourceCode);
-    }
-    return buffer.toString().trim();
-  }();
-
-  @override
-  String get sourceCode => _sourceCode;
-
   @override
   Inheritable? get overriddenElement => null;
 }

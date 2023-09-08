@@ -1960,11 +1960,6 @@ void main() async {
       expect(Apple.publicVariableStaticFieldsSorted, hasLength(1));
     });
 
-    test('constructors have source', () {
-      var ctor = Dog.constructors.first;
-      expect(ctor.sourceCode, isNotEmpty);
-    });
-
     test('get constants', () {
       expect(Apple.constantFields.wherePublic, hasLength(1));
       expect(
@@ -3071,15 +3066,6 @@ void main() async {
               '</span>'));
     });
 
-    test('has source code', () {
-      expect(topLevelFunction.sourceCode, startsWith('@deprecated'));
-      expect(topLevelFunction.sourceCode, endsWith('''
-String? topLevelFunction(int param1, bool param2, Cool coolBeans,
-    [double optionalPositional = 0.0]) {
-  return null;
-}'''));
-    });
-
     test('typedef params have proper signature', () {
       var function = fakeLibrary.functions.named('addCallback');
       var params =
@@ -3222,25 +3208,16 @@ String? topLevelFunction(int param1, bool param2, Cool coolBeans,
   group('Method', () {
     late final Class classB,
         klass,
-        HasGenerics,
         Cat,
         CatString,
         TypedFunctionsWithoutTypedefs;
-    late final Method m1,
-        isGreaterThan,
-        m4,
-        m5,
-        m6,
-        m7,
-        convertToMap,
-        abstractMethod;
+    late final Method m1, isGreaterThan, m4, m5, m6, m7, abstractMethod;
     late final Method inheritedClear, testGeneric, testGenericMethod;
     late final Method getAFunctionReturningVoid, getAFunctionReturningBool;
 
     setUpAll(() {
       klass = exLibrary.classes.named('Klass');
       classB = exLibrary.classes.named('B');
-      HasGenerics = fakeLibrary.classes.named('HasGenerics');
       CatString = exLibrary.classes.named('CatString');
       Cat = exLibrary.classes.named('Cat');
       inheritedClear =
@@ -3264,8 +3241,6 @@ String? topLevelFunction(int param1, bool param2, Cool coolBeans,
           .named('Dog')
           .instanceMethods
           .singleWhere((m) => m.name == 'testGenericMethod');
-      convertToMap = HasGenerics.instanceMethods
-          .singleWhere((m) => m.name == 'convertToMap');
       TypedFunctionsWithoutTypedefs =
           exLibrary.classes.named('TypedFunctionsWithoutTypedefs');
       getAFunctionReturningVoid = TypedFunctionsWithoutTypedefs.instanceMethods
@@ -3387,11 +3362,6 @@ String? topLevelFunction(int param1, bool param2, Cool coolBeans,
       var comment2 = m6.documentation;
       expect(comment, equals('Another method'));
       expect(comment2, equals('A shadowed method'));
-    });
-
-    test('method source code indents correctly', () {
-      expect(convertToMap.sourceCode,
-          'Map&lt;X, Y&gt;? convertToMap() =&gt; null;');
     });
   });
 
@@ -4501,89 +4471,6 @@ String? topLevelFunction(int param1, bool param2, Cool coolBeans,
     test('library has the exact errors/exceptions we expect', () {
       expect(exLibrary.exceptions.map((e) => e.name),
           unorderedEquals(expectedNames));
-    });
-  });
-
-  group('Source Code HTML', () {
-    Class EscapableProperties;
-    late final Field implicitGetterExplicitSetter, explicitGetterImplicitSetter;
-    late final Field explicitGetterSetter, explicitGetterSetterForInheriting;
-    late final Field finalProperty, simpleProperty, forInheriting;
-    late final Field ensureWholeDeclarationIsVisible;
-
-    setUpAll(() {
-      EscapableProperties =
-          fakeLibrary.classes.named('HtmlEscapableProperties');
-      implicitGetterExplicitSetter = EscapableProperties.allModelElements
-          .firstWhere((e) => e.name == 'implicitGetterExplicitSetter') as Field;
-      explicitGetterImplicitSetter = EscapableProperties.allModelElements
-          .firstWhere((e) => e.name == 'explicitGetterImplicitSetter') as Field;
-      explicitGetterSetter = EscapableProperties.allModelElements
-          .firstWhere((e) => e.name == 'explicitGetterSetter') as Field;
-      finalProperty = EscapableProperties.allModelElements
-          .firstWhere((e) => e.name == 'finalProperty') as Field;
-      simpleProperty = EscapableProperties.allModelElements
-          .firstWhere((e) => e.name == 'simpleProperty') as Field;
-      forInheriting = EscapableProperties.allModelElements
-          .firstWhere((e) => e.name == 'forInheriting') as Field;
-      explicitGetterSetterForInheriting = EscapableProperties.allModelElements
-              .firstWhere((e) => e.name == 'explicitGetterSetterForInheriting')
-          as Field;
-      ensureWholeDeclarationIsVisible = EscapableProperties.allModelElements
-              .firstWhere((e) => e.name == 'ensureWholeDeclarationIsVisible')
-          as Field;
-    });
-
-    test('Normal property fields are escaped', () {
-      expect(finalProperty.sourceCode, contains('&lt;int&gt;'));
-      expect(simpleProperty.sourceCode, contains('&lt;int&gt;'));
-      expect(forInheriting.sourceCode, contains('&lt;int&gt;'));
-    });
-
-    test('Explicit accessors are escaped', () {
-      expect(explicitGetterSetter.getter!.sourceCode, contains('&lt;int&gt;'));
-      expect(explicitGetterSetter.setter!.sourceCode, contains('&lt;int&gt;'));
-    });
-
-    test('Implicit accessors are escaped', () {
-      expect(implicitGetterExplicitSetter.getter!.sourceCode,
-          contains('&lt;int&gt;'));
-      expect(implicitGetterExplicitSetter.setter!.sourceCode,
-          contains('&lt;int&gt;'));
-      expect(explicitGetterImplicitSetter.getter!.sourceCode,
-          contains('&lt;int&gt;'));
-      expect(explicitGetterImplicitSetter.setter!.sourceCode,
-          contains('&lt;int&gt;'));
-      expect(explicitGetterSetterForInheriting.getter!.sourceCode,
-          contains('&lt;int&gt;'));
-      expect(explicitGetterSetterForInheriting.setter!.sourceCode,
-          contains('&lt;int&gt;'));
-    });
-
-    test('Property fields are terminated with semicolon', () {
-      expect(finalProperty.sourceCode.trim(),
-          endsWith('List&lt;int&gt;.filled(1, 1);'));
-      expect(simpleProperty.sourceCode.trim(),
-          endsWith('List&lt;int&gt;.filled(1, 1);'));
-      expect(forInheriting.sourceCode.trim(), endsWith('forInheriting;'));
-    });
-
-    test('Arrow accessors are terminated with semicolon', () {
-      expect(explicitGetterImplicitSetter.getter!.sourceCode.trim(),
-          endsWith('List&lt;int&gt;.filled(1, 1);'));
-      expect(explicitGetterSetter.getter!.sourceCode.trim(),
-          endsWith('List&lt;int&gt;.filled(1, 1);'));
-    });
-
-    test('Traditional accessors are not terminated with semicolon', () {
-      expect(implicitGetterExplicitSetter.setter!.sourceCode.trim(),
-          endsWith('{}'));
-      expect(explicitGetterSetter.setter!.sourceCode.trim(), endsWith('{}'));
-    });
-
-    test('Whole declaration is visible when declaration spans many lines', () {
-      expect(ensureWholeDeclarationIsVisible.sourceCode,
-          contains('List&lt;int&gt;? '));
     });
   });
 

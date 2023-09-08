@@ -5,7 +5,6 @@
 import 'dart:convert';
 
 import 'package:analyzer/dart/analysis/analysis_context.dart';
-import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:meta/meta.dart';
@@ -15,8 +14,6 @@ import 'package:meta/meta.dart';
 class ModelNode {
   final Element _element;
   final AnalysisContext _analysisContext;
-  final int _sourceEnd;
-  final int _sourceOffset;
 
   /// Data about the doc comment of this node.
   final CommentData? commentData;
@@ -28,8 +25,7 @@ class ModelNode {
     CommentData? commentData,
   }) {
     if (sourceNode == null) {
-      return ModelNode._(element, analysisContext,
-          sourceEnd: -1, sourceOffset: -1);
+      return ModelNode._(element, analysisContext);
     } else {
       // Get a node higher up the syntax tree that includes the semicolon.
       // In this case, it is either a [FieldDeclaration] or
@@ -42,8 +38,6 @@ class ModelNode {
       return ModelNode._(
         element,
         analysisContext,
-        sourceEnd: sourceNode.end,
-        sourceOffset: sourceNode.offset,
         commentData: commentData,
       );
     }
@@ -52,31 +46,8 @@ class ModelNode {
   ModelNode._(
     this._element,
     this._analysisContext, {
-    required int sourceEnd,
-    required int sourceOffset,
     this.commentData,
-  })  : _sourceEnd = sourceEnd,
-        _sourceOffset = sourceOffset;
-
-  bool get _isSynthetic => _sourceEnd < 0 || _sourceOffset < 0;
-
-  /// The text of the source code of this node, stripped of the leading
-  /// indentation, and stripped of the doc comments.
-  late final String sourceCode = () {
-    if (_isSynthetic) return '';
-
-    var path = _element.source?.fullName;
-    if (path == null) return '';
-
-    var fileResult = _analysisContext.currentSession.getFile(path);
-    if (fileResult is! FileResult) return '';
-
-    return fileResult.content
-        .substringFromLineStart(_sourceOffset, _sourceEnd)
-        .stripIndent
-        .stripDocComments
-        .trim();
-  }();
+  });
 }
 
 /// Comment data from the syntax tree.
