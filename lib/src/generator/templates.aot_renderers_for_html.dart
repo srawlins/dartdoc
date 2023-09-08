@@ -2146,14 +2146,6 @@ String _deduplicated__constant(GetterSetterCombo context0) {
   buffer.write(context0.oneLineDoc);
   buffer.write('\n  ');
   buffer.write(_deduplicated__attributes(context0));
-  if (context0.hasConstantValueForDisplay) {
-    buffer.writeln();
-    buffer.write('''    <div>
-      <span class="signature"><code>''');
-    buffer.write(context0.constantValueTruncated);
-    buffer.write('''</code></span>
-    </div>''');
-  }
   buffer.writeln();
   buffer.write('''</dd>
 ''');

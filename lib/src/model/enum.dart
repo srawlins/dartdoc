@@ -89,17 +89,6 @@ class EnumField extends Field {
   bool get isEnumValue => true;
 
   @override
-  bool get hasConstantValueForDisplay {
-    final enum_ = element.enclosingElement3 as EnumElement;
-    final enumHasDefaultConstructor =
-        enum_.constructors.any((c) => c.isDefaultConstructor);
-    // If this enum does not have any explicit constructors (and so only has a
-    // default constructor), then there is no meaningful constant initializer to
-    // display.
-    return !enumHasDefaultConstructor;
-  }
-
-  @override
   String get constantValueBase =>
       element.library.featureSet.isEnabled(Feature.enhanced_enums)
           ? super.constantValueBase
