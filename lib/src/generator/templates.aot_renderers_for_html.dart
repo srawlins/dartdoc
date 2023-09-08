@@ -3704,15 +3704,6 @@ String _deduplicated_lib_templates__constant_html(GetterSetterCombo context0) {
   buffer.write('\n  ');
   buffer.write(__deduplicated_lib_templates__constant_html_partial_attributes_1(
       context0));
-  if (context0.hasConstantValueForDisplay) {
-    buffer.writeln();
-    buffer.write('''
-    <div>
-      <span class="signature"><code>''');
-    buffer.write(context0.constantValueTruncated);
-    buffer.write('''</code></span>
-    </div>''');
-  }
   buffer.writeln();
   buffer.write('''
 </dd>
@@ -5040,15 +5031,6 @@ String __deduplicated_lib_templates__static_constants_html_partial_constant_0(
   buffer.write(
       ___deduplicated_lib_templates__static_constants_html_partial_constant_0_partial_attributes_1(
           context1));
-  if (context1.hasConstantValueForDisplay) {
-    buffer.writeln();
-    buffer.write('''
-    <div>
-      <span class="signature"><code>''');
-    buffer.write(context1.constantValueTruncated);
-    buffer.write('''</code></span>
-    </div>''');
-  }
   buffer.writeln();
   buffer.write('''
 </dd>
