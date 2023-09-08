@@ -768,9 +768,6 @@ abstract class ModelElement extends Canonicalization
   }();
 
   @override
-  late final String sourceCode = const HtmlEscape().convert(super.sourceCode);
-
-  @override
   int compareTo(Object other) {
     if (other is ModelElement) {
       return name.toLowerCase().compareTo(other.name.toLowerCase());

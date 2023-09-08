@@ -54,19 +54,6 @@ class Accessor extends ModelElement implements EnclosedElement {
   late final GetterSetterCombo definingCombo =
       getModelForElement(element.variable) as GetterSetterCombo;
 
-  String get _sourceCode {
-    if (!isSynthetic) {
-      return super.sourceCode;
-    }
-    var modelNode = packageGraph.getModelNodeFor(definingCombo.element);
-    return modelNode == null
-        ? ''
-        : const HtmlEscape().convert(modelNode.sourceCode);
-  }
-
-  @override
-  String get sourceCode => _sourceCode;
-
   @override
   late final String documentationComment = () {
     if (isSynthetic) {
