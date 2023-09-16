@@ -3,19 +3,77 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:analyzer/file_system/file_system.dart';
-import 'package:dartdoc/src/dartdoc_options.dart';
 import 'package:dartdoc/src/model/model.dart';
 import 'package:dartdoc/src/warnings.dart';
 import 'package:test/test.dart';
 import 'package:test_reflective_loader/test_reflective_loader.dart';
 
 import 'dartdoc_test_base.dart';
+import 'src/test_descriptor_utils.dart' as d;
 import 'src/utils.dart' as utils;
 
 void main() {
   defineReflectiveSuite(() {
+    defineReflectiveTests(CanonicalForTest);
     defineReflectiveTests(DocumentationCommentTest);
   });
+}
+
+@reflectiveTest
+class CanonicalForTest extends DartdocTestBase {
+  @override
+  String get libraryName => 'canonical_for';
+
+  late Library library;
+
+  PackageGraph get packageGraph => library.packageGraph;
+
+  void test_legalValue() async {
+    library = await bootPackageWithLibrary(libraryPreamble: '''
+/// {@canonical-for library2.MyClass}
+''', '''
+export 'src/library2.dart';
+''', extraFiles: [
+      d.dir('lib/src', [
+        d.file('library2.dart', '''
+class MyClass {}
+''')
+      ]),
+    ]);
+    var canonicalFor = library.canonicalFor;
+    expect(canonicalFor, hasLength(1));
+    expect(canonicalFor, contains('library2.MyClass'));
+    expectNoWarnings();
+  }
+
+  void test_deprecatedTag() async {
+    var library = await bootPackageWithLibrary(libraryPreamble: '''
+/// {@canonicalFor library2.MyClass}
+''', '''
+export 'src/library2.dart';
+''', extraFiles: [
+      d.dir('lib/src', [
+        d.file('library2.dart', '''
+class MyClass {}
+''')
+      ]),
+    ]);
+    var canonicalFor = library.canonicalFor;
+    expect(canonicalFor, hasLength(1));
+    expect(canonicalFor, contains('library2.MyClass'));
+    expect(
+      library,
+      hasDeprecatedWarning(
+        "Deprecated form of @canonical-for tag, '@canonicalFor'. Tag is now "
+        "written '@canonical-for'.",
+      ),
+    );
+  }
+
+  void expectNoWarnings() {
+    expect(packageGraph.packageWarningCounter.hasWarnings, isFalse);
+    expect(packageGraph.packageWarningCounter.countedWarnings, isEmpty);
+  }
 }
 
 @reflectiveTest
@@ -23,46 +81,29 @@ class DocumentationCommentTest extends DartdocTestBase {
   @override
   String get libraryName => 'my_library';
 
-  Matcher hasInvalidParameterWarning(String message) =>
-      _HasWarning(PackageWarning.invalidParameter, message);
-
-  Matcher hasMissingExampleWarning(String message) =>
-      _HasWarning(PackageWarning.missingExampleFile, message);
-
   late Folder projectRoot;
-  late PackageGraph packageGraph;
-  late ModelElement libraryModel;
 
-  void expectNoWarnings() {
-    expect(packageGraph.packageWarningCounter.hasWarnings, isFalse);
-    expect(packageGraph.packageWarningCounter.countedWarnings, isEmpty);
-  }
+  late PackageGraph packageGraph;
+  late Library libraryModel;
 
   @override
   Future<void> setUp() async {
     await super.setUp();
 
     projectRoot = utils.writePackage(
-        'my_package', resourceProvider, packageConfigProvider);
-    projectRoot
-        .getChildAssumingFile('dartdoc_options.yaml')
-        .writeAsStringSync('''
+        'my_package', resourceProvider, packageConfigProvider)
+      ..getChildAssumingFile('dartdoc_options.yaml').writeAsStringSync('''
       dartdoc:
         warnings:
           - missing-code-block-language
-      ''');
-
-    projectRoot
-        .getChildAssumingFolder('lib')
-        .getChildAssumingFile('a.dart')
-        .writeAsStringSync('''
+      ''')
+      ..getChildAssumingFolder('lib')
+          .getChildAssumingFile('a.dart')
+          .writeAsStringSync('''
 /// Documentation comment.
 int x = 1;
 ''');
 
-    var optionSet = DartdocOptionRoot.fromOptionGenerators(
-        'dartdoc', [createDartdocOptions], packageMetaProvider);
-    optionSet.parseArguments([]);
     packageGraph = await utils.bootBasicPackage(
         projectRoot.path, packageMetaProvider, packageConfigProvider,
         additionalArguments: []);
@@ -379,7 +420,7 @@ End text.'''));
 ///
 /// {@template abc}
 /// Template text.
-/// {@endtemplate}
+/// {@end-template}
 ///
 /// End text.
 ''');
@@ -397,7 +438,7 @@ End text.'''));
     var doc = await libraryModel.processComment('''
 /// {@template abc}
 /// Template text.
-/// {@endtemplate}
+/// {@end-template}
 ///
 /// End text.
 ''');
@@ -415,7 +456,7 @@ End text.'''));
 ///
 /// {@template abc}
 /// Template text.
-/// {@endtemplate}
+/// {@end-template}
 ''');
 
     expectNoWarnings();
@@ -431,7 +472,7 @@ Text.
 ///
 /// {@template abc}
 /// Template text.
-/// {@endtemplate}
+/// {@end-template}
 /// End text.
 ''');
 
@@ -447,11 +488,44 @@ End text.'''));
     var doc = await libraryModel.processComment('''
 /// {@template    abc    }
 /// Template text.
-/// {@endtemplate}
+/// {@end-template}
 ''');
 
     expectNoWarnings();
     expect(doc, equals('{@macro abc}'));
+  }
+
+  void test_templateDirectiveUsesDeprecatedSyntax() async {
+    await libraryModel.processComment('''
+/// Text.
+///
+/// {@template a}
+/// More text.
+/// {@endtemplate}
+///
+/// End text.
+''');
+
+    expect(
+      libraryModel,
+      hasDeprecatedWarning(
+        "Deprecated form of @template end tag, '@endtemplate'. End tag is now "
+        "written '{@end-template}'.",
+      ),
+    );
+  }
+
+  void test_templateDirectiveUsesModernSyntax() async {
+    await libraryModel.processComment('''
+/// Text.
+///
+/// {@template a}
+/// More text.
+/// {@end-template}
+///
+/// End text.
+''');
+    expectNoWarnings();
   }
 
   void test_processesExampleDirectiveWithFile() async {
@@ -875,13 +949,24 @@ Text.
             'A fenced code block in Markdown should have a language specified'),
         isFalse);
   }
-  //}, onPlatform: {
-  //  'windows': Skip('These tests do not work on Windows (#2446)')
-  //});
+
+  void expectNoWarnings() {
+    expect(packageGraph.packageWarningCounter.hasWarnings, isFalse);
+    expect(packageGraph.packageWarningCounter.countedWarnings, isEmpty);
+  }
 
 // TODO(srawlins): More unit tests: @example with `config.examplePathPrefix`,
 // @tool.
 }
+
+Matcher hasDeprecatedWarning(String message) =>
+    _HasWarning(PackageWarning.deprecated, message);
+
+Matcher hasInvalidParameterWarning(String message) =>
+    _HasWarning(PackageWarning.invalidParameter, message);
+
+Matcher hasMissingExampleWarning(String message) =>
+    _HasWarning(PackageWarning.missingExampleFile, message);
 
 class _HasWarning extends Matcher {
   final PackageWarning kind;
@@ -910,9 +995,19 @@ class _HasWarning extends Matcher {
     if (actual is ModelElement) {
       var warnings = actual
           .packageGraph.packageWarningCounter.countedWarnings[actual.element];
+
+      if (warnings == null) {
+        return mismatchDescription.add('has no warnings');
+      }
+      if (warnings.length == 1) {
+        var kind = warnings.keys.first;
+        return mismatchDescription
+            .add('has one $kind warnings: ${warnings[kind]}');
+      }
+
       return mismatchDescription.add('has warnings: $warnings');
-    } else {
-      return mismatchDescription.add('is a ${actual.runtimeType}');
     }
+
+    return mismatchDescription.add('is a ${actual.runtimeType}');
   }
 }

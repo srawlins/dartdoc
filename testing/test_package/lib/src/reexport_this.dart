@@ -6,5 +6,5 @@ library reexport_this;
 /// Even if it has links to [Dog] or other classes.
 ///
 /// And if I do, a test should fail.
-/// {@endtemplate}
+/// {@end-template}
 class ClassTemplateOneLiner {}

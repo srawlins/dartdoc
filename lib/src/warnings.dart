@@ -134,7 +134,7 @@ const Map<PackageWarning, PackageWarningDefinition> packageWarningDefinitions =
       'A symbol is exported from private to public in more than one library '
           'and dartdoc can not determine which one is canonical',
       longHelp: [
-        "Use {@canonicalFor $_namePlaceholder} in the desired library's",
+        "Use {@canonicalF-for $_namePlaceholder} in the desired library's",
         "documentation to resolve the ambiguity and/or override dartdoc's",
         'decision, or structure your package so the reexport is less',
         'ambiguous.  The symbol will still be referenced in all candidates --',
@@ -146,7 +146,7 @@ const Map<PackageWarning, PackageWarningDefinition> packageWarningDefinitions =
   PackageWarning.ignoredCanonicalFor: PackageWarningDefinition(
       PackageWarning.ignoredCanonicalFor,
       'ignored-canonical-for',
-      'A @canonicalFor tag refers to a library which this symbol can not be '
+      'A @canonical-for tag refers to a library which this symbol can not be '
           'canonical for'),
   PackageWarning.noCanonicalFound: PackageWarningDefinition(
       PackageWarning.noCanonicalFound,
@@ -319,7 +319,7 @@ enum PackageWarning {
   ambiguousReexport(
       'ambiguous reexport of {0}, canonicalization candidates: {1}'),
   ignoredCanonicalFor(
-      "library says it is {@canonicalFor {0}} but {0} can't be canonical "
+      "library says it is {@canonical-for {0}} but {0} can't be canonical "
       'there'),
 
   // Fix these warnings by adding libraries with `--include`, or by using

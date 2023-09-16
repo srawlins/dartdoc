@@ -896,7 +896,7 @@ class ExtraSpecialList<E> extends SpecialList {}
 /// {@category Excellent}
 /// {@category Unreal}
 /// {@category More Excellence}
-/// {@subCategory Things and Such}
+/// {@sub-category Things and Such}
 /// {@image https://flutter.io/images/catalog-widget-placeholder.png}
 /// {@samples https://flutter.io}
 ///
@@ -977,7 +977,7 @@ enum MacrosFromAccessors {
   /// Define a macro.
   /// {@template test_package_docs:accessorMacro}
   /// This is a macro defined in an Enum accessor.
-  /// {@endtemplate}
+  /// {@end-template}
   macroDefinedHere,
 
   /// Reference a macro.

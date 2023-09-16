@@ -40,7 +40,7 @@ const incorrectDocReferenceFromEx = 'doh';
 ///
 /// {@template ex1}
 /// ex2 macro content
-/// {@endtemplate}
+/// {@end-template}
 int myNumber = 3;
 
 /// {@macro ex1}
@@ -48,7 +48,7 @@ void testMacro() {}
 
 /// {@template ex2}
 /// ex2 macro content
-/// {@endtemplate}
+/// {@end-template}
 bool get isCheck => true;
 
 /// A custom annotation.
@@ -357,7 +357,7 @@ class Dog implements Cat, E {
   ///
   /// {@template foo}
   /// Foo macro content
-  /// {@endtemplate}
+  /// {@end-template}
   ///
   /// More docs
   void withMacro() {}
@@ -367,7 +367,7 @@ class Dog implements Cat, E {
 
   /// {@template private}
   /// Private macro content
-  /// {@endtemplate}
+  /// {@end-template}
   void _macroDefinedPrivately() {}
 
   /// Use a privately defined macro: {@macro private}
@@ -636,7 +636,7 @@ class ToolPrintingMacroWhichInjectsHtml {
   /// Text.
   /// {@template html-macro}
   /// {@inject-html}<div class="title">Title</div>{@end-inject-html}
-  /// {@endtemplate}
+  /// {@end-template}
   int a = 1;
 
   /// Text.

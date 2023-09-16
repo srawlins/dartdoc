@@ -960,17 +960,18 @@ void main() {
     test('with ambiguous reexport warnings', () {
       final warningMsg =
           '(reexport_one, reexport_two) -> reexport_two (confidence 0.000)';
-      // Unicorn class has a warning because two @canonicalFors cancel each other out.
+      // Unicorn class has a warning because two '@canonical-for' directives
+      // cancel each other out.
       expect(
           packageGraph.packageWarningCounter.hasWarning(
               AUnicornClass, PackageWarning.ambiguousReexport, warningMsg),
           isTrue);
-      // This class is ambiguous without a @canonicalFor
+      // This class is ambiguous without a '@canonical-for' directive.
       expect(
           packageGraph.packageWarningCounter.hasWarning(
               YetAnotherClass, PackageWarning.ambiguousReexport, warningMsg),
           isTrue);
-      // These two classes have a @canonicalFor
+      // These two classes have a '@canonical-for' directive.
       expect(
           packageGraph.packageWarningCounter.hasWarning(
               SomeClass, PackageWarning.ambiguousReexport, warningMsg),
@@ -979,7 +980,8 @@ void main() {
           packageGraph.packageWarningCounter.hasWarning(
               SomeOtherClass, PackageWarning.ambiguousReexport, warningMsg),
           isFalse);
-      // This library has a canonicalFor with no corresponding item
+      // This library has a '@canonical-for' directive with no corresponding
+      // item.
       expect(
           packageGraph.packageWarningCounter.hasWarning(reexportTwoLib,
               PackageWarning.ignoredCanonicalFor, 'something.ThatDoesntExist'),
@@ -998,7 +1000,7 @@ void main() {
           isTrue);
     });
 
-    test('@canonicalFor directive works', () {
+    test('@canonical-for directive works', () {
       expect(SomeOtherClass.canonicalLibrary, reexportOneLib);
       expect(SomeClass.canonicalLibrary, reexportTwoLib);
     });

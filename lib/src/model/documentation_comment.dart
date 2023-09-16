@@ -13,7 +13,7 @@ import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p show Context;
 
 final _templatePattern = RegExp(
-    r'[ ]*{@template\s+(.+?)}([\s\S]+?){@endtemplate}[ ]*(\n?)',
+    r'[ ]*{@template\s+(.+?)}([\s\S]+?)({@end-?template})[ ]*(\n?)',
     multiLine: true);
 final _htmlPattern = RegExp(
     r'[ ]*{@inject-html\s*}([\s\S]+?){@end-inject-html}[ ]*\n?',
@@ -146,6 +146,7 @@ mixin DocumentationComment on Documentable, Warnable, Locatable, SourceCode {
   static const _allDirectiveNames = {
     'animation',
     'end-inject-html',
+    'end-template',
     'end-tool',
     'endtemplate',
     'example',
@@ -157,11 +158,13 @@ mixin DocumentationComment on Documentable, Warnable, Locatable, SourceCode {
 
     // Other directives, parsed by `model/directives/*.dart`:
     'api',
+    'canonical-for',
     'canonicalFor',
     'category',
     'hideConstantImplementations',
     'image',
     'samples',
+    'sub-category',
     'subCategory',
 
     // Common Dart annotations which may decorate named parameters:
@@ -612,13 +615,19 @@ mixin DocumentationComment on Documentable, Warnable, Locatable, SourceCode {
   ///
   ///     &#123;@template NAME&#125;
   ///     The contents of the macro
-  ///     &#123;@endtemplate&#125;
+  ///     &#123;@end-template&#125;
   ///
   String _stripMacroTemplatesAndAddToIndex(String rawDocs) {
     return rawDocs.replaceAllMapped(_templatePattern, (match) {
       var name = match[1]!.trim();
       var content = match[2]!.trim();
-      var trailingNewline = match[3];
+      var endTemplateTag = match[3]!;
+      if (endTemplateTag == '{@endtemplate}') {
+        warn(PackageWarning.deprecated,
+            message: "Deprecated form of @template end tag, '@endtemplate'. "
+                "End tag is now written '{@end-template}'.");
+      }
+      var trailingNewline = match[4];
       packageGraph.addMacro(name, content);
       return '{@macro $name}$trailingNewline';
     });
@@ -891,7 +900,7 @@ mixin DocumentationComment on Documentable, Warnable, Locatable, SourceCode {
   ///     Some comments
   ///     &#123;@inject-html&#125;
   ///     &lt;p&gt;[HTML contents!]&lt;/p&gt;
-  ///     &#123;@endtemplate&#125;
+  ///     &#123;@end-template&#125;
   ///     More comments
   ///
   /// and [_stripHtmlAndAddToIndex] will replace your HTML fragment with this:
@@ -933,7 +942,7 @@ mixin DocumentationComment on Documentable, Warnable, Locatable, SourceCode {
   ///
   ///     &#123;@template foo&#125;
   ///     Foo contents!
-  ///     &#123;@endtemplate&#125;
+  ///     &#123;@end-template&#125;
   ///
   /// and them somewhere use it like this:
   ///

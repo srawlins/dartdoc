@@ -28,9 +28,10 @@ abstract mixin class Canonicalization implements Locatable, Documentable {
       }
     }
 
-    // Large boost for @canonicalFor, essentially overriding all other concerns.
+    // Large boost for @canonical-for, essentially overriding all other
+    // concerns.
     if (lib.canonicalFor.contains(fullyQualifiedName)) {
-      scoredCandidate._alterScore(5.0, 'marked @canonicalFor');
+      scoredCandidate._alterScore(5.0, 'marked @canonical-for');
     }
     // Penalty for deprecated libraries.
     if (lib.isDeprecated) scoredCandidate._alterScore(-1.0, 'is deprecated');
@@ -45,12 +46,14 @@ abstract mixin class Canonicalization implements Locatable, Documentable {
     // TODO(jcollins-g): is that even possible?
     assert(locationPieces.isNotEmpty);
     if (locationPieces.isEmpty) return scoredCandidate;
-    // The more pieces we have of the location in our library name, the more we should boost our score.
+    // The more pieces we have of the location in our library name, the more we
+    // should boost our score.
     scoredCandidate._alterScore(
         lib.namePieces.intersection(locationPieces).length.toDouble() /
             locationPieces.length.toDouble(),
         'element location shares parts with name');
-    // If pieces of location at least start with elements of our library name, boost the score a little bit.
+    // If pieces of location at least start with elements of our library name,
+    // boost the score a little bit.
     var scoreBoost = 0.0;
     for (var piece in resplit(locationPieces)) {
       for (var namePiece in lib.namePieces) {

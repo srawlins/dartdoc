@@ -267,7 +267,7 @@ anywhere in the comments, like:
 ```dart
 /// {@template template_name}
 /// Some shared docs
-/// {@endtemplate}
+/// {@end-template}
 ```
 
 and then you can insert it via `{@macro template_name}`, like

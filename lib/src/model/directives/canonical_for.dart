@@ -4,8 +4,9 @@
 
 import 'package:dartdoc/src/model/documentation_comment.dart';
 import 'package:dartdoc/src/model/library.dart';
+import 'package:dartdoc/src/warnings.dart';
 
-final _canonicalRegExp = RegExp(r'{@canonicalFor\s([^}]+)}');
+final _canonicalRegExp = RegExp(r'{@(canonicalFor|canonical-for)\s([^}]+)}');
 
 /// Used by [Library] to implement the `canonicalFor` directive.
 mixin CanonicalFor on DocumentationComment {
@@ -29,7 +30,13 @@ mixin CanonicalFor on DocumentationComment {
     rawDocs = super.buildDocumentationAddition(rawDocs);
     var newCanonicalFor = <String>{};
     rawDocs = rawDocs.replaceAllMapped(_canonicalRegExp, (Match match) {
-      var elementName = match.group(1)!;
+      var canonicalName = match.group(1)!;
+      if (canonicalName == 'canonicalFor') {
+        warn(PackageWarning.deprecated,
+            message: "Deprecated form of @canonical-for tag, '@canonicalFor'. "
+                "Tag is now written '@canonical-for'.");
+      }
+      var elementName = match.group(2)!;
       newCanonicalFor.add(elementName);
       return '';
     });

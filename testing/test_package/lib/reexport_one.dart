@@ -1,5 +1,5 @@
-/// {@canonicalFor reexport.somelib.SomeOtherClass}
-/// {@canonicalFor reexport.somelib.AUnicornClass}
+/// {@canonical-for reexport.somelib.SomeOtherClass}
+/// {@canonical-for reexport.somelib.AUnicornClass}
 /// {@category Unreal}
 
 library reexport_one;

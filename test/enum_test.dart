@@ -434,7 +434,6 @@ enum E {
   one,
   two, three
 }
-
 ''');
     var one = library.enums.named('E').publicEnumValues.named('one');
     expect(one.hasAnnotations, true);
