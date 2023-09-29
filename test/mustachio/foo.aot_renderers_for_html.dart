@@ -5,7 +5,7 @@
 
 // Some deduplicated render functions are generated but not used.
 // TODO(srawlins): Detect these and do not write them.
-// ignore_for_file: unused_element
+// ignore_for_file: Xunused_element
 // Sometimes we enter a new section which triggers creating a new variable, but
 // the variable is not used; generally when the section is checking if a
 // non-bool, non-Iterable field is non-null.

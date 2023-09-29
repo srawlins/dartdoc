@@ -5,7 +5,7 @@
 
 // Some deduplicated render functions are generated but not used.
 // TODO(srawlins): Detect these and do not write them.
-// ignore_for_file: unused_element
+// ignore_for_file: Xunused_element
 // Sometimes we enter a new section which triggers creating a new variable, but
 // the variable is not used; generally when the section is checking if a
 // non-bool, non-Iterable field is non-null.
@@ -15,31 +15,31 @@
 import 'dart:convert';
 
 import 'package:dartdoc/src/generator/template_data.dart';
-import 'package:dartdoc/src/model/accessor.dart';
 import 'package:dartdoc/src/model/canonicalization.dart';
 import 'package:dartdoc/src/model/category.dart';
 import 'package:dartdoc/src/model/class.dart';
 import 'package:dartdoc/src/model/constructor.dart';
 import 'package:dartdoc/src/model/container.dart';
+import 'package:dartdoc/src/model/container_member.dart';
 import 'package:dartdoc/src/model/documentable.dart';
 import 'package:dartdoc/src/model/enum.dart';
 import 'package:dartdoc/src/model/extension.dart';
 import 'package:dartdoc/src/model/extension_type.dart';
 import 'package:dartdoc/src/model/field.dart';
 import 'package:dartdoc/src/model/getter_setter_combo.dart';
+import 'package:dartdoc/src/model/inheritable.dart';
 import 'package:dartdoc/src/model/inheriting_container.dart';
 import 'package:dartdoc/src/model/library.dart';
 import 'package:dartdoc/src/model/method.dart';
-import 'package:dartdoc/src/model/mixin.dart';
 import 'package:dartdoc/src/model/model_element.dart';
 import 'package:dartdoc/src/model/model_function.dart';
-import 'package:dartdoc/src/model/package.dart';
 import 'package:dartdoc/src/model/top_level_variable.dart';
+import 'package:dartdoc/src/model/type_parameter.dart';
 import 'package:dartdoc/src/model/typedef.dart';
 
 String renderTypedef(TypedefTemplateData context0) {
   final buffer = StringBuffer();
-  buffer.write(_renderTypedef_partial_head_0(context0));
+  buffer.write(_deduplicated_lib_templates_html__head_html(context0));
   buffer.writeln();
   buffer.write('''
 
@@ -56,17 +56,15 @@ String renderTypedef(TypedefTemplateData context0) {
   buffer.writeln();
   buffer.write('''
       <div>''');
-  buffer.write(_renderTypedef_partial_source_link_1(context1));
+  buffer.write(_deduplicated_lib_templates_html__source_link_html(context1));
   buffer.write('''<h1><span class="kind-typedef">''');
   buffer.write(context1.nameWithGenerics);
   buffer.write('''</span> ''');
   buffer.writeEscaped(context1.kind.toString());
   buffer.write(' ');
-  buffer.write(_renderTypedef_partial_feature_set_2(context1));
+  buffer.write(_deduplicated_lib_templates_html__feature_set_html(context1));
   buffer.write(' ');
-  buffer.write(
-      ___renderCategory_partial_typedef_10_partial_type_2_partial_categorization_0(
-          context1));
+  buffer.write(_deduplicated_lib_templates_html__categorization_html(context1));
   buffer.write('''</h1></div>''');
   buffer.writeln();
   buffer.write('''
@@ -81,9 +79,9 @@ String renderTypedef(TypedefTemplateData context0) {
 ''');
   var context3 = context0.typeDef;
   buffer.write('\n    ');
-  buffer.write(_renderTypedef_partial_documentation_5(context3));
+  buffer.write(_deduplicated_lib_templates_html__documentation_html(context3));
   buffer.write('\n    ');
-  buffer.write(_renderTypedef_partial_source_code_6(context3));
+  buffer.write(_deduplicated_lib_templates_html__source_code_html(context3));
   buffer.writeln();
   buffer.write('''
 
@@ -91,7 +89,7 @@ String renderTypedef(TypedefTemplateData context0) {
 
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     ''');
-  buffer.write(_renderTypedef_partial_search_sidebar_7(context0));
+  buffer.write(_deduplicated_lib_templates_html__search_sidebar_html(context0));
   buffer.writeln();
   buffer.write('''
     <h5>''');
@@ -106,7 +104,7 @@ String renderTypedef(TypedefTemplateData context0) {
   </div><!--/.sidebar-offcanvas-->
 
 ''');
-  buffer.write(_renderTypedef_partial_footer_8(context0));
+  buffer.write(_deduplicated_lib_templates_html__footer_html(context0));
   buffer.writeln();
 
   return buffer.toString();
@@ -114,7 +112,7 @@ String renderTypedef(TypedefTemplateData context0) {
 
 String renderTopLevelProperty(TopLevelPropertyTemplateData context0) {
   final buffer = StringBuffer();
-  buffer.write(_renderTopLevelProperty_partial_head_0(context0));
+  buffer.write(_deduplicated_lib_templates_html__head_html(context0));
   buffer.writeln();
   buffer.write('''
 
@@ -131,16 +129,15 @@ String renderTopLevelProperty(TopLevelPropertyTemplateData context0) {
   buffer.writeln();
   buffer.write('''
       <div>''');
-  buffer.write(_renderTopLevelProperty_partial_source_link_1(context1));
+  buffer.write(_deduplicated_lib_templates_html__source_link_html(context1));
   buffer.write('''<h1><span class="kind-top-level-property">''');
   buffer.write(context1.name);
   buffer.write('''</span> ''');
   buffer.writeEscaped(context1.kind.toString());
   buffer.write(' ');
-  buffer.write(_renderTopLevelProperty_partial_feature_set_2(context1));
+  buffer.write(_deduplicated_lib_templates_html__feature_set_html(context1));
   buffer.write(' ');
-  buffer.write(
-      __renderCategory_partial_constant_6_partial_categorization_0(context1));
+  buffer.write(_deduplicated_lib_templates_html__categorization_html(context1));
   buffer.write('''</h1></div>
 ''');
   if (context1.hasNoGetterSetter == true) {
@@ -148,11 +145,11 @@ String renderTopLevelProperty(TopLevelPropertyTemplateData context0) {
     buffer.write('''
         <section class="multi-line-signature">
           ''');
-    buffer.write(_renderTopLevelProperty_partial_annotations_4(context1));
+    buffer.write(_deduplicated_lib_templates_html__annotations_html(context1));
     buffer.write('\n          ');
     buffer.write(context1.modelType.linkedName);
     buffer.write('\n          ');
-    buffer.write(_renderTopLevelProperty_partial_name_summary_5(context1));
+    buffer.write(_deduplicated_lib_templates_html__name_summary_html(context1));
     buffer.write('\n          ');
     buffer.write(
         __renderCategory_partial_constant_6_partial_attributes_1(context1));
@@ -160,19 +157,22 @@ String renderTopLevelProperty(TopLevelPropertyTemplateData context0) {
     buffer.write('''
         </section>
         ''');
-    buffer.write(_renderTopLevelProperty_partial_documentation_7(context1));
+    buffer
+        .write(_deduplicated_lib_templates_html__documentation_html(context1));
     buffer.write('\n        ');
-    buffer.write(_renderTopLevelProperty_partial_source_code_8(context1));
+    buffer.write(_deduplicated_lib_templates_html__source_code_html(context1));
   }
   buffer.writeln();
   if (context1.hasExplicitGetter == true) {
     buffer.write('\n        ');
-    buffer.write(_renderTopLevelProperty_partial_accessor_getter_9(context1));
+    buffer.write(
+        _deduplicated_lib_templates_html__accessor_getter_html(context1));
   }
   buffer.writeln();
   if (context1.hasExplicitSetter == true) {
     buffer.write('\n        ');
-    buffer.write(_renderTopLevelProperty_partial_accessor_setter_10(context1));
+    buffer.write(
+        _deduplicated_lib_templates_html__accessor_setter_html(context1));
   }
   buffer.writeln();
   buffer.write('''
@@ -180,7 +180,7 @@ String renderTopLevelProperty(TopLevelPropertyTemplateData context0) {
 
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     ''');
-  buffer.write(_renderTopLevelProperty_partial_search_sidebar_11(context0));
+  buffer.write(_deduplicated_lib_templates_html__search_sidebar_html(context0));
   buffer.writeln();
   buffer.write('''
     <h5>''');
@@ -195,7 +195,7 @@ String renderTopLevelProperty(TopLevelPropertyTemplateData context0) {
   </div><!--/.sidebar-offcanvas-->
 
 ''');
-  buffer.write(_renderTopLevelProperty_partial_footer_12(context0));
+  buffer.write(_deduplicated_lib_templates_html__footer_html(context0));
   buffer.writeln();
 
   return buffer.toString();
@@ -590,7 +590,7 @@ String renderSidebarForContainer<T extends Documentable>(
 
 String renderSearchPage(PackageTemplateData context0) {
   final buffer = StringBuffer();
-  buffer.write(_renderError_partial_head_0(context0));
+  buffer.write(_deduplicated_lib_templates_html__head_html(context0));
   buffer.writeln();
   buffer.write('''
 
@@ -599,7 +599,7 @@ String renderSearchPage(PackageTemplateData context0) {
 
 <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
   ''');
-  buffer.write(_renderError_partial_search_sidebar_1(context0));
+  buffer.write(_deduplicated_lib_templates_html__search_sidebar_html(context0));
   buffer.writeln();
   buffer.write('''
   <h5 class="hidden-xs"><span class="package-name">''');
@@ -608,7 +608,7 @@ String renderSearchPage(PackageTemplateData context0) {
   buffer.writeEscaped(context0.self.kind.toString());
   buffer.write('''</span></h5>
   ''');
-  buffer.write(_renderError_partial_packages_2(context0));
+  buffer.write(_deduplicated_lib_templates_html__packages_html(context0));
   buffer.writeln();
   buffer.write('''
 </div>
@@ -617,7 +617,7 @@ String renderSearchPage(PackageTemplateData context0) {
 </div>
 
 ''');
-  buffer.write(_renderError_partial_footer_3(context0));
+  buffer.write(_deduplicated_lib_templates_html__footer_html(context0));
   buffer.writeln();
 
   return buffer.toString();
@@ -625,7 +625,7 @@ String renderSearchPage(PackageTemplateData context0) {
 
 String renderProperty(PropertyTemplateData context0) {
   final buffer = StringBuffer();
-  buffer.write(_renderProperty_partial_head_0(context0));
+  buffer.write(_deduplicated_lib_templates_html__head_html(context0));
   buffer.writeln();
   buffer.write('''
 
@@ -642,13 +642,13 @@ String renderProperty(PropertyTemplateData context0) {
   buffer.writeln();
   buffer.write('''
       <div>''');
-  buffer.write(_renderProperty_partial_source_link_1(context1));
+  buffer.write(_deduplicated_lib_templates_html__source_link_html(context1));
   buffer.write('''<h1><span class="kind-property">''');
   buffer.writeEscaped(context1.name);
   buffer.write('''</span> ''');
   buffer.writeEscaped(context1.kind.toString());
   buffer.write(' ');
-  buffer.write(_renderProperty_partial_feature_set_2(context1));
+  buffer.write(_deduplicated_lib_templates_html__feature_set_html(context1));
   buffer.write('''</h1></div>''');
   buffer.writeln();
   var context2 = context0.self;
@@ -657,21 +657,21 @@ String renderProperty(PropertyTemplateData context0) {
     buffer.write('''
         <section class="multi-line-signature">
           ''');
-    buffer.write(_renderProperty_partial_annotations_3(context2));
+    buffer.write(_deduplicated_lib_templates_html__annotations_html(context2));
     buffer.write('\n          ');
     buffer.write(context2.modelType.linkedName);
     buffer.write('\n          ');
-    buffer.write(_renderProperty_partial_name_summary_4(context2));
+    buffer.write(_deduplicated_lib_templates_html__name_summary_html(context2));
     buffer.write('\n          ');
-    buffer.write(
-        __renderClass_partial_property_10_partial_attributes_1(context2));
+    buffer.write(_deduplicated_lib_templates_html__attributes_html(context2));
     buffer.writeln();
     buffer.write('''
         </section>
         ''');
-    buffer.write(_renderProperty_partial_documentation_6(context2));
+    buffer
+        .write(_deduplicated_lib_templates_html__documentation_html(context2));
     buffer.write('\n        ');
-    buffer.write(_renderProperty_partial_source_code_7(context2));
+    buffer.write(_deduplicated_lib_templates_html__source_code_html(context2));
   }
   buffer.writeln();
   if (context2.hasGetterOrSetter == true) {
@@ -691,7 +691,7 @@ String renderProperty(PropertyTemplateData context0) {
 
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     ''');
-  buffer.write(_renderProperty_partial_search_sidebar_10(context0));
+  buffer.write(_deduplicated_lib_templates_html__search_sidebar_html(context0));
   buffer.writeln();
   buffer.write('''
     <h5>''');
@@ -706,7 +706,7 @@ String renderProperty(PropertyTemplateData context0) {
   </div><!--/.sidebar-offcanvas-->
 
 ''');
-  buffer.write(_renderProperty_partial_footer_11(context0));
+  buffer.write(_deduplicated_lib_templates_html__footer_html(context0));
   buffer.writeln();
 
   return buffer.toString();
@@ -714,7 +714,7 @@ String renderProperty(PropertyTemplateData context0) {
 
 String renderMixin(MixinTemplateData context0) {
   final buffer = StringBuffer();
-  buffer.write(_renderMixin_partial_head_0(context0));
+  buffer.write(_deduplicated_lib_templates_html__head_html(context0));
   buffer.writeln();
   buffer.write('''
 
@@ -731,21 +731,20 @@ String renderMixin(MixinTemplateData context0) {
   buffer.writeln();
   buffer.write('''
       <div>''');
-  buffer.write(_renderMixin_partial_source_link_1(context1));
+  buffer.write(_deduplicated_lib_templates_html__source_link_html(context1));
   buffer.write('''<h1><span class="kind-mixin">''');
   buffer.write(context1.nameWithGenerics);
   buffer.write('''</span> ''');
   buffer.writeEscaped(context1.kind.toString());
   buffer.write(' ');
-  buffer.write(_renderMixin_partial_feature_set_2(context1));
+  buffer.write(_deduplicated_lib_templates_html__feature_set_html(context1));
   buffer.write(' ');
-  buffer.write(
-      __renderCategory_partial_container_3_partial_categorization_0(context1));
+  buffer.write(_deduplicated_lib_templates_html__categorization_html(context1));
   buffer.write('''</h1></div>''');
   buffer.writeln();
   var context2 = context0.mixin;
   buffer.write('\n    ');
-  buffer.write(_renderMixin_partial_documentation_4(context2));
+  buffer.write(_deduplicated_lib_templates_html__documentation_html(context2));
   buffer.writeln();
   if (context2.hasModifiers == true) {
     buffer.writeln();
@@ -770,9 +769,9 @@ String renderMixin(MixinTemplateData context0) {
         </ul></dd>''');
     }
     buffer.write('\n\n        ');
-    buffer.write(_renderMixin_partial_super_chain_5(context2));
+    buffer.write(_deduplicated_lib_templates_html__super_chain_html(context2));
     buffer.write('\n        ');
-    buffer.write(_renderMixin_partial_interfaces_6(context2));
+    buffer.write(_deduplicated_lib_templates_html__interfaces_html(context2));
     buffer.writeln();
     if (context2.hasPublicImplementors == true) {
       buffer.writeln();
@@ -794,7 +793,7 @@ String renderMixin(MixinTemplateData context0) {
         </dd>''');
     }
     buffer.write('\n\n        ');
-    buffer.write(_renderMixin_partial_annotations_7(context2));
+    buffer.write(_deduplicated_lib_templates_html__annotations_html(context2));
     buffer.writeln();
     buffer.write('''
       </dl>
@@ -815,7 +814,7 @@ String renderMixin(MixinTemplateData context0) {
     var context7 = context2.publicInstanceFields;
     for (var context8 in context7) {
       buffer.write('\n        ');
-      buffer.write(_renderClass_partial_property_10(context8));
+      buffer.write(_deduplicated_lib_templates_html__property_html(context8));
     }
     buffer.writeln();
     buffer.write('''
@@ -823,22 +822,26 @@ String renderMixin(MixinTemplateData context0) {
     </section>''');
   }
   buffer.write('\n\n    ');
-  buffer.write(_renderMixin_partial_instance_methods_9(context2));
+  buffer
+      .write(_deduplicated_lib_templates_html__instance_methods_html(context2));
   buffer.write('\n    ');
-  buffer.write(_renderMixin_partial_instance_operators_10(context2));
+  buffer.write(
+      _deduplicated_lib_templates_html__instance_operators_html(context2));
   buffer.write('\n    ');
-  buffer.write(_renderMixin_partial_static_properties_11(context2));
+  buffer.write(
+      _deduplicated_lib_templates_html__static_properties_html(context2));
   buffer.write('\n    ');
-  buffer.write(_renderMixin_partial_static_methods_12(context2));
+  buffer.write(_deduplicated_lib_templates_html__static_methods_html(context2));
   buffer.write('\n    ');
-  buffer.write(_renderMixin_partial_static_constants_13(context2));
+  buffer
+      .write(_deduplicated_lib_templates_html__static_constants_html(context2));
   buffer.writeln();
   buffer.write('''
   </div> <!-- /.main-content -->
 
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     ''');
-  buffer.write(_renderMixin_partial_search_sidebar_14(context0));
+  buffer.write(_deduplicated_lib_templates_html__search_sidebar_html(context0));
   buffer.writeln();
   buffer.write('''
     <h5>''');
@@ -853,7 +856,7 @@ String renderMixin(MixinTemplateData context0) {
   </div><!--/.sidebar-offcanvas-->
 
 ''');
-  buffer.write(_renderMixin_partial_footer_15(context0));
+  buffer.write(_deduplicated_lib_templates_html__footer_html(context0));
   buffer.writeln();
 
   return buffer.toString();
@@ -861,7 +864,7 @@ String renderMixin(MixinTemplateData context0) {
 
 String renderMethod(MethodTemplateData context0) {
   final buffer = StringBuffer();
-  buffer.write(_renderMethod_partial_head_0(context0));
+  buffer.write(_deduplicated_lib_templates_html__head_html(context0));
   buffer.writeln();
   buffer.write('''
 
@@ -878,13 +881,13 @@ String renderMethod(MethodTemplateData context0) {
   buffer.writeln();
   buffer.write('''
       <div>''');
-  buffer.write(_renderMethod_partial_source_link_1(context1));
+  buffer.write(_deduplicated_lib_templates_html__source_link_html(context1));
   buffer.write('''<h1><span class="kind-method">''');
   buffer.write(context1.nameWithGenerics);
   buffer.write('''</span> ''');
   buffer.writeEscaped(context1.fullkind);
   buffer.write(' ');
-  buffer.write(_renderMethod_partial_feature_set_2(context1));
+  buffer.write(_deduplicated_lib_templates_html__feature_set_html(context1));
   buffer.write('''</h1></div>''');
   buffer.writeln();
   var context2 = context0.method;
@@ -894,16 +897,14 @@ String renderMethod(MethodTemplateData context0) {
       ''');
   buffer.write(_renderMethod_partial_callable_multiline_3(context2));
   buffer.write('\n      ');
-  buffer.write(
-      ___renderClass_partial_instance_methods_11_partial_callable_0_partial_attributes_1(
-          context2));
+  buffer.write(_deduplicated_lib_templates_html__attributes_html(context2));
   buffer.writeln();
   buffer.write('''
     </section>
     ''');
-  buffer.write(_renderMethod_partial_documentation_5(context2));
+  buffer.write(_deduplicated_lib_templates_html__documentation_html(context2));
   buffer.write('\n\n    ');
-  buffer.write(_renderMethod_partial_source_code_6(context2));
+  buffer.write(_deduplicated_lib_templates_html__source_code_html(context2));
   buffer.writeln();
   buffer.writeln();
   buffer.write('''
@@ -911,7 +912,7 @@ String renderMethod(MethodTemplateData context0) {
 
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     ''');
-  buffer.write(_renderMethod_partial_search_sidebar_7(context0));
+  buffer.write(_deduplicated_lib_templates_html__search_sidebar_html(context0));
   buffer.writeln();
   buffer.write('''
     <h5>''');
@@ -926,7 +927,7 @@ String renderMethod(MethodTemplateData context0) {
   </div><!--/.sidebar-offcanvas-->
 
 ''');
-  buffer.write(_renderMethod_partial_footer_8(context0));
+  buffer.write(_deduplicated_lib_templates_html__footer_html(context0));
   buffer.writeln();
 
   return buffer.toString();
@@ -934,7 +935,7 @@ String renderMethod(MethodTemplateData context0) {
 
 String renderLibrary(LibraryTemplateData context0) {
   final buffer = StringBuffer();
-  buffer.write(_renderLibrary_partial_head_0(context0));
+  buffer.write(_deduplicated_lib_templates_html__head_html(context0));
   buffer.writeln();
   buffer.write('''
 
@@ -952,13 +953,13 @@ String renderLibrary(LibraryTemplateData context0) {
   buffer.writeln();
   buffer.write('''
       <div>''');
-  buffer.write(_renderLibrary_partial_source_link_1(context1));
+  buffer.write(_deduplicated_lib_templates_html__source_link_html(context1));
   buffer.write('''<h1><span class="kind-library">''');
   buffer.write(context1.name);
   buffer.write('''</span> ''');
   buffer.writeEscaped(context1.kind.toString());
   buffer.write(' ');
-  buffer.write(_renderLibrary_partial_feature_set_2(context1));
+  buffer.write(_deduplicated_lib_templates_html__feature_set_html(context1));
   buffer.write(' ');
   buffer.write(
       __renderCategory_partial_library_2_partial_categorization_0(context1));
@@ -966,7 +967,7 @@ String renderLibrary(LibraryTemplateData context0) {
   buffer.writeln();
   var context2 = context0.library;
   buffer.write('\n    ');
-  buffer.write(_renderLibrary_partial_documentation_4(context2));
+  buffer.write(_deduplicated_lib_templates_html__documentation_html(context2));
   buffer.writeln();
   var context3 = context0.library;
   if (context3.hasPublicClasses == true) {
@@ -1174,7 +1175,7 @@ String renderLibrary(LibraryTemplateData context0) {
 
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     ''');
-  buffer.write(_renderLibrary_partial_search_sidebar_15(context0));
+  buffer.write(_deduplicated_lib_templates_html__search_sidebar_html(context0));
   buffer.writeln();
   buffer.write('''
     <h5><span class="package-name">''');
@@ -1183,7 +1184,7 @@ String renderLibrary(LibraryTemplateData context0) {
   buffer.writeEscaped(context0.parent!.kind.toString());
   buffer.write('''</span></h5>
     ''');
-  buffer.write(_renderLibrary_partial_packages_16(context0));
+  buffer.write(_deduplicated_lib_templates_html__packages_html(context0));
   buffer.writeln();
   buffer.write('''
   </div>
@@ -1197,7 +1198,7 @@ String renderLibrary(LibraryTemplateData context0) {
   </div><!--/sidebar-offcanvas-right-->
 
 ''');
-  buffer.write(_renderLibrary_partial_footer_17(context0));
+  buffer.write(_deduplicated_lib_templates_html__footer_html(context0));
   buffer.writeln();
 
   return buffer.toString();
@@ -1205,14 +1206,14 @@ String renderLibrary(LibraryTemplateData context0) {
 
 String renderIndex(PackageTemplateData context0) {
   final buffer = StringBuffer();
-  buffer.write(_renderError_partial_head_0(context0));
+  buffer.write(_deduplicated_lib_templates_html__head_html(context0));
   buffer.writeln();
   buffer.write('''
 
   <div id="dartdoc-main-content" class="main-content">''');
   var context1 = context0.defaultPackage;
   buffer.write('\n      ');
-  buffer.write(_renderIndex_partial_documentation_1(context1));
+  buffer.write(_deduplicated_lib_templates_html__documentation_html(context1));
   buffer.writeln();
   var context2 = context0.localPackages;
   for (var context3 in context2) {
@@ -1265,7 +1266,7 @@ String renderIndex(PackageTemplateData context0) {
 
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     ''');
-  buffer.write(_renderError_partial_search_sidebar_1(context0));
+  buffer.write(_deduplicated_lib_templates_html__search_sidebar_html(context0));
   buffer.writeln();
   buffer.write('''
     <h5 class="hidden-xs"><span class="package-name">''');
@@ -1274,7 +1275,7 @@ String renderIndex(PackageTemplateData context0) {
   buffer.writeEscaped(context0.self.kind.toString());
   buffer.write('''</span></h5>
     ''');
-  buffer.write(_renderError_partial_packages_2(context0));
+  buffer.write(_deduplicated_lib_templates_html__packages_html(context0));
   buffer.writeln();
   buffer.write('''
   </div>
@@ -1283,7 +1284,7 @@ String renderIndex(PackageTemplateData context0) {
   </div>
 
 ''');
-  buffer.write(_renderError_partial_footer_3(context0));
+  buffer.write(_deduplicated_lib_templates_html__footer_html(context0));
   buffer.writeln();
 
   return buffer.toString();
@@ -1291,7 +1292,7 @@ String renderIndex(PackageTemplateData context0) {
 
 String renderFunction(FunctionTemplateData context0) {
   final buffer = StringBuffer();
-  buffer.write(_renderFunction_partial_head_0(context0));
+  buffer.write(_deduplicated_lib_templates_html__head_html(context0));
   buffer.writeln();
   buffer.write('''
 
@@ -1308,16 +1309,15 @@ String renderFunction(FunctionTemplateData context0) {
   buffer.writeln();
   buffer.write('''
       <div>''');
-  buffer.write(_renderFunction_partial_source_link_1(context1));
+  buffer.write(_deduplicated_lib_templates_html__source_link_html(context1));
   buffer.write('''<h1><span class="kind-function">''');
   buffer.write(context1.nameWithGenerics);
   buffer.write('''</span> ''');
   buffer.writeEscaped(context1.kind.toString());
   buffer.write(' ');
-  buffer.write(_renderFunction_partial_feature_set_2(context1));
+  buffer.write(_deduplicated_lib_templates_html__feature_set_html(context1));
   buffer.write(' ');
-  buffer.write(
-      __renderCategory_partial_callable_8_partial_categorization_0(context1));
+  buffer.write(_deduplicated_lib_templates_html__categorization_html(context1));
   buffer.write('''</h1></div>''');
   buffer.writeln();
   var context2 = context0.function;
@@ -1327,15 +1327,14 @@ String renderFunction(FunctionTemplateData context0) {
         ''');
   buffer.write(_renderFunction_partial_callable_multiline_4(context2));
   buffer.write('\n        ');
-  buffer.write(
-      __renderCategory_partial_callable_8_partial_attributes_1(context2));
+  buffer.write(_deduplicated_lib_templates_html__attributes_html(context2));
   buffer.writeln();
   buffer.write('''
     </section>
     ''');
-  buffer.write(_renderFunction_partial_documentation_6(context2));
+  buffer.write(_deduplicated_lib_templates_html__documentation_html(context2));
   buffer.write('\n\n    ');
-  buffer.write(_renderFunction_partial_source_code_7(context2));
+  buffer.write(_deduplicated_lib_templates_html__source_code_html(context2));
   buffer.writeln();
   buffer.writeln();
   buffer.write('''
@@ -1343,7 +1342,7 @@ String renderFunction(FunctionTemplateData context0) {
 
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     ''');
-  buffer.write(_renderFunction_partial_search_sidebar_8(context0));
+  buffer.write(_deduplicated_lib_templates_html__search_sidebar_html(context0));
   buffer.writeln();
   buffer.write('''
     <h5>''');
@@ -1358,7 +1357,7 @@ String renderFunction(FunctionTemplateData context0) {
   </div><!--/.sidebar-offcanvas-->
 
 ''');
-  buffer.write(_renderFunction_partial_footer_9(context0));
+  buffer.write(_deduplicated_lib_templates_html__footer_html(context0));
   buffer.writeln();
 
   return buffer.toString();
@@ -1367,7 +1366,7 @@ String renderFunction(FunctionTemplateData context0) {
 String renderExtensionType<T extends ExtensionType>(
     ExtensionTypeTemplateData<T> context0) {
   final buffer = StringBuffer();
-  buffer.write(_renderExtensionType_partial_head_0(context0));
+  buffer.write(_deduplicated_lib_templates_html__head_html(context0));
   buffer.writeln();
   buffer.write('''
 <div
@@ -1383,22 +1382,21 @@ String renderExtensionType<T extends ExtensionType>(
   buffer.writeln();
   buffer.write('''
     <div>''');
-  buffer.write(_renderExtensionType_partial_source_link_1(context1));
+  buffer.write(_deduplicated_lib_templates_html__source_link_html(context1));
   buffer.write('''<h1><span class="kind-class">''');
   buffer.write(context1.nameWithGenerics);
   buffer.write('''</span>
       ''');
   buffer.writeEscaped(context1.kind.toString());
   buffer.write(' ');
-  buffer.write(_renderExtensionType_partial_feature_set_2(context1));
+  buffer.write(_deduplicated_lib_templates_html__feature_set_html(context1));
   buffer.write(' ');
-  buffer.write(
-      __renderCategory_partial_container_3_partial_categorization_0(context1));
+  buffer.write(_deduplicated_lib_templates_html__categorization_html(context1));
   buffer.write('''</h1></div>''');
   buffer.writeln();
   var context2 = context0.extensionType;
   buffer.write('\n    ');
-  buffer.write(_renderExtensionType_partial_documentation_4(context2));
+  buffer.write(_deduplicated_lib_templates_html__documentation_html(context2));
   buffer.writeln();
   buffer.write('''
     <section>
@@ -1418,7 +1416,8 @@ String renderExtensionType<T extends ExtensionType>(
         </dd>
       </dl>
       ''');
-  buffer.write(_renderExtensionType_partial_container_annotations_5(context2));
+  buffer.write(
+      _deduplicated_lib_templates_html__container_annotations_html(context2));
   buffer.writeln();
   buffer.write('''
     </section>
@@ -1433,7 +1432,7 @@ String renderExtensionType<T extends ExtensionType>(
     var context4 = context2.publicInstanceFieldsSorted;
     for (var context5 in context4) {
       buffer.write('\n            ');
-      buffer.write(_renderClass_partial_property_10(context5));
+      buffer.write(_deduplicated_lib_templates_html__property_html(context5));
     }
     buffer.writeln();
     buffer.write('''
@@ -1441,15 +1440,19 @@ String renderExtensionType<T extends ExtensionType>(
     </section>''');
   }
   buffer.write('\n\n    ');
-  buffer.write(_renderExtensionType_partial_instance_methods_7(context2));
+  buffer
+      .write(_deduplicated_lib_templates_html__instance_methods_html(context2));
   buffer.write('\n    ');
-  buffer.write(_renderExtensionType_partial_instance_operators_8(context2));
+  buffer.write(
+      _deduplicated_lib_templates_html__instance_operators_html(context2));
   buffer.write('\n    ');
-  buffer.write(_renderExtensionType_partial_static_properties_9(context2));
+  buffer.write(
+      _deduplicated_lib_templates_html__static_properties_html(context2));
   buffer.write('\n    ');
-  buffer.write(_renderExtensionType_partial_static_methods_10(context2));
+  buffer.write(_deduplicated_lib_templates_html__static_methods_html(context2));
   buffer.write('\n    ');
-  buffer.write(_renderExtensionType_partial_static_constants_11(context2));
+  buffer
+      .write(_deduplicated_lib_templates_html__static_constants_html(context2));
   buffer.writeln();
   buffer.write('''
 
@@ -1457,7 +1460,7 @@ String renderExtensionType<T extends ExtensionType>(
 
 <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     ''');
-  buffer.write(_renderExtensionType_partial_search_sidebar_12(context0));
+  buffer.write(_deduplicated_lib_templates_html__search_sidebar_html(context2));
   buffer.writeln();
   buffer.write('''
     <h5>''');
@@ -1471,7 +1474,7 @@ String renderExtensionType<T extends ExtensionType>(
 </div><!--/.sidebar-offcanvas-->
 
 ''');
-  buffer.write(_renderExtensionType_partial_footer_13(context0));
+  buffer.write(_deduplicated_lib_templates_html__footer_html(context2));
   buffer.writeln();
   buffer.writeln();
 
@@ -1480,7 +1483,7 @@ String renderExtensionType<T extends ExtensionType>(
 
 String renderExtension<T extends Extension>(ExtensionTemplateData<T> context0) {
   final buffer = StringBuffer();
-  buffer.write(_renderExtension_partial_head_0(context0));
+  buffer.write(_deduplicated_lib_templates_html__head_html(context0));
   buffer.writeln();
   buffer.write('''
 <div
@@ -1496,21 +1499,20 @@ String renderExtension<T extends Extension>(ExtensionTemplateData<T> context0) {
   buffer.writeln();
   buffer.write('''
     <div>''');
-  buffer.write(_renderExtension_partial_source_link_1(context1));
+  buffer.write(_deduplicated_lib_templates_html__source_link_html(context1));
   buffer.write('''<h1><span class="kind-class">''');
   buffer.write(context1.nameWithGenerics);
   buffer.write('''</span> ''');
   buffer.writeEscaped(context1.kind.toString());
   buffer.write(' ');
-  buffer.write(_renderExtension_partial_feature_set_2(context1));
+  buffer.write(_deduplicated_lib_templates_html__feature_set_html(context1));
   buffer.write(' ');
-  buffer.write(
-      __renderCategory_partial_container_3_partial_categorization_0(context1));
+  buffer.write(_deduplicated_lib_templates_html__categorization_html(context1));
   buffer.write('''</h1></div>''');
   buffer.writeln();
   var context2 = context0.extension;
   buffer.write('\n    ');
-  buffer.write(_renderExtension_partial_documentation_4(context2));
+  buffer.write(_deduplicated_lib_templates_html__documentation_html(context2));
   buffer.writeln();
   buffer.write('''
     <section>
@@ -1530,7 +1532,8 @@ String renderExtension<T extends Extension>(ExtensionTemplateData<T> context0) {
         </dd>
       </dl>
       ''');
-  buffer.write(_renderExtension_partial_container_annotations_5(context2));
+  buffer.write(
+      _deduplicated_lib_templates_html__container_annotations_html(context2));
   buffer.writeln();
   buffer.write('''
     </section>
@@ -1545,7 +1548,7 @@ String renderExtension<T extends Extension>(ExtensionTemplateData<T> context0) {
     var context4 = context2.publicInstanceFieldsSorted;
     for (var context5 in context4) {
       buffer.write('\n            ');
-      buffer.write(_renderClass_partial_property_10(context5));
+      buffer.write(_deduplicated_lib_templates_html__property_html(context5));
     }
     buffer.writeln();
     buffer.write('''
@@ -1553,15 +1556,19 @@ String renderExtension<T extends Extension>(ExtensionTemplateData<T> context0) {
     </section>''');
   }
   buffer.write('\n\n    ');
-  buffer.write(_renderExtension_partial_instance_methods_7(context2));
+  buffer
+      .write(_deduplicated_lib_templates_html__instance_methods_html(context2));
   buffer.write('\n    ');
-  buffer.write(_renderExtension_partial_instance_operators_8(context2));
+  buffer.write(
+      _deduplicated_lib_templates_html__instance_operators_html(context2));
   buffer.write('\n    ');
-  buffer.write(_renderExtension_partial_static_properties_9(context2));
+  buffer.write(
+      _deduplicated_lib_templates_html__static_properties_html(context2));
   buffer.write('\n    ');
-  buffer.write(_renderExtension_partial_static_methods_10(context2));
+  buffer.write(_deduplicated_lib_templates_html__static_methods_html(context2));
   buffer.write('\n    ');
-  buffer.write(_renderExtension_partial_static_constants_11(context2));
+  buffer
+      .write(_deduplicated_lib_templates_html__static_constants_html(context2));
   buffer.writeln();
   buffer.write('''
 
@@ -1569,7 +1576,7 @@ String renderExtension<T extends Extension>(ExtensionTemplateData<T> context0) {
 
 <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     ''');
-  buffer.write(_renderExtension_partial_search_sidebar_12(context0));
+  buffer.write(_deduplicated_lib_templates_html__search_sidebar_html(context2));
   buffer.writeln();
   buffer.write('''
     <h5>''');
@@ -1584,7 +1591,7 @@ String renderExtension<T extends Extension>(ExtensionTemplateData<T> context0) {
 </div><!--/.sidebar-offcanvas-->
 
 ''');
-  buffer.write(_renderExtension_partial_footer_13(context0));
+  buffer.write(_deduplicated_lib_templates_html__footer_html(context2));
   buffer.writeln();
   buffer.writeln();
 
@@ -1593,7 +1600,7 @@ String renderExtension<T extends Extension>(ExtensionTemplateData<T> context0) {
 
 String renderError(PackageTemplateData context0) {
   final buffer = StringBuffer();
-  buffer.write(_renderError_partial_head_0(context0));
+  buffer.write(_deduplicated_lib_templates_html__head_html(context0));
   buffer.writeln();
   buffer.write('''
 
@@ -1614,7 +1621,7 @@ String renderError(PackageTemplateData context0) {
 
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     ''');
-  buffer.write(_renderError_partial_search_sidebar_1(context0));
+  buffer.write(_deduplicated_lib_templates_html__search_sidebar_html(context0));
   buffer.writeln();
   buffer.write('''
     <h5><span class="package-name">''');
@@ -1623,7 +1630,7 @@ String renderError(PackageTemplateData context0) {
   buffer.writeEscaped(context0.self.kind.toString());
   buffer.write('''</span></h5>
     ''');
-  buffer.write(_renderError_partial_packages_2(context0));
+  buffer.write(_deduplicated_lib_templates_html__packages_html(context0));
   buffer.writeln();
   buffer.write('''
   </div>
@@ -1632,7 +1639,7 @@ String renderError(PackageTemplateData context0) {
   </div>
 
 ''');
-  buffer.write(_renderError_partial_footer_3(context0));
+  buffer.write(_deduplicated_lib_templates_html__footer_html(context0));
   buffer.writeln();
 
   return buffer.toString();
@@ -1640,7 +1647,7 @@ String renderError(PackageTemplateData context0) {
 
 String renderEnum(EnumTemplateData context0) {
   final buffer = StringBuffer();
-  buffer.write(_renderEnum_partial_head_0(context0));
+  buffer.write(_deduplicated_lib_templates_html__head_html(context0));
   buffer.writeln();
   buffer.write('''
 
@@ -1657,7 +1664,7 @@ String renderEnum(EnumTemplateData context0) {
   buffer.writeln();
   buffer.write('''
       <div>''');
-  buffer.write(_renderEnum_partial_source_link_1(context1));
+  buffer.write(_deduplicated_lib_templates_html__source_link_html(context1));
   buffer.writeln();
   buffer.write('''
         <h1>
@@ -1667,10 +1674,9 @@ String renderEnum(EnumTemplateData context0) {
           ''');
   buffer.writeEscaped(context1.kind.toString());
   buffer.write(' ');
-  buffer.write(_renderEnum_partial_feature_set_2(context1));
+  buffer.write(_deduplicated_lib_templates_html__feature_set_html(context1));
   buffer.write(' ');
-  buffer.write(
-      __renderCategory_partial_container_3_partial_categorization_0(context1));
+  buffer.write(_deduplicated_lib_templates_html__categorization_html(context1));
   buffer.writeln();
   buffer.write('''
         </h1>
@@ -1678,7 +1684,7 @@ String renderEnum(EnumTemplateData context0) {
   buffer.writeln();
   var context2 = context0.eNum;
   buffer.write('\n    ');
-  buffer.write(_renderEnum_partial_documentation_4(context2));
+  buffer.write(_deduplicated_lib_templates_html__documentation_html(context2));
   buffer.writeln();
   if (context2.hasModifiers == true) {
     buffer.writeln();
@@ -1686,20 +1692,21 @@ String renderEnum(EnumTemplateData context0) {
     <section>
       <dl class="dl-horizontal">
         ''');
-    buffer.write(_renderEnum_partial_super_chain_5(context2));
+    buffer.write(_deduplicated_lib_templates_html__super_chain_html(context2));
     buffer.write('\n        ');
-    buffer.write(_renderEnum_partial_interfaces_6(context2));
+    buffer.write(_deduplicated_lib_templates_html__interfaces_html(context2));
     buffer.write('\n        ');
     buffer.write(_renderEnum_partial_mixed_in_types_7(context2));
     buffer.write('\n        ');
-    buffer.write(_renderEnum_partial_container_annotations_8(context2));
+    buffer.write(
+        _deduplicated_lib_templates_html__container_annotations_html(context2));
     buffer.writeln();
     buffer.write('''
       </dl>
     </section>''');
   }
   buffer.write('\n\n    ');
-  buffer.write(_renderEnum_partial_constructors_9(context2));
+  buffer.write(_deduplicated_lib_templates_html__constructors_html(context2));
   buffer.writeln();
   if (context2.hasPublicEnumValues == true) {
     buffer.writeln();
@@ -1711,8 +1718,7 @@ String renderEnum(EnumTemplateData context0) {
     var context3 = context2.publicEnumValues;
     for (var context4 in context3) {
       buffer.write('\n          ');
-      buffer.write(__renderClass_partial_static_constants_15_partial_constant_0(
-          context4));
+      buffer.write(_deduplicated_lib_templates_html__constant_html(context4));
     }
     buffer.writeln();
     buffer.write('''
@@ -1738,7 +1744,7 @@ String renderEnum(EnumTemplateData context0) {
     var context5 = context2.publicInstanceFieldsSorted;
     for (var context6 in context5) {
       buffer.write('\n        ');
-      buffer.write(_renderClass_partial_property_10(context6));
+      buffer.write(_deduplicated_lib_templates_html__property_html(context6));
     }
     buffer.writeln();
     buffer.write('''
@@ -1746,22 +1752,26 @@ String renderEnum(EnumTemplateData context0) {
     </section>''');
   }
   buffer.write('\n\n    ');
-  buffer.write(_renderEnum_partial_instance_methods_12(context2));
+  buffer
+      .write(_deduplicated_lib_templates_html__instance_methods_html(context2));
   buffer.write('\n    ');
-  buffer.write(_renderEnum_partial_instance_operators_13(context2));
+  buffer.write(
+      _deduplicated_lib_templates_html__instance_operators_html(context2));
   buffer.write('\n    ');
-  buffer.write(_renderEnum_partial_static_properties_14(context2));
+  buffer.write(
+      _deduplicated_lib_templates_html__static_properties_html(context2));
   buffer.write('\n    ');
-  buffer.write(_renderEnum_partial_static_methods_15(context2));
+  buffer.write(_deduplicated_lib_templates_html__static_methods_html(context2));
   buffer.write('\n    ');
-  buffer.write(_renderEnum_partial_static_constants_16(context2));
+  buffer
+      .write(_deduplicated_lib_templates_html__static_constants_html(context2));
   buffer.writeln();
   buffer.write('''
   </div><!-- /.main-content -->
 
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     ''');
-  buffer.write(_renderEnum_partial_search_sidebar_17(context0));
+  buffer.write(_deduplicated_lib_templates_html__search_sidebar_html(context0));
   buffer.writeln();
   buffer.write('''
     <h5>''');
@@ -1776,7 +1786,7 @@ String renderEnum(EnumTemplateData context0) {
   </div><!-- /.sidebar-offcanvas -->
 
 ''');
-  buffer.write(_renderEnum_partial_footer_18(context0));
+  buffer.write(_deduplicated_lib_templates_html__footer_html(context0));
   buffer.writeln();
 
   return buffer.toString();
@@ -1784,7 +1794,7 @@ String renderEnum(EnumTemplateData context0) {
 
 String renderConstructor(ConstructorTemplateData context0) {
   final buffer = StringBuffer();
-  buffer.write(_renderConstructor_partial_head_0(context0));
+  buffer.write(_deduplicated_lib_templates_html__head_html(context0));
   buffer.writeln();
   buffer.write('''
 
@@ -1801,13 +1811,13 @@ String renderConstructor(ConstructorTemplateData context0) {
   buffer.writeln();
   buffer.write('''
       <div>''');
-  buffer.write(_renderConstructor_partial_source_link_1(context1));
+  buffer.write(_deduplicated_lib_templates_html__source_link_html(context1));
   buffer.write('''<h1><span class="kind-constructor">''');
   buffer.write(context1.nameWithGenerics);
   buffer.write('''</span> ''');
   buffer.writeEscaped(context1.kind.toString());
   buffer.write(' ');
-  buffer.write(_renderConstructor_partial_feature_set_2(context1));
+  buffer.write(_deduplicated_lib_templates_html__feature_set_html(context1));
   buffer.write('''</h1></div>''');
   buffer.writeln();
   var context2 = context0.constructor;
@@ -1835,7 +1845,7 @@ String renderConstructor(ConstructorTemplateData context0) {
     </section>
 
     ''');
-  buffer.write(_renderConstructor_partial_documentation_4(context2));
+  buffer.write(_deduplicated_lib_templates_html__documentation_html(context2));
   buffer.write('\n\n    ');
   buffer.write(_renderConstructor_partial_source_code_5(context2));
   buffer.writeln();
@@ -1845,7 +1855,7 @@ String renderConstructor(ConstructorTemplateData context0) {
 
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     ''');
-  buffer.write(_renderConstructor_partial_search_sidebar_6(context0));
+  buffer.write(_deduplicated_lib_templates_html__search_sidebar_html(context0));
   buffer.writeln();
   buffer.write('''
     <h5>''');
@@ -1860,7 +1870,7 @@ String renderConstructor(ConstructorTemplateData context0) {
   </div><!--/.sidebar-offcanvas-->
 
 ''');
-  buffer.write(_renderConstructor_partial_footer_7(context0));
+  buffer.write(_deduplicated_lib_templates_html__footer_html(context0));
   buffer.writeln();
 
   return buffer.toString();
@@ -1868,7 +1878,7 @@ String renderConstructor(ConstructorTemplateData context0) {
 
 String renderClass(ClassTemplateData context0) {
   final buffer = StringBuffer();
-  buffer.write(_renderClass_partial_head_0(context0));
+  buffer.write(_deduplicated_lib_templates_html__head_html(context0));
   buffer.writeln();
   buffer.write('''
 
@@ -1893,13 +1903,12 @@ String renderClass(ClassTemplateData context0) {
   buffer.write(' ');
   buffer.write(_renderClass_partial_feature_set_2(context1));
   buffer.write(' ');
-  buffer.write(
-      __renderCategory_partial_container_3_partial_categorization_0(context1));
+  buffer.write(_deduplicated_lib_templates_html__categorization_html(context1));
   buffer.write('''</h1></div>''');
   buffer.writeln();
   var context2 = context0.clazz;
   buffer.write('\n    ');
-  buffer.write(_renderClass_partial_documentation_4(context2));
+  buffer.write(_deduplicated_lib_templates_html__documentation_html(context2));
   buffer.writeln();
   if (context2.hasModifiers == true) {
     buffer.writeln();
@@ -1972,7 +1981,7 @@ String renderClass(ClassTemplateData context0) {
     var context7 = context2.publicInstanceFieldsSorted;
     for (var context8 in context7) {
       buffer.write('\n        ');
-      buffer.write(_renderClass_partial_property_10(context8));
+      buffer.write(_deduplicated_lib_templates_html__property_html(context8));
     }
     buffer.writeln();
     buffer.write('''
@@ -1996,7 +2005,7 @@ String renderClass(ClassTemplateData context0) {
 
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     ''');
-  buffer.write(_renderClass_partial_search_sidebar_16(context0));
+  buffer.write(_deduplicated_lib_templates_html__search_sidebar_html(context0));
   buffer.writeln();
   buffer.write('''
     <h5>''');
@@ -2011,7 +2020,7 @@ String renderClass(ClassTemplateData context0) {
   </div><!--/.sidebar-offcanvas-->
 
 ''');
-  buffer.write(_renderClass_partial_footer_17(context0));
+  buffer.write(_deduplicated_lib_templates_html__footer_html(context0));
   buffer.writeln();
 
   return buffer.toString();
@@ -2303,63 +2312,6 @@ String _renderTypedef_partial_typedef_multiline_4(Typedef context1) {
   return buffer.toString();
 }
 
-String _renderTypedef_partial_source_link_1(Typedef context1) =>
-    _deduplicated_lib_templates_html__source_link_html(context1);
-
-String _renderTypedef_partial_source_code_6(Typedef context1) =>
-    _deduplicated_lib_templates_html__source_code_html(context1);
-
-String _renderTypedef_partial_search_sidebar_7(TypedefTemplateData context0) =>
-    _deduplicated_lib_templates_html__search_sidebar_html(context0);
-
-String _renderTypedef_partial_head_0(TypedefTemplateData context0) =>
-    _deduplicated_lib_templates_html__head_html(context0);
-
-String _renderTypedef_partial_footer_8(TypedefTemplateData context0) =>
-    _deduplicated_lib_templates_html__footer_html(context0);
-
-String _renderTypedef_partial_feature_set_2(Typedef context1) =>
-    _deduplicated_lib_templates_html__feature_set_html(context1);
-
-String _renderTypedef_partial_documentation_5(Typedef context1) =>
-    _deduplicated_lib_templates_html__documentation_html(context1);
-
-String _renderTopLevelProperty_partial_source_link_1(
-        TopLevelVariable context1) =>
-    _deduplicated_lib_templates_html__source_link_html(context1);
-
-String _renderTopLevelProperty_partial_source_code_8(
-        TopLevelVariable context1) =>
-    _deduplicated_lib_templates_html__source_code_html(context1);
-
-String _renderTopLevelProperty_partial_search_sidebar_11(
-        TopLevelPropertyTemplateData context0) =>
-    _deduplicated_lib_templates_html__search_sidebar_html(context0);
-
-String _renderTopLevelProperty_partial_name_summary_5(
-        TopLevelVariable context1) =>
-    _deduplicated_lib_templates_html__name_summary_html(context1);
-
-String _renderTopLevelProperty_partial_head_0(
-        TopLevelPropertyTemplateData context0) =>
-    _deduplicated_lib_templates_html__head_html(context0);
-
-String _renderTopLevelProperty_partial_footer_12(
-        TopLevelPropertyTemplateData context0) =>
-    _deduplicated_lib_templates_html__footer_html(context0);
-
-String _renderTopLevelProperty_partial_feature_set_2(
-        TopLevelVariable context1) =>
-    _deduplicated_lib_templates_html__feature_set_html(context1);
-
-String _renderTopLevelProperty_partial_documentation_7(
-        TopLevelVariable context1) =>
-    _deduplicated_lib_templates_html__documentation_html(context1);
-
-String _renderTopLevelProperty_partial_annotations_4(
-        TopLevelVariable context1) =>
-    _deduplicated_lib_templates_html__annotations_html(context1);
-
 String _renderTopLevelProperty_partial_accessor_setter_10(
         TopLevelVariable context1) =>
     _deduplicated_lib_templates_html__accessor_setter_html(context1);
@@ -2368,33 +2320,8 @@ String _renderTopLevelProperty_partial_accessor_getter_9(
         TopLevelVariable context1) =>
     _deduplicated_lib_templates_html__accessor_getter_html(context1);
 
-String _renderProperty_partial_source_link_1(Field context1) =>
-    _deduplicated_lib_templates_html__source_link_html(context1);
-
-String _renderProperty_partial_source_code_7(Field context1) =>
-    _deduplicated_lib_templates_html__source_code_html(context1);
-
-String _renderProperty_partial_search_sidebar_10(
-        PropertyTemplateData context0) =>
-    _deduplicated_lib_templates_html__search_sidebar_html(context0);
-
 String _renderProperty_partial_name_summary_4(Field context1) =>
     _deduplicated_lib_templates_html__name_summary_html(context1);
-
-String _renderProperty_partial_head_0(PropertyTemplateData context0) =>
-    _deduplicated_lib_templates_html__head_html(context0);
-
-String _renderProperty_partial_footer_11(PropertyTemplateData context0) =>
-    _deduplicated_lib_templates_html__footer_html(context0);
-
-String _renderProperty_partial_feature_set_2(Field context1) =>
-    _deduplicated_lib_templates_html__feature_set_html(context1);
-
-String _renderProperty_partial_documentation_6(Field context1) =>
-    _deduplicated_lib_templates_html__documentation_html(context1);
-
-String _renderProperty_partial_annotations_3(Field context1) =>
-    _deduplicated_lib_templates_html__annotations_html(context1);
 
 String _renderProperty_partial_accessor_setter_9(Field context1) =>
     _deduplicated_lib_templates_html__accessor_setter_html(context1);
@@ -2402,74 +2329,9 @@ String _renderProperty_partial_accessor_setter_9(Field context1) =>
 String _renderProperty_partial_accessor_getter_8(Field context1) =>
     _deduplicated_lib_templates_html__accessor_getter_html(context1);
 
-String _renderMixin_partial_super_chain_5(Mixin context1) =>
-    _deduplicated_lib_templates_html__super_chain_html(context1);
-
-String _renderMixin_partial_static_properties_11(Mixin context1) =>
-    _deduplicated_lib_templates_html__static_properties_html(context1);
-
-String _renderMixin_partial_static_methods_12(Mixin context1) =>
-    _deduplicated_lib_templates_html__static_methods_html(context1);
-
-String _renderMixin_partial_static_constants_13(Mixin context1) =>
-    _deduplicated_lib_templates_html__static_constants_html(context1);
-
-String _renderMixin_partial_source_link_1(Mixin context1) =>
-    _deduplicated_lib_templates_html__source_link_html(context1);
-
-String _renderMixin_partial_search_sidebar_14(MixinTemplateData context0) =>
-    _deduplicated_lib_templates_html__search_sidebar_html(context0);
-
-String _renderMixin_partial_interfaces_6(Mixin context1) =>
-    _deduplicated_lib_templates_html__interfaces_html(context1);
-
-String _renderMixin_partial_instance_operators_10(Mixin context1) =>
-    _deduplicated_lib_templates_html__instance_operators_html(context1);
-
-String _renderMixin_partial_instance_methods_9(Mixin context1) =>
-    _deduplicated_lib_templates_html__instance_methods_html(context1);
-
-String _renderMixin_partial_head_0(MixinTemplateData context0) =>
-    _deduplicated_lib_templates_html__head_html(context0);
-
-String _renderMixin_partial_footer_15(MixinTemplateData context0) =>
-    _deduplicated_lib_templates_html__footer_html(context0);
-
-String _renderMixin_partial_feature_set_2(Mixin context1) =>
-    _deduplicated_lib_templates_html__feature_set_html(context1);
-
-String _renderMixin_partial_documentation_4(Mixin context1) =>
-    _deduplicated_lib_templates_html__documentation_html(context1);
-
-String _renderMixin_partial_annotations_7(Mixin context1) =>
-    _deduplicated_lib_templates_html__annotations_html(context1);
-
-String _renderMethod_partial_source_link_1(Method context1) =>
-    _deduplicated_lib_templates_html__source_link_html(context1);
-
-String _renderMethod_partial_source_code_6(Method context1) =>
-    _deduplicated_lib_templates_html__source_code_html(context1);
-
-String _renderMethod_partial_search_sidebar_7(MethodTemplateData context0) =>
-    _deduplicated_lib_templates_html__search_sidebar_html(context0);
-
-String _renderMethod_partial_head_0(MethodTemplateData context0) =>
-    _deduplicated_lib_templates_html__head_html(context0);
-
-String _renderMethod_partial_footer_8(MethodTemplateData context0) =>
-    _deduplicated_lib_templates_html__footer_html(context0);
-
-String _renderMethod_partial_feature_set_2(Method context1) =>
-    _deduplicated_lib_templates_html__feature_set_html(context1);
-
-String _renderMethod_partial_documentation_5(Method context1) =>
-    _deduplicated_lib_templates_html__documentation_html(context1);
-
 String _renderMethod_partial_callable_multiline_3(Method context1) {
   final buffer = StringBuffer();
-  buffer.write(
-      __renderMethod_partial_callable_multiline_3_partial_annotations_0(
-          context1));
+  buffer.write(_deduplicated_lib_templates_html__annotations_html(context1));
   buffer.writeln();
   buffer.write('''
 
@@ -2477,9 +2339,7 @@ String _renderMethod_partial_callable_multiline_3(Method context1) {
   buffer.write(context1.modelType.returnType.linkedName);
   buffer.write('''</span>
 ''');
-  buffer.write(
-      __renderMethod_partial_callable_multiline_3_partial_name_summary_1(
-          context1));
+  buffer.write(_deduplicated_lib_templates_html__name_summary_html(context1));
   buffer.write(context1.genericParameters);
   buffer.write('''(<wbr>''');
   if (context1.hasParameters == true) {
@@ -2493,18 +2353,6 @@ String _renderMethod_partial_callable_multiline_3(Method context1) {
 
 String _renderLibrary_partial_source_link_1(Library context1) =>
     _deduplicated_lib_templates_html__source_link_html(context1);
-
-String _renderLibrary_partial_search_sidebar_15(LibraryTemplateData context0) =>
-    _deduplicated_lib_templates_html__search_sidebar_html(context0);
-
-String _renderLibrary_partial_packages_16(LibraryTemplateData context0) =>
-    _deduplicated_lib_templates_html__packages_html(context0);
-
-String _renderLibrary_partial_head_0(LibraryTemplateData context0) =>
-    _deduplicated_lib_templates_html__head_html(context0);
-
-String _renderLibrary_partial_footer_17(LibraryTemplateData context0) =>
-    _deduplicated_lib_templates_html__footer_html(context0);
 
 String _renderLibrary_partial_feature_set_2(Library context1) =>
     _deduplicated_lib_templates_html__feature_set_html(context1);
@@ -2521,8 +2369,7 @@ String _renderLibrary_partial_extension_type_8(ExtensionType context3) {
   buffer.write('''">''');
   buffer.write(context3.linkedName);
   buffer.write('''</span> ''');
-  buffer.write(
-      __renderCategory_partial_container_3_partial_categorization_0(context3));
+  buffer.write(_deduplicated_lib_templates_html__categorization_html(context3));
   buffer.writeln();
   buffer.write('''
 </dt>
@@ -2538,39 +2385,12 @@ String _renderLibrary_partial_extension_type_8(ExtensionType context3) {
   return buffer.toString();
 }
 
-String _renderLibrary_partial_documentation_4(Library context1) =>
-    _deduplicated_lib_templates_html__documentation_html(context1);
-
-String _renderIndex_partial_documentation_1(Package context1) =>
-    _deduplicated_lib_templates_html__documentation_html(context1);
-
-String _renderFunction_partial_source_link_1(ModelFunction context1) =>
-    _deduplicated_lib_templates_html__source_link_html(context1);
-
 String _renderFunction_partial_source_code_7(ModelFunction context1) =>
     _deduplicated_lib_templates_html__source_code_html(context1);
 
-String _renderFunction_partial_search_sidebar_8(
-        FunctionTemplateData context0) =>
-    _deduplicated_lib_templates_html__search_sidebar_html(context0);
-
-String _renderFunction_partial_head_0(FunctionTemplateData context0) =>
-    _deduplicated_lib_templates_html__head_html(context0);
-
-String _renderFunction_partial_footer_9(FunctionTemplateData context0) =>
-    _deduplicated_lib_templates_html__footer_html(context0);
-
-String _renderFunction_partial_feature_set_2(ModelFunction context1) =>
-    _deduplicated_lib_templates_html__feature_set_html(context1);
-
-String _renderFunction_partial_documentation_6(ModelFunction context1) =>
-    _deduplicated_lib_templates_html__documentation_html(context1);
-
 String _renderFunction_partial_callable_multiline_4(ModelFunction context1) {
   final buffer = StringBuffer();
-  buffer.write(
-      __renderFunction_partial_callable_multiline_4_partial_annotations_0(
-          context1));
+  buffer.write(_deduplicated_lib_templates_html__annotations_html(context1));
   buffer.writeln();
   buffer.write('''
 
@@ -2601,91 +2421,17 @@ String _renderExtension_partial_static_methods_10(Extension context1) =>
 String _renderExtension_partial_static_constants_11(Extension context1) =>
     _deduplicated_lib_templates_html__static_constants_html(context1);
 
-String _renderExtension_partial_source_link_1(Extension context1) =>
-    _deduplicated_lib_templates_html__source_link_html(context1);
-
-String _renderExtension_partial_search_sidebar_12<T extends Extension>(
-        ExtensionTemplateData<T> context0) =>
-    _deduplicated_lib_templates_html__search_sidebar_html(context0);
-
 String _renderExtension_partial_instance_operators_8(Extension context1) =>
     _deduplicated_lib_templates_html__instance_operators_html(context1);
 
 String _renderExtension_partial_instance_methods_7(Extension context1) =>
     _deduplicated_lib_templates_html__instance_methods_html(context1);
 
-String _renderExtension_partial_head_0<T extends Extension>(
-        ExtensionTemplateData<T> context0) =>
-    _deduplicated_lib_templates_html__head_html(context0);
-
-String _renderExtension_partial_footer_13<T extends Extension>(
-        ExtensionTemplateData<T> context0) =>
-    _deduplicated_lib_templates_html__footer_html(context0);
-
-String _renderExtension_partial_feature_set_2(Extension context1) =>
-    _deduplicated_lib_templates_html__feature_set_html(context1);
-
-String _renderExtension_partial_documentation_4(Extension context1) =>
-    _deduplicated_lib_templates_html__documentation_html(context1);
-
 String _renderExtension_partial_container_annotations_5(Extension context1) =>
     _deduplicated_lib_templates_html__container_annotations_html(context1);
 
-String _renderExtensionType_partial_static_properties_9(
-        ExtensionType context1) =>
-    _deduplicated_lib_templates_html__static_properties_html(context1);
-
-String _renderExtensionType_partial_static_methods_10(ExtensionType context1) =>
-    _deduplicated_lib_templates_html__static_methods_html(context1);
-
-String _renderExtensionType_partial_static_constants_11(
-        ExtensionType context1) =>
-    _deduplicated_lib_templates_html__static_constants_html(context1);
-
-String _renderExtensionType_partial_source_link_1(ExtensionType context1) =>
-    _deduplicated_lib_templates_html__source_link_html(context1);
-
-String _renderExtensionType_partial_search_sidebar_12<T extends ExtensionType>(
-        ExtensionTypeTemplateData<T> context0) =>
-    _deduplicated_lib_templates_html__search_sidebar_html(context0);
-
-String _renderExtensionType_partial_instance_operators_8(
-        ExtensionType context1) =>
-    _deduplicated_lib_templates_html__instance_operators_html(context1);
-
-String _renderExtensionType_partial_instance_methods_7(
-        ExtensionType context1) =>
-    _deduplicated_lib_templates_html__instance_methods_html(context1);
-
-String _renderExtensionType_partial_head_0<T extends ExtensionType>(
-        ExtensionTypeTemplateData<T> context0) =>
-    _deduplicated_lib_templates_html__head_html(context0);
-
-String _renderExtensionType_partial_footer_13<T extends ExtensionType>(
-        ExtensionTypeTemplateData<T> context0) =>
-    _deduplicated_lib_templates_html__footer_html(context0);
-
-String _renderExtensionType_partial_feature_set_2(ExtensionType context1) =>
-    _deduplicated_lib_templates_html__feature_set_html(context1);
-
-String _renderExtensionType_partial_documentation_4(ExtensionType context1) =>
-    _deduplicated_lib_templates_html__documentation_html(context1);
-
-String _renderExtensionType_partial_container_annotations_5(
-        ExtensionType context1) =>
-    _deduplicated_lib_templates_html__container_annotations_html(context1);
-
-String _renderError_partial_search_sidebar_1(PackageTemplateData context0) =>
-    _deduplicated_lib_templates_html__search_sidebar_html(context0);
-
 String _renderError_partial_packages_2(PackageTemplateData context0) =>
     _deduplicated_lib_templates_html__packages_html(context0);
-
-String _renderError_partial_head_0(PackageTemplateData context0) =>
-    _deduplicated_lib_templates_html__head_html(context0);
-
-String _renderError_partial_footer_3(PackageTemplateData context0) =>
-    _deduplicated_lib_templates_html__footer_html(context0);
 
 String _renderEnum_partial_super_chain_5(Enum context1) =>
     _deduplicated_lib_templates_html__super_chain_html(context1);
@@ -2698,12 +2444,6 @@ String _renderEnum_partial_static_methods_15(Enum context1) =>
 
 String _renderEnum_partial_static_constants_16(Enum context1) =>
     _deduplicated_lib_templates_html__static_constants_html(context1);
-
-String _renderEnum_partial_source_link_1(Enum context1) =>
-    _deduplicated_lib_templates_html__source_link_html(context1);
-
-String _renderEnum_partial_search_sidebar_17(EnumTemplateData context0) =>
-    _deduplicated_lib_templates_html__search_sidebar_html(context0);
 
 String _renderEnum_partial_mixed_in_types_7(Enum context1) {
   final buffer = StringBuffer();
@@ -2741,18 +2481,6 @@ String _renderEnum_partial_instance_operators_13(Enum context1) =>
 String _renderEnum_partial_instance_methods_12(Enum context1) =>
     _deduplicated_lib_templates_html__instance_methods_html(context1);
 
-String _renderEnum_partial_head_0(EnumTemplateData context0) =>
-    _deduplicated_lib_templates_html__head_html(context0);
-
-String _renderEnum_partial_footer_18(EnumTemplateData context0) =>
-    _deduplicated_lib_templates_html__footer_html(context0);
-
-String _renderEnum_partial_feature_set_2(Enum context1) =>
-    _deduplicated_lib_templates_html__feature_set_html(context1);
-
-String _renderEnum_partial_documentation_4(Enum context1) =>
-    _deduplicated_lib_templates_html__documentation_html(context1);
-
 String _renderEnum_partial_container_annotations_8(Enum context1) =>
     _deduplicated_lib_templates_html__container_annotations_html(context1);
 
@@ -2765,21 +2493,8 @@ String _renderConstructor_partial_source_link_1(Constructor context1) =>
 String _renderConstructor_partial_source_code_5(Constructor context1) =>
     _deduplicated_lib_templates_html__source_code_html(context1);
 
-String _renderConstructor_partial_search_sidebar_6(
-        ConstructorTemplateData context0) =>
-    _deduplicated_lib_templates_html__search_sidebar_html(context0);
-
-String _renderConstructor_partial_head_0(ConstructorTemplateData context0) =>
-    _deduplicated_lib_templates_html__head_html(context0);
-
-String _renderConstructor_partial_footer_7(ConstructorTemplateData context0) =>
-    _deduplicated_lib_templates_html__footer_html(context0);
-
 String _renderConstructor_partial_feature_set_2(Constructor context1) =>
     _deduplicated_lib_templates_html__feature_set_html(context1);
-
-String _renderConstructor_partial_documentation_4(Constructor context1) =>
-    _deduplicated_lib_templates_html__documentation_html(context1);
 
 String _renderConstructor_partial_annotations_3(Constructor context1) =>
     _deduplicated_lib_templates_html__annotations_html(context1);
@@ -2886,8 +2601,8 @@ String _renderCategory_partial_typedef_10(Typedef context2) {
     buffer.write('''</span>
     </span>
     ''');
-    buffer.write(
-        __renderCategory_partial_typedef_10_partial_categorization_0(context3));
+    buffer
+        .write(_deduplicated_lib_templates_html__categorization_html(context3));
     buffer.writeln();
     buffer.write('''
   </dt>
@@ -2899,8 +2614,7 @@ String _renderCategory_partial_typedef_10(Typedef context2) {
     ''');
     buffer.write(context3.oneLineDoc);
     buffer.write('\n    ');
-    buffer.write(
-        __renderCategory_partial_typedef_10_partial_attributes_1(context3));
+    buffer.write(_deduplicated_lib_templates_html__attributes_html(context3));
     buffer.writeln();
     buffer.write('''
   </dd>''');
@@ -3140,8 +2854,7 @@ String _renderCategory_partial_extension_5(Extension context2) {
   buffer.write('''">''');
   buffer.write(context2.linkedName);
   buffer.write('''</span> ''');
-  buffer.write(
-      __renderCategory_partial_container_3_partial_categorization_0(context2));
+  buffer.write(_deduplicated_lib_templates_html__categorization_html(context2));
   buffer.writeln();
   buffer.write('''
 </dt>
@@ -3173,8 +2886,7 @@ String _renderCategory_partial_container_3(Container context2) {
   buffer.write(context2.linkedName);
   buffer.write(context2.linkedGenericParameters);
   buffer.write('''</span> ''');
-  buffer.write(
-      __renderCategory_partial_container_3_partial_categorization_0(context2));
+  buffer.write(_deduplicated_lib_templates_html__categorization_html(context2));
   buffer.writeln();
   buffer.write('''
 </dt>
@@ -3217,8 +2929,7 @@ String _renderCategory_partial_callable_8(ModelFunctionTyped context2) {
   buffer.write('''</span>
   </span>
   ''');
-  buffer.write(
-      __renderCategory_partial_callable_8_partial_categorization_0(context2));
+  buffer.write(_deduplicated_lib_templates_html__categorization_html(context2));
   buffer.writeln();
   buffer.write('''
 </dt>
@@ -3230,8 +2941,7 @@ String _renderCategory_partial_callable_8(ModelFunctionTyped context2) {
   ''');
   buffer.write(context2.oneLineDoc);
   buffer.write('\n  ');
-  buffer.write(
-      __renderCategory_partial_callable_8_partial_attributes_1(context2));
+  buffer.write(_deduplicated_lib_templates_html__attributes_html(context2));
   buffer.writeln();
   buffer.write('''
 </dd>
@@ -3239,6 +2949,14 @@ String _renderCategory_partial_callable_8(ModelFunctionTyped context2) {
 
   return buffer.toString();
 }
+
+String _deduplicated_lib_templates_html__super_chain_html(
+        TypeImplementing context0) =>
+    _deduplicated_lib_templates_html__super_chain_html(context0);
+
+String _deduplicated_lib_templates_html__super_chain_html(
+        TypeImplementing context0) =>
+    _deduplicated_lib_templates_html__super_chain_html(context0);
 
 String _deduplicated_lib_templates_html__super_chain_html(
     InheritingContainer context0) {
@@ -3275,6 +2993,30 @@ String _deduplicated_lib_templates_html__super_chain_html(
   return buffer.toString();
 }
 
+String _deduplicated_lib_templates_html__super_chain_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__super_chain_html(context0);
+
+String _deduplicated_lib_templates_html__super_chain_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__super_chain_html(context0);
+
+String _deduplicated_lib_templates_html__static_properties_html(
+        TypeImplementing context0) =>
+    _deduplicated_lib_templates_html__static_properties_html(context0);
+
+String _deduplicated_lib_templates_html__static_properties_html(
+        TypeImplementing context0) =>
+    _deduplicated_lib_templates_html__static_properties_html(context0);
+
+String _deduplicated_lib_templates_html__static_properties_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__static_properties_html(context0);
+
+String _deduplicated_lib_templates_html__static_properties_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__static_properties_html(context0);
+
 String _deduplicated_lib_templates_html__static_properties_html(
     Container context0) {
   final buffer = StringBuffer();
@@ -3288,7 +3030,7 @@ String _deduplicated_lib_templates_html__static_properties_html(
     var context1 = context0.publicVariableStaticFieldsSorted;
     for (var context2 in context1) {
       buffer.write('\n        ');
-      buffer.write(_renderClass_partial_property_10(context2));
+      buffer.write(_deduplicated_lib_templates_html__property_html(context2));
     }
     buffer.writeln();
     buffer.write('''
@@ -3298,6 +3040,62 @@ String _deduplicated_lib_templates_html__static_properties_html(
 
   return buffer.toString();
 }
+
+String _deduplicated_lib_templates_html__static_properties_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_properties_html(context0);
+
+String _deduplicated_lib_templates_html__static_properties_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_properties_html(context0);
+
+String _deduplicated_lib_templates_html__static_properties_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_properties_html(context0);
+
+String _deduplicated_lib_templates_html__static_properties_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_properties_html(context0);
+
+String _deduplicated_lib_templates_html__static_properties_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_properties_html(context0);
+
+String _deduplicated_lib_templates_html__static_properties_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_properties_html(context0);
+
+String _deduplicated_lib_templates_html__static_properties_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_properties_html(context0);
+
+String _deduplicated_lib_templates_html__static_properties_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_properties_html(context0);
+
+String _deduplicated_lib_templates_html__static_properties_html(
+        Constructable context0) =>
+    _deduplicated_lib_templates_html__static_properties_html(context0);
+
+String _deduplicated_lib_templates_html__static_properties_html(
+        Constructable context0) =>
+    _deduplicated_lib_templates_html__static_properties_html(context0);
+
+String _deduplicated_lib_templates_html__static_methods_html(
+        TypeImplementing context0) =>
+    _deduplicated_lib_templates_html__static_methods_html(context0);
+
+String _deduplicated_lib_templates_html__static_methods_html(
+        TypeImplementing context0) =>
+    _deduplicated_lib_templates_html__static_methods_html(context0);
+
+String _deduplicated_lib_templates_html__static_methods_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__static_methods_html(context0);
+
+String _deduplicated_lib_templates_html__static_methods_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__static_methods_html(context0);
 
 String _deduplicated_lib_templates_html__static_methods_html(
     Container context0) {
@@ -3323,6 +3121,62 @@ String _deduplicated_lib_templates_html__static_methods_html(
   return buffer.toString();
 }
 
+String _deduplicated_lib_templates_html__static_methods_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_methods_html(context0);
+
+String _deduplicated_lib_templates_html__static_methods_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_methods_html(context0);
+
+String _deduplicated_lib_templates_html__static_methods_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_methods_html(context0);
+
+String _deduplicated_lib_templates_html__static_methods_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_methods_html(context0);
+
+String _deduplicated_lib_templates_html__static_methods_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_methods_html(context0);
+
+String _deduplicated_lib_templates_html__static_methods_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_methods_html(context0);
+
+String _deduplicated_lib_templates_html__static_methods_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_methods_html(context0);
+
+String _deduplicated_lib_templates_html__static_methods_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_methods_html(context0);
+
+String _deduplicated_lib_templates_html__static_methods_html(
+        Constructable context0) =>
+    _deduplicated_lib_templates_html__static_methods_html(context0);
+
+String _deduplicated_lib_templates_html__static_methods_html(
+        Constructable context0) =>
+    _deduplicated_lib_templates_html__static_methods_html(context0);
+
+String _deduplicated_lib_templates_html__static_constants_html(
+        TypeImplementing context0) =>
+    _deduplicated_lib_templates_html__static_constants_html(context0);
+
+String _deduplicated_lib_templates_html__static_constants_html(
+        TypeImplementing context0) =>
+    _deduplicated_lib_templates_html__static_constants_html(context0);
+
+String _deduplicated_lib_templates_html__static_constants_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__static_constants_html(context0);
+
+String _deduplicated_lib_templates_html__static_constants_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__static_constants_html(context0);
+
 String _deduplicated_lib_templates_html__static_constants_html(
     Container context0) {
   final buffer = StringBuffer();
@@ -3337,8 +3191,7 @@ String _deduplicated_lib_templates_html__static_constants_html(
     var context1 = context0.publicConstantFieldsSorted;
     for (var context2 in context1) {
       buffer.write('\n        ');
-      buffer.write(__renderClass_partial_static_constants_15_partial_constant_0(
-          context2));
+      buffer.write(_deduplicated_lib_templates_html__constant_html(context2));
     }
     buffer.writeln();
     buffer.write('''
@@ -3348,6 +3201,86 @@ String _deduplicated_lib_templates_html__static_constants_html(
 
   return buffer.toString();
 }
+
+String _deduplicated_lib_templates_html__static_constants_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_constants_html(context0);
+
+String _deduplicated_lib_templates_html__static_constants_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_constants_html(context0);
+
+String _deduplicated_lib_templates_html__static_constants_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_constants_html(context0);
+
+String _deduplicated_lib_templates_html__static_constants_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_constants_html(context0);
+
+String _deduplicated_lib_templates_html__static_constants_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_constants_html(context0);
+
+String _deduplicated_lib_templates_html__static_constants_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_constants_html(context0);
+
+String _deduplicated_lib_templates_html__static_constants_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_constants_html(context0);
+
+String _deduplicated_lib_templates_html__static_constants_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__static_constants_html(context0);
+
+String _deduplicated_lib_templates_html__static_constants_html(
+        Constructable context0) =>
+    _deduplicated_lib_templates_html__static_constants_html(context0);
+
+String _deduplicated_lib_templates_html__static_constants_html(
+        Constructable context0) =>
+    _deduplicated_lib_templates_html__static_constants_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        TypeImplementing context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        TypeImplementing context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
 
 String _deduplicated_lib_templates_html__source_link_html(
     ModelElement context0) {
@@ -3359,6 +3292,350 @@ String _deduplicated_lib_templates_html__source_link_html(
     buffer.write(context0.sourceHref);
     buffer.write(
         '''"><span class="material-symbols-outlined">description</span></a></div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ContainerMember context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        ContainerMember context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(Container context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(Container context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        Constructable context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_link_html(
+        Constructable context0) =>
+    _deduplicated_lib_templates_html__source_link_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasSourceCode == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">''');
+    buffer.write(context0.sourceCode);
+    buffer.write('''</code></pre>
+</section>''');
   }
   buffer.writeln();
 
@@ -3382,6 +3659,604 @@ String _deduplicated_lib_templates_html__source_code_html(
 
   return buffer.toString();
 }
+
+String _deduplicated_lib_templates_html__source_code_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasSourceCode == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">''');
+    buffer.write(context0.sourceCode);
+    buffer.write('''</code></pre>
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__source_code_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasSourceCode == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">''');
+    buffer.write(context0.sourceCode);
+    buffer.write('''</code></pre>
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__source_code_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasSourceCode == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">''');
+    buffer.write(context0.sourceCode);
+    buffer.write('''</code></pre>
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__source_code_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasSourceCode == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">''');
+    buffer.write(context0.sourceCode);
+    buffer.write('''</code></pre>
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__source_code_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasSourceCode == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">''');
+    buffer.write(context0.sourceCode);
+    buffer.write('''</code></pre>
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__source_code_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasSourceCode == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">''');
+    buffer.write(context0.sourceCode);
+    buffer.write('''</code></pre>
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__source_code_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasSourceCode == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">''');
+    buffer.write(context0.sourceCode);
+    buffer.write('''</code></pre>
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__source_code_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasSourceCode == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">''');
+    buffer.write(context0.sourceCode);
+    buffer.write('''</code></pre>
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__source_code_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasSourceCode == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">''');
+    buffer.write(context0.sourceCode);
+    buffer.write('''</code></pre>
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__source_code_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasSourceCode == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">''');
+    buffer.write(context0.sourceCode);
+    buffer.write('''</code></pre>
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__source_code_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasSourceCode == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">''');
+    buffer.write(context0.sourceCode);
+    buffer.write('''</code></pre>
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__source_code_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasSourceCode == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">''');
+    buffer.write(context0.sourceCode);
+    buffer.write('''</code></pre>
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__source_code_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasSourceCode == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">''');
+    buffer.write(context0.sourceCode);
+    buffer.write('''</code></pre>
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__source_code_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasSourceCode == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">''');
+    buffer.write(context0.sourceCode);
+    buffer.write('''</code></pre>
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__source_code_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasSourceCode == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">''');
+    buffer.write(context0.sourceCode);
+    buffer.write('''</code></pre>
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ContainerMember context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ContainerMember context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ContainerMember context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ContainerMember context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ContainerMember context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
+
+String _deduplicated_lib_templates_html__source_code_html(
+        ContainerMember context0) =>
+    _deduplicated_lib_templates_html__source_code_html(context0);
 
 String _deduplicated_lib_templates_html__search_sidebar_html(
     TemplateDataBase context0) {
@@ -3445,6 +4320,126 @@ String _deduplicated_lib_templates_html__search_sidebar_html(
   return buffer.toString();
 }
 
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
+String _deduplicated_lib_templates_html__search_sidebar_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__search_sidebar_html(context0);
+
 String _deduplicated_lib_templates_html__property_html(
     GetterSetterCombo context0) {
   final buffer = StringBuffer();
@@ -3483,6 +4478,276 @@ String _deduplicated_lib_templates_html__property_html(
 
   return buffer.toString();
 }
+
+String _deduplicated_lib_templates_html__property_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  buffer.write('''<dt id="''');
+  buffer.writeEscaped(context0.htmlId);
+  buffer.write('''" class="property''');
+  if (context0.isInherited == true) {
+    buffer.write(''' inherited''');
+  }
+  buffer.write('''">
+  <span class="name">''');
+  buffer.write(context0.linkedName);
+  buffer.write('''</span>
+  <span class="signature">''');
+  buffer.write(context0.arrow);
+  buffer.write(' ');
+  buffer.write(context0.modelType.linkedName);
+  buffer.write('''</span> ''');
+  buffer.write(_deduplicated_lib_templates_html__categorization_html(context0));
+  buffer.writeln();
+  buffer.write('''
+</dt>
+<dd''');
+  if (context0.isInherited == true) {
+    buffer.write(''' class="inherited"''');
+  }
+  buffer.write('''>
+  ''');
+  buffer.write(context0.oneLineDoc);
+  buffer.write('\n  ');
+  buffer.write(_deduplicated_lib_templates_html__attributes_html(context0));
+  buffer.writeln();
+  buffer.write('''
+</dd>
+''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__property_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  buffer.write('''<dt id="''');
+  buffer.writeEscaped(context0.htmlId);
+  buffer.write('''" class="property''');
+  if (context0.isInherited == true) {
+    buffer.write(''' inherited''');
+  }
+  buffer.write('''">
+  <span class="name">''');
+  buffer.write(context0.linkedName);
+  buffer.write('''</span>
+  <span class="signature">''');
+  buffer.write(context0.arrow);
+  buffer.write(' ');
+  buffer.write(context0.modelType.linkedName);
+  buffer.write('''</span> ''');
+  buffer.write(_deduplicated_lib_templates_html__categorization_html(context0));
+  buffer.writeln();
+  buffer.write('''
+</dt>
+<dd''');
+  if (context0.isInherited == true) {
+    buffer.write(''' class="inherited"''');
+  }
+  buffer.write('''>
+  ''');
+  buffer.write(context0.oneLineDoc);
+  buffer.write('\n  ');
+  buffer.write(_deduplicated_lib_templates_html__attributes_html(context0));
+  buffer.writeln();
+  buffer.write('''
+</dd>
+''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
+
+String _deduplicated_lib_templates_html__property_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__property_html(context0);
 
 String _deduplicated_lib_templates_html__packages_html(
     TemplateDataBase context0) {
@@ -3549,6 +4814,54 @@ String _deduplicated_lib_templates_html__packages_html(
   return buffer.toString();
 }
 
+String _deduplicated_lib_templates_html__packages_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__packages_html(context0);
+
+String _deduplicated_lib_templates_html__packages_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__packages_html(context0);
+
+String _deduplicated_lib_templates_html__packages_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__packages_html(context0);
+
+String _deduplicated_lib_templates_html__packages_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__packages_html(context0);
+
+String _deduplicated_lib_templates_html__packages_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__packages_html(context0);
+
+String _deduplicated_lib_templates_html__packages_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__packages_html(context0);
+
+String _deduplicated_lib_templates_html__packages_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__packages_html(context0);
+
+String _deduplicated_lib_templates_html__packages_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__packages_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
 String _deduplicated_lib_templates_html__name_summary_html(
     ModelElement context0) {
   final buffer = StringBuffer();
@@ -3565,6 +4878,606 @@ String _deduplicated_lib_templates_html__name_summary_html(
 
   return buffer.toString();
 }
+
+String _deduplicated_lib_templates_html__name_summary_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.isConst == true) {
+    buffer.write('''const ''');
+  }
+  buffer.write('''<span class="name ''');
+  if (context0.isDeprecated == true) {
+    buffer.write('''deprecated''');
+  }
+  buffer.write('''">''');
+  buffer.writeEscaped(context0.name);
+  buffer.write('''</span>''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__name_summary_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.isConst == true) {
+    buffer.write('''const ''');
+  }
+  buffer.write('''<span class="name ''');
+  if (context0.isDeprecated == true) {
+    buffer.write('''deprecated''');
+  }
+  buffer.write('''">''');
+  buffer.writeEscaped(context0.name);
+  buffer.write('''</span>''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__name_summary_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.isConst == true) {
+    buffer.write('''const ''');
+  }
+  buffer.write('''<span class="name ''');
+  if (context0.isDeprecated == true) {
+    buffer.write('''deprecated''');
+  }
+  buffer.write('''">''');
+  buffer.writeEscaped(context0.name);
+  buffer.write('''</span>''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__name_summary_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.isConst == true) {
+    buffer.write('''const ''');
+  }
+  buffer.write('''<span class="name ''');
+  if (context0.isDeprecated == true) {
+    buffer.write('''deprecated''');
+  }
+  buffer.write('''">''');
+  buffer.writeEscaped(context0.name);
+  buffer.write('''</span>''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__name_summary_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.isConst == true) {
+    buffer.write('''const ''');
+  }
+  buffer.write('''<span class="name ''');
+  if (context0.isDeprecated == true) {
+    buffer.write('''deprecated''');
+  }
+  buffer.write('''">''');
+  buffer.writeEscaped(context0.name);
+  buffer.write('''</span>''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__name_summary_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.isConst == true) {
+    buffer.write('''const ''');
+  }
+  buffer.write('''<span class="name ''');
+  if (context0.isDeprecated == true) {
+    buffer.write('''deprecated''');
+  }
+  buffer.write('''">''');
+  buffer.writeEscaped(context0.name);
+  buffer.write('''</span>''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__name_summary_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.isConst == true) {
+    buffer.write('''const ''');
+  }
+  buffer.write('''<span class="name ''');
+  if (context0.isDeprecated == true) {
+    buffer.write('''deprecated''');
+  }
+  buffer.write('''">''');
+  buffer.writeEscaped(context0.name);
+  buffer.write('''</span>''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__name_summary_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.isConst == true) {
+    buffer.write('''const ''');
+  }
+  buffer.write('''<span class="name ''');
+  if (context0.isDeprecated == true) {
+    buffer.write('''deprecated''');
+  }
+  buffer.write('''">''');
+  buffer.writeEscaped(context0.name);
+  buffer.write('''</span>''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__name_summary_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.isConst == true) {
+    buffer.write('''const ''');
+  }
+  buffer.write('''<span class="name ''');
+  if (context0.isDeprecated == true) {
+    buffer.write('''deprecated''');
+  }
+  buffer.write('''">''');
+  buffer.writeEscaped(context0.name);
+  buffer.write('''</span>''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__name_summary_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.isConst == true) {
+    buffer.write('''const ''');
+  }
+  buffer.write('''<span class="name ''');
+  if (context0.isDeprecated == true) {
+    buffer.write('''deprecated''');
+  }
+  buffer.write('''">''');
+  buffer.writeEscaped(context0.name);
+  buffer.write('''</span>''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__name_summary_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.isConst == true) {
+    buffer.write('''const ''');
+  }
+  buffer.write('''<span class="name ''');
+  if (context0.isDeprecated == true) {
+    buffer.write('''deprecated''');
+  }
+  buffer.write('''">''');
+  buffer.writeEscaped(context0.name);
+  buffer.write('''</span>''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__name_summary_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.isConst == true) {
+    buffer.write('''const ''');
+  }
+  buffer.write('''<span class="name ''');
+  if (context0.isDeprecated == true) {
+    buffer.write('''deprecated''');
+  }
+  buffer.write('''">''');
+  buffer.writeEscaped(context0.name);
+  buffer.write('''</span>''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__name_summary_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.isConst == true) {
+    buffer.write('''const ''');
+  }
+  buffer.write('''<span class="name ''');
+  if (context0.isDeprecated == true) {
+    buffer.write('''deprecated''');
+  }
+  buffer.write('''">''');
+  buffer.writeEscaped(context0.name);
+  buffer.write('''</span>''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__name_summary_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.isConst == true) {
+    buffer.write('''const ''');
+  }
+  buffer.write('''<span class="name ''');
+  if (context0.isDeprecated == true) {
+    buffer.write('''deprecated''');
+  }
+  buffer.write('''">''');
+  buffer.writeEscaped(context0.name);
+  buffer.write('''</span>''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__name_summary_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.isConst == true) {
+    buffer.write('''const ''');
+  }
+  buffer.write('''<span class="name ''');
+  if (context0.isDeprecated == true) {
+    buffer.write('''deprecated''');
+  }
+  buffer.write('''">''');
+  buffer.writeEscaped(context0.name);
+  buffer.write('''</span>''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__name_summary_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.isConst == true) {
+    buffer.write('''const ''');
+  }
+  buffer.write('''<span class="name ''');
+  if (context0.isDeprecated == true) {
+    buffer.write('''deprecated''');
+  }
+  buffer.write('''">''');
+  buffer.writeEscaped(context0.name);
+  buffer.write('''</span>''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        Inheritable context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        Inheritable context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        Inheritable context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        Inheritable context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        Inheritable context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__name_summary_html(
+        Inheritable context0) =>
+    _deduplicated_lib_templates_html__name_summary_html(context0);
+
+String _deduplicated_lib_templates_html__interfaces_html(
+        TypeImplementing context0) =>
+    _deduplicated_lib_templates_html__interfaces_html(context0);
+
+String _deduplicated_lib_templates_html__interfaces_html(
+        TypeImplementing context0) =>
+    _deduplicated_lib_templates_html__interfaces_html(context0);
 
 String _deduplicated_lib_templates_html__interfaces_html(
     InheritingContainer context0) {
@@ -3593,6 +5506,30 @@ String _deduplicated_lib_templates_html__interfaces_html(
 
   return buffer.toString();
 }
+
+String _deduplicated_lib_templates_html__interfaces_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__interfaces_html(context0);
+
+String _deduplicated_lib_templates_html__interfaces_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__interfaces_html(context0);
+
+String _deduplicated_lib_templates_html__instance_operators_html(
+        TypeImplementing context0) =>
+    _deduplicated_lib_templates_html__instance_operators_html(context0);
+
+String _deduplicated_lib_templates_html__instance_operators_html(
+        TypeImplementing context0) =>
+    _deduplicated_lib_templates_html__instance_operators_html(context0);
+
+String _deduplicated_lib_templates_html__instance_operators_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__instance_operators_html(context0);
+
+String _deduplicated_lib_templates_html__instance_operators_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__instance_operators_html(context0);
 
 String _deduplicated_lib_templates_html__instance_operators_html(
     Container context0) {
@@ -3624,6 +5561,62 @@ String _deduplicated_lib_templates_html__instance_operators_html(
   return buffer.toString();
 }
 
+String _deduplicated_lib_templates_html__instance_operators_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__instance_operators_html(context0);
+
+String _deduplicated_lib_templates_html__instance_operators_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__instance_operators_html(context0);
+
+String _deduplicated_lib_templates_html__instance_operators_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__instance_operators_html(context0);
+
+String _deduplicated_lib_templates_html__instance_operators_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__instance_operators_html(context0);
+
+String _deduplicated_lib_templates_html__instance_operators_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__instance_operators_html(context0);
+
+String _deduplicated_lib_templates_html__instance_operators_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__instance_operators_html(context0);
+
+String _deduplicated_lib_templates_html__instance_operators_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__instance_operators_html(context0);
+
+String _deduplicated_lib_templates_html__instance_operators_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__instance_operators_html(context0);
+
+String _deduplicated_lib_templates_html__instance_operators_html(
+        Constructable context0) =>
+    _deduplicated_lib_templates_html__instance_operators_html(context0);
+
+String _deduplicated_lib_templates_html__instance_operators_html(
+        Constructable context0) =>
+    _deduplicated_lib_templates_html__instance_operators_html(context0);
+
+String _deduplicated_lib_templates_html__instance_methods_html(
+        TypeImplementing context0) =>
+    _deduplicated_lib_templates_html__instance_methods_html(context0);
+
+String _deduplicated_lib_templates_html__instance_methods_html(
+        TypeImplementing context0) =>
+    _deduplicated_lib_templates_html__instance_methods_html(context0);
+
+String _deduplicated_lib_templates_html__instance_methods_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__instance_methods_html(context0);
+
+String _deduplicated_lib_templates_html__instance_methods_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__instance_methods_html(context0);
+
 String _deduplicated_lib_templates_html__instance_methods_html(
     Container context0) {
   final buffer = StringBuffer();
@@ -3653,6 +5646,46 @@ String _deduplicated_lib_templates_html__instance_methods_html(
 
   return buffer.toString();
 }
+
+String _deduplicated_lib_templates_html__instance_methods_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__instance_methods_html(context0);
+
+String _deduplicated_lib_templates_html__instance_methods_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__instance_methods_html(context0);
+
+String _deduplicated_lib_templates_html__instance_methods_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__instance_methods_html(context0);
+
+String _deduplicated_lib_templates_html__instance_methods_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__instance_methods_html(context0);
+
+String _deduplicated_lib_templates_html__instance_methods_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__instance_methods_html(context0);
+
+String _deduplicated_lib_templates_html__instance_methods_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__instance_methods_html(context0);
+
+String _deduplicated_lib_templates_html__instance_methods_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__instance_methods_html(context0);
+
+String _deduplicated_lib_templates_html__instance_methods_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__instance_methods_html(context0);
+
+String _deduplicated_lib_templates_html__instance_methods_html(
+        Constructable context0) =>
+    _deduplicated_lib_templates_html__instance_methods_html(context0);
+
+String _deduplicated_lib_templates_html__instance_methods_html(
+        Constructable context0) =>
+    _deduplicated_lib_templates_html__instance_methods_html(context0);
 
 String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) {
   final buffer = StringBuffer();
@@ -3809,6 +5842,96 @@ String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) {
   return buffer.toString();
 }
 
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
+String _deduplicated_lib_templates_html__head_html(TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__head_html(context0);
+
 String _deduplicated_lib_templates_html__footer_html(
     TemplateDataBase context0) {
   final buffer = StringBuffer();
@@ -3860,6 +5983,166 @@ String _deduplicated_lib_templates_html__footer_html(
   return buffer.toString();
 }
 
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__footer_html(
+        TemplateDataBase context0) =>
+    _deduplicated_lib_templates_html__footer_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        TypeImplementing context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        TypeImplementing context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
 String _deduplicated_lib_templates_html__feature_set_html(
     ModelElement context0) {
   final buffer = StringBuffer();
@@ -3869,6 +6152,334 @@ String _deduplicated_lib_templates_html__feature_set_html(
       buffer.write('\n    ');
       buffer.write(context2.featureLabel);
     }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ContainerMember context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        ContainerMember context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(Container context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(Container context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        Constructable context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__feature_set_html(
+        Constructable context0) =>
+    _deduplicated_lib_templates_html__feature_set_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+    Canonicalization context0) {
+  final buffer = StringBuffer();
+  if (context0.hasDocumentation == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="desc markdown">
+  ''');
+    buffer.write(context0.documentationAsHtml);
+    buffer.writeln();
+    buffer.write('''
+</section>''');
   }
   buffer.writeln();
 
@@ -3892,6 +6503,236 @@ String _deduplicated_lib_templates_html__documentation_html(
 
   return buffer.toString();
 }
+
+String _deduplicated_lib_templates_html__documentation_html(
+    Canonicalization context0) {
+  final buffer = StringBuffer();
+  if (context0.hasDocumentation == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="desc markdown">
+  ''');
+    buffer.write(context0.documentationAsHtml);
+    buffer.writeln();
+    buffer.write('''
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__documentation_html(
+    Canonicalization context0) {
+  final buffer = StringBuffer();
+  if (context0.hasDocumentation == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="desc markdown">
+  ''');
+    buffer.write(context0.documentationAsHtml);
+    buffer.writeln();
+    buffer.write('''
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__documentation_html(
+    Canonicalization context0) {
+  final buffer = StringBuffer();
+  if (context0.hasDocumentation == true) {
+    buffer.writeln();
+    buffer.write('''
+<section class="desc markdown">
+  ''');
+    buffer.write(context0.documentationAsHtml);
+    buffer.writeln();
+    buffer.write('''
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__documentation_html(
+        Canonicalization context0) =>
+    _deduplicated_lib_templates_html__documentation_html(context0);
+
+String _deduplicated_lib_templates_html__container_annotations_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__container_annotations_html(context0);
+
+String _deduplicated_lib_templates_html__container_annotations_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__container_annotations_html(context0);
 
 String _deduplicated_lib_templates_html__container_annotations_html(
     Container context0) {
@@ -3921,6 +6762,46 @@ String _deduplicated_lib_templates_html__container_annotations_html(
 
   return buffer.toString();
 }
+
+String _deduplicated_lib_templates_html__container_annotations_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__container_annotations_html(context0);
+
+String _deduplicated_lib_templates_html__container_annotations_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__container_annotations_html(context0);
+
+String _deduplicated_lib_templates_html__container_annotations_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__container_annotations_html(context0);
+
+String _deduplicated_lib_templates_html__container_annotations_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__container_annotations_html(context0);
+
+String _deduplicated_lib_templates_html__container_annotations_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__container_annotations_html(context0);
+
+String _deduplicated_lib_templates_html__container_annotations_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__container_annotations_html(context0);
+
+String _deduplicated_lib_templates_html__container_annotations_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__container_annotations_html(context0);
+
+String _deduplicated_lib_templates_html__container_annotations_html(
+        Container context0) =>
+    _deduplicated_lib_templates_html__container_annotations_html(context0);
+
+String _deduplicated_lib_templates_html__container_annotations_html(
+        Constructable context0) =>
+    _deduplicated_lib_templates_html__container_annotations_html(context0);
+
+String _deduplicated_lib_templates_html__container_annotations_html(
+        Constructable context0) =>
+    _deduplicated_lib_templates_html__container_annotations_html(context0);
 
 String _deduplicated_lib_templates_html__constructors_html(
     InheritingContainer context0) {
@@ -3967,6 +6848,74 @@ String _deduplicated_lib_templates_html__constructors_html(
     </dl>
   </section>''');
   }
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__constructors_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__constructors_html(context0);
+
+String _deduplicated_lib_templates_html__constructors_html(
+        InheritingContainer context0) =>
+    _deduplicated_lib_templates_html__constructors_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  buffer.write('''<dt id="''');
+  buffer.writeEscaped(context0.htmlId);
+  buffer.write('''" class="constant">''');
+  if (context0.isEnumValue == true) {
+    buffer.writeln();
+    buffer.write('''
+    <span class="name ''');
+    if (context0.isDeprecated == true) {
+      buffer.write('''deprecated''');
+    }
+    buffer.write('''">''');
+    buffer.write(context0.name);
+    buffer.write('''</span>''');
+  }
+  if (context0.isEnumValue != true) {
+    buffer.writeln();
+    buffer.write('''
+    <span class="name ''');
+    if (context0.isDeprecated == true) {
+      buffer.write('''deprecated''');
+    }
+    buffer.write('''">''');
+    buffer.write(context0.linkedName);
+    buffer.write('''</span>''');
+  }
+  buffer.writeln();
+  buffer.write('''
+  <span class="signature">&#8594; const ''');
+  buffer.write(context0.modelType.linkedName);
+  buffer.write('''</span>
+  ''');
+  buffer.write(_deduplicated_lib_templates_html__categorization_html(context0));
+  buffer.writeln();
+  buffer.write('''
+</dt>
+<dd>
+  ''');
+  buffer.write(context0.oneLineDoc);
+  buffer.write('\n  ');
+  buffer.write(_deduplicated_lib_templates_html__attributes_html(context0));
+  if (context0.hasConstantValueForDisplay == true) {
+    buffer.writeln();
+    buffer.write('''
+    <div>
+      <span class="signature"><code>''');
+    buffer.write(context0.constantValueTruncated);
+    buffer.write('''</code></span>
+    </div>''');
+  }
+  buffer.writeln();
+  buffer.write('''
+</dd>
+''');
 
   return buffer.toString();
 }
@@ -4031,6 +6980,226 @@ String _deduplicated_lib_templates_html__constant_html(
   return buffer.toString();
 }
 
+String _deduplicated_lib_templates_html__constant_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  buffer.write('''<dt id="''');
+  buffer.writeEscaped(context0.htmlId);
+  buffer.write('''" class="constant">''');
+  if (context0.isEnumValue == true) {
+    buffer.writeln();
+    buffer.write('''
+    <span class="name ''');
+    if (context0.isDeprecated == true) {
+      buffer.write('''deprecated''');
+    }
+    buffer.write('''">''');
+    buffer.write(context0.name);
+    buffer.write('''</span>''');
+  }
+  if (context0.isEnumValue != true) {
+    buffer.writeln();
+    buffer.write('''
+    <span class="name ''');
+    if (context0.isDeprecated == true) {
+      buffer.write('''deprecated''');
+    }
+    buffer.write('''">''');
+    buffer.write(context0.linkedName);
+    buffer.write('''</span>''');
+  }
+  buffer.writeln();
+  buffer.write('''
+  <span class="signature">&#8594; const ''');
+  buffer.write(context0.modelType.linkedName);
+  buffer.write('''</span>
+  ''');
+  buffer.write(_deduplicated_lib_templates_html__categorization_html(context0));
+  buffer.writeln();
+  buffer.write('''
+</dt>
+<dd>
+  ''');
+  buffer.write(context0.oneLineDoc);
+  buffer.write('\n  ');
+  buffer.write(_deduplicated_lib_templates_html__attributes_html(context0));
+  if (context0.hasConstantValueForDisplay == true) {
+    buffer.writeln();
+    buffer.write('''
+    <div>
+      <span class="signature"><code>''');
+    buffer.write(context0.constantValueTruncated);
+    buffer.write('''</code></span>
+    </div>''');
+  }
+  buffer.writeln();
+  buffer.write('''
+</dd>
+''');
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
+String _deduplicated_lib_templates_html__constant_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__constant_html(context0);
+
 String _deduplicated_lib_templates_html__categorization_html(
     ModelElement context0) {
   final buffer = StringBuffer();
@@ -4046,6 +7215,2080 @@ String _deduplicated_lib_templates_html__categorization_html(
   return buffer.toString();
 }
 
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasCategoryNames == true) {
+    var context1 = context0.displayedCategories;
+    for (var context2 in context1) {
+      buffer.write('\n    ');
+      buffer.write(context2!.categoryLabel);
+    }
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
+String _deduplicated_lib_templates_html__categorization_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__categorization_html(context0);
+
 String _deduplicated_lib_templates_html__attributes_html(
     ModelElement context0) {
   final buffer = StringBuffer();
@@ -4055,6 +9298,2099 @@ String _deduplicated_lib_templates_html__attributes_html(
     buffer.write('''</div>''');
   }
   buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAttributes == true) {
+    buffer.write('''<div class="features">''');
+    buffer.write(context0.attributesAsString);
+    buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__attributes_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__attributes_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+    TypeParameters context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAnnotations == true) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context1 = context0.annotations;
+    for (var context2 in context1) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context2.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__annotations_html(
+    TypeParameters context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAnnotations == true) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context1 = context0.annotations;
+    for (var context2 in context1) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context2.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__annotations_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        TypeParameters context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAnnotations == true) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context1 = context0.annotations;
+    for (var context2 in context1) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context2.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
 
   return buffer.toString();
 }
@@ -4084,6 +11420,709 @@ String _deduplicated_lib_templates_html__annotations_html(
   return buffer.toString();
 }
 
+String _deduplicated_lib_templates_html__annotations_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAnnotations == true) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context1 = context0.annotations;
+    for (var context2 in context1) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context2.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__annotations_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAnnotations == true) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context1 = context0.annotations;
+    for (var context2 in context1) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context2.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__annotations_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAnnotations == true) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context1 = context0.annotations;
+    for (var context2 in context1) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context2.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__annotations_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAnnotations == true) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context1 = context0.annotations;
+    for (var context2 in context1) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context2.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__annotations_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAnnotations == true) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context1 = context0.annotations;
+    for (var context2 in context1) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context2.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__annotations_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAnnotations == true) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context1 = context0.annotations;
+    for (var context2 in context1) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context2.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__annotations_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAnnotations == true) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context1 = context0.annotations;
+    for (var context2 in context1) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context2.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__annotations_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAnnotations == true) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context1 = context0.annotations;
+    for (var context2 in context1) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context2.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__annotations_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAnnotations == true) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context1 = context0.annotations;
+    for (var context2 in context1) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context2.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__annotations_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAnnotations == true) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context1 = context0.annotations;
+    for (var context2 in context1) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context2.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__annotations_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAnnotations == true) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context1 = context0.annotations;
+    for (var context2 in context1) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context2.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__annotations_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAnnotations == true) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context1 = context0.annotations;
+    for (var context2 in context1) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context2.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__annotations_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAnnotations == true) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context1 = context0.annotations;
+    for (var context2 in context1) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context2.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__annotations_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAnnotations == true) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context1 = context0.annotations;
+    for (var context2 in context1) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context2.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__annotations_html(
+    ModelElement context0) {
+  final buffer = StringBuffer();
+  if (context0.hasAnnotations == true) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context1 = context0.annotations;
+    for (var context2 in context1) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context2.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
+
+  return buffer.toString();
+}
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ModelElement context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ContainerMember context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ContainerMember context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ContainerMember context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ContainerMember context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ContainerMember context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
+String _deduplicated_lib_templates_html__annotations_html(
+        ContainerMember context0) =>
+    _deduplicated_lib_templates_html__annotations_html(context0);
+
 String _deduplicated_lib_templates_html__accessor_setter_html(
     GetterSetterCombo context0) {
   final buffer = StringBuffer();
@@ -4095,35 +12134,26 @@ String _deduplicated_lib_templates_html__accessor_setter_html(
 
 <section class="multi-line-signature">
   ''');
-    buffer.write(
-        __renderTopLevelProperty_partial_accessor_getter_9_partial_annotations_0(
-            context1));
+    buffer.write(_deduplicated_lib_templates_html__annotations_html(context1));
     buffer.writeln();
     buffer.write('''
   <span class="returntype">void</span>
   ''');
-    buffer.write(
-        __renderTopLevelProperty_partial_accessor_getter_9_partial_name_summary_1(
-            context1));
+    buffer.write(_deduplicated_lib_templates_html__name_summary_html(context1));
     buffer.write('''<span class="signature">(<wbr>''');
     buffer.write(context1.linkedParamsNoMetadata);
     buffer.write(''')</span>
   ''');
-    buffer.write(
-        __renderTopLevelProperty_partial_accessor_getter_9_partial_attributes_2(
-            context1));
+    buffer.write(_deduplicated_lib_templates_html__attributes_html(context1));
     buffer.writeln();
     buffer.write('''
 </section>
 
 ''');
-    buffer.write(
-        __renderTopLevelProperty_partial_accessor_getter_9_partial_documentation_3(
-            context1));
+    buffer
+        .write(_deduplicated_lib_templates_html__documentation_html(context1));
     buffer.writeln();
-    buffer.write(
-        __renderTopLevelProperty_partial_accessor_getter_9_partial_source_code_4(
-            context1));
+    buffer.write(_deduplicated_lib_templates_html__source_code_html(context1));
     buffer.writeln();
     buffer.write('''
 </section>''');
@@ -4132,6 +12162,14 @@ String _deduplicated_lib_templates_html__accessor_setter_html(
 
   return buffer.toString();
 }
+
+String _deduplicated_lib_templates_html__accessor_setter_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__accessor_setter_html(context0);
+
+String _deduplicated_lib_templates_html__accessor_setter_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__accessor_setter_html(context0);
 
 String _deduplicated_lib_templates_html__accessor_getter_html(
     GetterSetterCombo context0) {
@@ -4144,34 +12182,25 @@ String _deduplicated_lib_templates_html__accessor_getter_html(
 
 <section class="multi-line-signature">
   ''');
-    buffer.write(
-        __renderTopLevelProperty_partial_accessor_getter_9_partial_annotations_0(
-            context1));
+    buffer.write(_deduplicated_lib_templates_html__annotations_html(context1));
     buffer.writeln();
     buffer.write('''
   <span class="returntype">''');
     buffer.write(context1.modelType.returnType.linkedName);
     buffer.write('''</span>
   ''');
-    buffer.write(
-        __renderTopLevelProperty_partial_accessor_getter_9_partial_name_summary_1(
-            context1));
+    buffer.write(_deduplicated_lib_templates_html__name_summary_html(context1));
     buffer.write('\n  ');
-    buffer.write(
-        __renderTopLevelProperty_partial_accessor_getter_9_partial_attributes_2(
-            context1));
+    buffer.write(_deduplicated_lib_templates_html__attributes_html(context1));
     buffer.writeln();
     buffer.write('''
 </section>
 
 ''');
-    buffer.write(
-        __renderTopLevelProperty_partial_accessor_getter_9_partial_documentation_3(
-            context1));
+    buffer
+        .write(_deduplicated_lib_templates_html__documentation_html(context1));
     buffer.writeln();
-    buffer.write(
-        __renderTopLevelProperty_partial_accessor_getter_9_partial_source_code_4(
-            context1));
+    buffer.write(_deduplicated_lib_templates_html__source_code_html(context1));
     buffer.writeln();
     buffer.write('''
 </section>''');
@@ -4180,6 +12209,14 @@ String _deduplicated_lib_templates_html__accessor_getter_html(
 
   return buffer.toString();
 }
+
+String _deduplicated_lib_templates_html__accessor_getter_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__accessor_getter_html(context0);
+
+String _deduplicated_lib_templates_html__accessor_getter_html(
+        GetterSetterCombo context0) =>
+    _deduplicated_lib_templates_html__accessor_getter_html(context0);
 
 String __renderTypedef_partial_typedef_multiline_4_partial_type_multiline_0(
     Typedef context1) {
@@ -4203,9 +12240,7 @@ String __renderTypedef_partial_typedef_multiline_4_partial_type_multiline_0(
 </div>''');
   }
   buffer.writeln();
-  buffer.write(
-      ___renderTypedef_partial_typedef_multiline_4_partial_type_multiline_0_partial_name_summary_0(
-          context1));
+  buffer.write(_deduplicated_lib_templates_html__name_summary_html(context1));
   buffer.write(context1.genericParameters);
   buffer.write(''' = ''');
   buffer.write(context1.modelType.linkedName);
@@ -4215,55 +12250,9 @@ String __renderTypedef_partial_typedef_multiline_4_partial_type_multiline_0(
   return buffer.toString();
 }
 
-String __renderTopLevelProperty_partial_accessor_getter_9_partial_source_code_4(
-        Accessor context2) =>
-    _deduplicated_lib_templates_html__source_code_html(context2);
-
-String
-    __renderTopLevelProperty_partial_accessor_getter_9_partial_name_summary_1(
-            Accessor context2) =>
-        _deduplicated_lib_templates_html__name_summary_html(context2);
-
-String
-    __renderTopLevelProperty_partial_accessor_getter_9_partial_documentation_3(
-            Accessor context2) =>
-        _deduplicated_lib_templates_html__documentation_html(context2);
-
-String __renderTopLevelProperty_partial_accessor_getter_9_partial_attributes_2(
-        Accessor context2) =>
-    _deduplicated_lib_templates_html__attributes_html(context2);
-
-String __renderTopLevelProperty_partial_accessor_getter_9_partial_annotations_0(
-        Accessor context2) =>
-    _deduplicated_lib_templates_html__annotations_html(context2);
-
-String __renderProperty_partial_accessor_getter_8_partial_source_code_4(
-        ContainerAccessor context2) =>
-    _deduplicated_lib_templates_html__source_code_html(context2);
-
-String __renderProperty_partial_accessor_getter_8_partial_name_summary_1(
-        ContainerAccessor context2) =>
-    _deduplicated_lib_templates_html__name_summary_html(context2);
-
-String __renderProperty_partial_accessor_getter_8_partial_documentation_3(
-        ContainerAccessor context2) =>
-    _deduplicated_lib_templates_html__documentation_html(context2);
-
-String __renderProperty_partial_accessor_getter_8_partial_attributes_2(
-        ContainerAccessor context2) =>
-    _deduplicated_lib_templates_html__attributes_html(context2);
-
-String __renderProperty_partial_accessor_getter_8_partial_annotations_0(
-        ContainerAccessor context2) =>
-    _deduplicated_lib_templates_html__annotations_html(context2);
-
 String __renderMethod_partial_callable_multiline_3_partial_name_summary_1(
         Method context1) =>
     _deduplicated_lib_templates_html__name_summary_html(context1);
-
-String __renderMethod_partial_callable_multiline_3_partial_annotations_0(
-        Method context1) =>
-    _deduplicated_lib_templates_html__annotations_html(context1);
 
 String __renderFunction_partial_callable_multiline_4_partial_name_summary_1(
         ModelFunction context1) =>
@@ -4276,13 +12265,6 @@ String __renderFunction_partial_callable_multiline_4_partial_annotations_0(
 String __renderClass_partial_static_constants_15_partial_constant_0(
         Field context2) =>
     _deduplicated_lib_templates_html__constant_html(context2);
-
-String __renderClass_partial_property_10_partial_categorization_0(
-        Field context2) =>
-    _deduplicated_lib_templates_html__categorization_html(context2);
-
-String __renderClass_partial_property_10_partial_attributes_1(Field context2) =>
-    _deduplicated_lib_templates_html__attributes_html(context2);
 
 String __renderClass_partial_instance_methods_11_partial_callable_0(
     Method context2) {
@@ -4310,9 +12292,7 @@ String __renderClass_partial_instance_methods_11_partial_callable_0(
   buffer.write('''</span>
   </span>
   ''');
-  buffer.write(
-      ___renderClass_partial_instance_methods_11_partial_callable_0_partial_categorization_0(
-          context2));
+  buffer.write(_deduplicated_lib_templates_html__categorization_html(context2));
   buffer.writeln();
   buffer.write('''
 </dt>
@@ -4324,9 +12304,7 @@ String __renderClass_partial_instance_methods_11_partial_callable_0(
   ''');
   buffer.write(context2.oneLineDoc);
   buffer.write('\n  ');
-  buffer.write(
-      ___renderClass_partial_instance_methods_11_partial_callable_0_partial_attributes_1(
-          context2));
+  buffer.write(_deduplicated_lib_templates_html__attributes_html(context2));
   buffer.writeln();
   buffer.write('''
 </dd>
@@ -4360,9 +12338,7 @@ String __renderCategory_partial_typedef_10_partial_type_2(Typedef context2) {
   buffer.write('''
   </span>
   ''');
-  buffer.write(
-      ___renderCategory_partial_typedef_10_partial_type_2_partial_categorization_0(
-          context2));
+  buffer.write(_deduplicated_lib_templates_html__categorization_html(context2));
   buffer.writeln();
   buffer.write('''
 </dt>
@@ -4374,9 +12350,7 @@ String __renderCategory_partial_typedef_10_partial_type_2(Typedef context2) {
   ''');
   buffer.write(context2.oneLineDoc);
   buffer.write('\n  ');
-  buffer.write(
-      ___renderCategory_partial_typedef_10_partial_type_2_partial_attributes_1(
-          context2));
+  buffer.write(_deduplicated_lib_templates_html__attributes_html(context2));
   buffer.writeln();
   buffer.write('''
 </dd>
@@ -4384,14 +12358,6 @@ String __renderCategory_partial_typedef_10_partial_type_2(Typedef context2) {
 
   return buffer.toString();
 }
-
-String __renderCategory_partial_typedef_10_partial_categorization_0(
-        FunctionTypedef context3) =>
-    _deduplicated_lib_templates_html__categorization_html(context3);
-
-String __renderCategory_partial_typedef_10_partial_attributes_1(
-        FunctionTypedef context3) =>
-    _deduplicated_lib_templates_html__attributes_html(context3);
 
 String __renderCategory_partial_library_2_partial_categorization_0(
         Library context2) =>
@@ -4401,44 +12367,12 @@ String __renderCategory_partial_container_3_partial_categorization_0(
         Container context2) =>
     _deduplicated_lib_templates_html__categorization_html(context2);
 
-String __renderCategory_partial_constant_6_partial_categorization_0(
-        TopLevelVariable context2) =>
-    _deduplicated_lib_templates_html__categorization_html(context2);
-
 String __renderCategory_partial_constant_6_partial_attributes_1(
         TopLevelVariable context2) =>
     _deduplicated_lib_templates_html__attributes_html(context2);
 
-String __renderCategory_partial_callable_8_partial_categorization_0(
-        ModelFunctionTyped context2) =>
-    _deduplicated_lib_templates_html__categorization_html(context2);
-
 String __renderCategory_partial_callable_8_partial_attributes_1(
         ModelFunctionTyped context2) =>
-    _deduplicated_lib_templates_html__attributes_html(context2);
-
-String
-    ___renderTypedef_partial_typedef_multiline_4_partial_type_multiline_0_partial_name_summary_0(
-            Typedef context1) =>
-        _deduplicated_lib_templates_html__name_summary_html(context1);
-
-String
-    ___renderClass_partial_instance_methods_11_partial_callable_0_partial_categorization_0(
-            Method context2) =>
-        _deduplicated_lib_templates_html__categorization_html(context2);
-
-String
-    ___renderClass_partial_instance_methods_11_partial_callable_0_partial_attributes_1(
-            Method context2) =>
-        _deduplicated_lib_templates_html__attributes_html(context2);
-
-String
-    ___renderCategory_partial_typedef_10_partial_type_2_partial_categorization_0(
-            Typedef context2) =>
-        _deduplicated_lib_templates_html__categorization_html(context2);
-
-String ___renderCategory_partial_typedef_10_partial_type_2_partial_attributes_1(
-        Typedef context2) =>
     _deduplicated_lib_templates_html__attributes_html(context2);
 
 extension on StringBuffer {
