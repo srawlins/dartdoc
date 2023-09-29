@@ -350,6 +350,8 @@ abstract class InheritingContainer extends Container
   Iterable<Method> get publicInheritedMethods =>
       model_utils.filterNonPublic(inheritedMethods);
 
+  bool get hasPublicInterfaces => publicInterfaces.isNotEmpty;
+
   Iterable<DefinedElementType> get publicInterfaces => const [];
 
   Iterable<DefinedElementType> get publicSuperChainReversed =>
@@ -482,8 +484,6 @@ mixin TypeImplementing on InheritingContainer {
       super.hasModifiers || hasPublicInterfaces || hasPublicImplementors;
 
   bool get hasPublicImplementors => publicImplementors.isNotEmpty;
-
-  bool get hasPublicInterfaces => publicInterfaces.isNotEmpty;
 
   /// Interfaces directly implemented by this container.
   List<DefinedElementType> get interfaces => directInterfaces;

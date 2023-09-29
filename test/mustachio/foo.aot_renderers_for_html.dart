@@ -3,8 +3,7 @@
 // To change the contents of this library, make changes to the builder source
 // files in the tool/mustachio/ directory.
 
-// There are a few deduplicated render functions which are generated but not
-// used.
+// Some deduplicated render functions are generated but not used.
 // TODO(srawlins): Detect these and do not write them.
 // ignore_for_file: unused_element
 // Sometimes we enter a new section which triggers creating a new variable, but
@@ -67,13 +66,13 @@ String renderFoo(Foo context0) {
   return buffer.toString();
 }
 
-String renderBar() {
+String renderBaz() {
   final buffer = StringBuffer();
 
   return buffer.toString();
 }
 
-String renderBaz() {
+String renderBar() {
   final buffer = StringBuffer();
 
   return buffer.toString();

@@ -7668,6 +7668,13 @@ class _Renderer_InheritingContainer extends RendererBase<InheritingContainer> {
                       self.renderSimpleVariable(c, remainingNames, 'bool'),
                   getBool: (CT_ c) => c.hasPublicInheritedMethods == true,
                 ),
+                'hasPublicInterfaces': Property(
+                  getValue: (CT_ c) => c.hasPublicInterfaces,
+                  renderVariable: (CT_ c, Property<CT_> self,
+                          List<String> remainingNames) =>
+                      self.renderSimpleVariable(c, remainingNames, 'bool'),
+                  getBool: (CT_ c) => c.hasPublicInterfaces == true,
+                ),
                 'hasPublicSuperChainReversed': Property(
                   getValue: (CT_ c) => c.hasPublicSuperChainReversed,
                   renderVariable: (CT_ c, Property<CT_> self,
@@ -15416,13 +15423,6 @@ class _Renderer_TypeImplementing extends RendererBase<TypeImplementing> {
                           List<String> remainingNames) =>
                       self.renderSimpleVariable(c, remainingNames, 'bool'),
                   getBool: (CT_ c) => c.hasPublicImplementors == true,
-                ),
-                'hasPublicInterfaces': Property(
-                  getValue: (CT_ c) => c.hasPublicInterfaces,
-                  renderVariable: (CT_ c, Property<CT_> self,
-                          List<String> remainingNames) =>
-                      self.renderSimpleVariable(c, remainingNames, 'bool'),
-                  getBool: (CT_ c) => c.hasPublicInterfaces == true,
                 ),
                 'interfaces': Property(
                   getValue: (CT_ c) => c.interfaces,
