@@ -347,9 +347,6 @@ abstract class ModelElement extends Canonicalization
   // Stub for mustache.
   Iterable<Category?> get displayedCategories => const [];
 
-  @override
-  ModelNode? get modelNode => packageGraph.getModelNodeFor(element);
-
   /// This element's [Annotation]s.
   ///
   /// Does not include annotations with `null` elements or that are otherwise

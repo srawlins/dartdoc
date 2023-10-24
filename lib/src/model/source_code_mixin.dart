@@ -7,8 +7,6 @@ import 'package:analyzer/source/line_info.dart';
 import 'package:dartdoc/src/model/model.dart';
 
 mixin SourceCode implements Documentable {
-  ModelNode? get modelNode;
-
   CharacterLocation? get characterLocation;
 
   Element? get element;

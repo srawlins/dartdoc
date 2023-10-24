@@ -10789,18 +10789,6 @@ class _Renderer_ModelElement extends RendererBase<ModelElement> {
                         _render_String(e, ast, r.template, sink, parent: r));
                   },
                 ),
-                'modelNode': Property(
-                  getValue: (CT_ c) => c.modelNode,
-                  renderVariable: (CT_ c, Property<CT_> self,
-                          List<String> remainingNames) =>
-                      self.renderSimpleVariable(c, remainingNames, 'ModelNode'),
-                  isNullValue: (CT_ c) => c.modelNode == null,
-                  renderValue: (CT_ c, RendererBase<CT_> r,
-                      List<MustachioNode> ast, StringSink sink) {
-                    renderSimple(c.modelNode, ast, r.template, sink,
-                        parent: r, getters: _invisibleGetters['ModelNode']!);
-                  },
-                ),
                 'name': Property(
                   getValue: (CT_ c) => c.name,
                   renderVariable:
@@ -13291,18 +13279,6 @@ class _Renderer_SourceCode extends RendererBase<SourceCode> {
                       List<MustachioNode> ast, StringSink sink) {
                     _render_Library(c.library!, ast, r.template, sink,
                         parent: r);
-                  },
-                ),
-                'modelNode': Property(
-                  getValue: (CT_ c) => c.modelNode,
-                  renderVariable: (CT_ c, Property<CT_> self,
-                          List<String> remainingNames) =>
-                      self.renderSimpleVariable(c, remainingNames, 'ModelNode'),
-                  isNullValue: (CT_ c) => c.modelNode == null,
-                  renderValue: (CT_ c, RendererBase<CT_> r,
-                      List<MustachioNode> ast, StringSink sink) {
-                    renderSimple(c.modelNode, ast, r.template, sink,
-                        parent: r, getters: _invisibleGetters['ModelNode']!);
                   },
                 ),
               }) as Map<String, Property<CT_>>;
@@ -16411,7 +16387,6 @@ const _invisibleGetters = {
     'runtimeType',
     'superclassConstraints'
   },
-  'ModelNode': {'hashCode', 'runtimeType'},
   'PackageGraph': {
     'allConstructedModelElements',
     'allExtensionsAdded',

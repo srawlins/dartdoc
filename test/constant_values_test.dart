@@ -194,8 +194,6 @@ class A {
 }
 ''');
     var aClass = library.classes.named('A');
-    var aConst = aClass.constantFields.named('aConst');
-    expect(aConst.hasConstantValueForDisplay, isFalse);
     expect(aClass.documentation, equals('Some documentation.'));
   }
 
@@ -209,10 +207,6 @@ static const aTopLevelConst = 37;
 ''', libraryPreamble: '''
 /// Some documentation.
 ''');
-    var aConst = library.classes.named('A').constantFields.named('aConst');
-    expect(aConst.hasConstantValueForDisplay, isFalse);
-    var aTopLevelConst = library.constants.named('aTopLevelConst');
-    expect(aTopLevelConst.hasConstantValueForDisplay, isFalse);
     expect(library.documentation, equals('Some documentation.'));
   }
 }
