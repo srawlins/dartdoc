@@ -53,8 +53,6 @@ class Library extends ModelElement
 
   factory Library.fromLibraryResult(DartDocResolvedLibrary resolvedLibrary,
       PackageGraph packageGraph, Package package) {
-    packageGraph.gatherModelNodes(resolvedLibrary);
-
     var element = resolvedLibrary.element;
 
     var localElements = {

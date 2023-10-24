@@ -43,8 +43,6 @@ class PackageGraph with CommentReferable, Nameable {
 
   final InheritanceManager3 inheritanceManager = InheritanceManager3();
 
-  final AnalysisContext _analysisContext;
-
   /// PackageMeta for the default package.
   final PackageMeta packageMeta;
 
@@ -248,14 +246,9 @@ class PackageGraph with CommentReferable, Nameable {
         // There should be only one library directive. If there are more, there
         // is no harm in grabbing ModelNode for each.
         var commentData = directive.documentationComment?.data;
+
         _modelNodes.putIfAbsent(
-            resolvedLibrary.element,
-            () => ModelNode(
-                  directive,
-                  resolvedLibrary.element,
-                  _analysisContext,
-                  commentData: commentData,
-                ));
+            resolvedLibrary.element, () => ModelNode(commentData: commentData));
       }
 
       for (var declaration in unit.declarations) {
@@ -305,12 +298,7 @@ class PackageGraph with CommentReferable, Nameable {
       }
       _modelNodes.putIfAbsent(
         element,
-        () => ModelNode(
-          declaration,
-          element,
-          _analysisContext,
-          commentData: commentData,
-        ),
+        () => ModelNode(commentData: commentData),
       );
     }
 

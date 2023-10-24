@@ -4,50 +4,16 @@
 
 import 'dart:convert';
 
-import 'package:analyzer/dart/analysis/analysis_context.dart';
-import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:meta/meta.dart';
 
 /// Stripped down information derived from [AstNode] containing only information
 /// needed to resurrect the source code of [_element].
 class ModelNode {
-  final Element _element;
-  final AnalysisContext _analysisContext;
-
   /// Data about the doc comment of this node.
   final CommentData? commentData;
 
-  factory ModelNode(
-    AstNode? sourceNode,
-    Element element,
-    AnalysisContext analysisContext, {
-    CommentData? commentData,
-  }) {
-    if (sourceNode == null) {
-      return ModelNode._(element, analysisContext);
-    } else {
-      // Get a node higher up the syntax tree that includes the semicolon.
-      // In this case, it is either a [FieldDeclaration] or
-      // [TopLevelVariableDeclaration]. (#2401)
-      if (sourceNode is VariableDeclaration) {
-        sourceNode = sourceNode.parent!.parent!;
-        assert(sourceNode is FieldDeclaration ||
-            sourceNode is TopLevelVariableDeclaration);
-      }
-      return ModelNode._(
-        element,
-        analysisContext,
-        commentData: commentData,
-      );
-    }
-  }
-
-  ModelNode._(
-    this._element,
-    this._analysisContext, {
-    this.commentData,
-  });
+  ModelNode({this.commentData});
 }
 
 /// Comment data from the syntax tree.
