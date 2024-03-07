@@ -295,8 +295,9 @@ Future<void> runDoc(ArgResults commandResults) async {
   }
   var target = commandResults.rest.single;
   var stats = commandResults['stats'];
+  var version = commandResults['version'];
   await switch (target) {
-    'flutter' => docFlutter(withStats: stats),
+    'flutter' => docFlutter(withStats: stats, version: version),
     'help' => _docHelp(),
     'package' => _docPackage(commandResults, withStats: stats),
     'sdk' => docSdk(withStats: stats),
@@ -305,7 +306,7 @@ Future<void> runDoc(ArgResults commandResults) async {
   };
 }
 
-Future<void> docFlutter({bool withStats = false}) async {
+Future<void> docFlutter({bool withStats = false, String? version}) async {
   print('building flutter docs into: ${flutterDir.path}');
   var env = createThrowawayPubCache();
   await _docFlutter(
@@ -314,6 +315,7 @@ Future<void> docFlutter({bool withStats = false}) async {
     env: env,
     label: 'docs',
     withStats: withStats,
+    version: version,
   );
 }
 
@@ -323,9 +325,10 @@ Future<Iterable<Map<String, Object?>>> _docFlutter({
   required Map<String, String> env,
   String? label,
   bool withStats = false,
+  String? version,
 }) async {
   var flutterRepo = await FlutterRepo.copyFromExistingFlutterRepo(
-      await cleanFlutterRepo, flutterPath, env, label);
+      await buildCleanFlutterRepo(version: version), flutterPath, env, label);
   var snippetsPath = path.join(flutterPath, 'dev', 'snippets');
   var snippetsOutPath =
       path.join(flutterPath, 'bin', 'cache', 'artifacts', 'snippets');
@@ -426,8 +429,8 @@ Future<String> docPackage({
   if (pubPackageMetaProvider
       .fromDir(PhysicalResourceProvider.INSTANCE.getFolder(pubPackageDir.path))!
       .requiresFlutter) {
-    var flutterRepo =
-        await FlutterRepo.fromExistingFlutterRepo(await cleanFlutterRepo);
+    var flutterRepo = await FlutterRepo.fromExistingFlutterRepo(
+        await buildCleanFlutterRepo());
     executable = flutterRepo.cacheDart;
     environment = flutterRepo.env;
   }

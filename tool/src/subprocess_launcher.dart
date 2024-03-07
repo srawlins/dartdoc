@@ -49,6 +49,7 @@ class SubprocessLauncher {
     Map<String, String>? environment,
     bool includeParentEnvironment = true,
     bool withStats = false,
+    Set<int> okExitCodes = const {0},
   }) async {
     environment = {...defaultEnvironment, ...?environment};
     var jsonObjects = <Map<String, Object?>>[];
@@ -127,7 +128,7 @@ class SubprocessLauncher {
     var (_, _, exitCode) =
         await (stdoutFuture, stderrFuture, process.exitCode).wait;
 
-    if (exitCode != 0) {
+    if (!okExitCodes.contains(exitCode)) {
       throw SubprocessException(
         command: [executable, ...arguments].join(' '),
         workingDirectory: workingDirectory,

@@ -25,7 +25,7 @@ class FlutterRepo {
 
   String get flutterCmd => path.joinAll([repoPath, 'bin', 'flutter']);
 
-  Future<void> init() async {
+  Future<void> init({String? version}) async {
     Directory(repoPath).createSync(recursive: true);
     await launcher.runStreamed(
         'git', ['clone', 'https://github.com/flutter/flutter.git', '.'],
@@ -35,10 +35,14 @@ class FlutterRepo {
       ['--version'],
       workingDirectory: repoPath,
     );
+    if (version != null) {
+      await launcher.runStreamed(flutterCmd, ['downgrade', version]);
+    }
     await launcher.runStreamed(
       flutterCmd,
       ['update-packages'],
       workingDirectory: repoPath,
+      okExitCodes: {0, 69},
     );
   }
 
@@ -78,11 +82,12 @@ Directory cleanFlutterDir = Directory(path.join(
 Future<void>? _lockFuture;
 Completer<FlutterRepo>? _cleanFlutterRepo;
 
-/// Returns true if we need to replace the existing flutter.  We never release
-/// this lock until the program exits to prevent edge case runs from
-/// spontaneously deciding to download a new Flutter SDK in the middle of a run.
-// TODO(srawlins): The above comment is outdated.
-Future<FlutterRepo> get cleanFlutterRepo async {
+/// Returns a clean [FlutterRepo].
+///
+/// We don't release this lock until the program exits to prevent edge case runs
+/// from spontaneously deciding to download a new Flutter SDK in the middle of a
+/// run.
+Future<FlutterRepo> buildCleanFlutterRepo({String? version}) async {
   var repoCompleter = _cleanFlutterRepo;
   if (repoCompleter != null) {
     return repoCompleter.future;
@@ -110,13 +115,15 @@ Future<FlutterRepo> get cleanFlutterRepo async {
         int.parse(lastSynced.readAsStringSync()));
   }
   if (lastSyncedTime == null ||
+      // If a version has been specified, don't trust the existing repo.
+      version != null ||
       DateTime.now().difference(lastSyncedTime) > Duration(hours: 24)) {
     // Rebuild the repository.
     if (cleanFlutterDir.existsSync()) {
       cleanFlutterDir.deleteSync(recursive: true);
     }
     cleanFlutterDir.createSync(recursive: true);
-    await newRepo.init();
+    await newRepo.init(version: version);
     await lastSynced
         .writeAsString(DateTime.now().millisecondsSinceEpoch.toString());
   }
