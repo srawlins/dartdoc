@@ -679,7 +679,18 @@ abstract class ModelElement extends Canonicalization
     }
 
     var cssClass = isDeprecated ? ' class="deprecated"' : '';
-    return '<a$cssClass href="$href">$displayName</a>';
+    if (this is Constructor) {
+      var page = enclosingElement!.href;
+      return '<a$cssClass href="$page#$htmlId">${element.name}</a>';
+    } else if (this is Field) {
+      var page = enclosingElement!.href;
+      return '<a$cssClass href="$page#$htmlId">${element.name}</a>';
+    } else if (this is Method) {
+      var page = enclosingElement!.href;
+      return '<a$cssClass href="$page#$htmlId">${element.name}</a>';
+    } else {
+      return '<a$cssClass href="$href">$displayName</a>';
+    }
   }();
 
   ParameterRenderer get _parameterRenderer => const ParameterRendererHtml();

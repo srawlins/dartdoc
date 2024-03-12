@@ -133,7 +133,7 @@ abstract class GeneratorBackend {
     runtimeStats.incrementAccumulator('writtenClassFileCount');
   }
 
-  /// Emits documentation content for the [constructor].
+  /*/// Emits documentation content for the [constructor].
   void generateConstructor(PackageGraph packageGraph, Library library,
       Constructable constructable, Constructor constructor) {
     var data = ConstructorTemplateData(
@@ -141,7 +141,7 @@ abstract class GeneratorBackend {
     var content = templates.renderConstructor(data);
     write(writer, constructor.filePath, data, content);
     runtimeStats.incrementAccumulator('writtenConstructorFileCount');
-  }
+  }*/
 
   /// Emits documentation content for the [enum_].
   void generateEnum(PackageGraph packageGraph, Library library, Enum enum_) {
@@ -170,14 +170,14 @@ abstract class GeneratorBackend {
     runtimeStats.incrementAccumulator('writtenExtensionTypeFileCount');
   }
 
-  /// Emits documentation content for the [function].
+  /*/// Emits documentation content for the [function].
   void generateFunction(
       PackageGraph packageGraph, Library library, ModelFunction function) {
     var data = FunctionTemplateData(options, packageGraph, library, function);
     var content = templates.renderFunction(data);
     write(writer, function.filePath, data, content);
     runtimeStats.incrementAccumulator('writtenFunctionFileCount');
-  }
+  }*/
 
   /// Emits documentation content for the [library].
   void generateLibrary(PackageGraph packageGraph, Library library) {
@@ -187,7 +187,7 @@ abstract class GeneratorBackend {
     runtimeStats.incrementAccumulator('writtenLibraryFileCount');
   }
 
-  /// Emits documentation content for the [method].
+  /*/// Emits documentation content for the [method].
   void generateMethod(PackageGraph packageGraph, Library library,
       Container container, Method method) {
     var data =
@@ -195,7 +195,7 @@ abstract class GeneratorBackend {
     var content = templates.renderMethod(data);
     write(writer, method.filePath, data, content);
     runtimeStats.incrementAccumulator('writtenMethodFileCount');
-  }
+  }*/
 
   /// Emits documentation content for the [mixin].
   void generateMixin(PackageGraph packageGraph, Library library, Mixin mixin) {
@@ -213,7 +213,7 @@ abstract class GeneratorBackend {
     runtimeStats.incrementAccumulator('writtenPackageFileCount');
   }
 
-  /// Emits documentation content for the [field].
+  /*/// Emits documentation content for the [field].
   void generateProperty(PackageGraph packageGraph, Library library,
       Container container, Field field) {
     var data =
@@ -240,7 +240,7 @@ abstract class GeneratorBackend {
     var content = templates.renderTypedef(data);
     write(writer, typedef.filePath, data, content);
     runtimeStats.incrementAccumulator('writtenTypedefFileCount');
-  }
+  }*/
 
   /// Emits files not specific to a Dart language element (like a favicon, etc).
   Future<void> generateAdditionalFiles();

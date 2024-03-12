@@ -3,7 +3,13 @@
   <span class="signature">{{{ arrow }}} {{{ modelType.linkedName }}}</span>
   {{ >categorization }}
 </dt>
-<dd{{ #isInherited }} class="inherited"{{ /isInherited }}>
-  {{{ oneLineDoc }}}
+{{ #isInherited }}
+<dd class="inherited">
   {{ >attributes }}
+  {{{ oneLineDoc }}}
 </dd>
+{{ /isInherited }}
+{{ ^isInherited }}
+  {{ >attributes }}
+  {{ >documentation }}
+{{ /isInherited }}

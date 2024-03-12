@@ -14,7 +14,7 @@
       {{ #hasPublicEnumValues }}
         <li class="section-title"><a href="{{{ href }}}#values">Values</a></li>
         {{ #publicEnumValues }}
-          <li>{{{ linkedName }}}</li>
+          <li><a href="#{{ htmlId }}">{{ name }}</a></li>
         {{ /publicEnumValues }}
       {{ /hasPublicEnumValues }}
     {{ /isEnum }}
@@ -26,14 +26,14 @@
           <a href="{{{ href }}}#instance-properties">Properties</a>
         </li>
         {{ #publicInstanceFieldsSorted }}
-          <li{{ #isInherited }} class="inherited"{{ /isInherited }}>{{{ linkedName }}}</li>
+          <li{{ #isInherited }} class="inherited"{{ /isInherited }}><a href="#{{ htmlId }}">{{ name }}</a></li>
         {{ /publicInstanceFieldsSorted }}
       {{ /hasPublicInstanceFields }}
 
       {{ #hasPublicInstanceMethods }}
         <li class="section-title{{ #publicInheritedInstanceMethods }} inherited{{ /publicInheritedInstanceMethods }}"><a href="{{{ href }}}#instance-methods">Methods</a></li>
         {{ #publicInstanceMethodsSorted }}
-          <li{{ #isInherited }} class="inherited"{{ /isInherited }}>{{{ linkedName }}}</li>
+          <li{{ #isInherited }} class="inherited"{{ /isInherited }}><a href="#{{ htmlId }}">{{ name }}</a></li>
         {{ /publicInstanceMethodsSorted }}
       {{ /hasPublicInstanceMethods }}
 

@@ -13,18 +13,18 @@
 @Renderer(#renderCategory, Context<CategoryTemplateData>(), 'category',
     visibleTypes: _visibleTypes)
 @Renderer(#renderClass, Context<ClassTemplateData>(), 'class')
-@Renderer(#renderConstructor, Context<ConstructorTemplateData>(), 'constructor')
+//@Renderer(#renderConstructor, Context<ConstructorTemplateData>(), 'constructor')
 @Renderer(#renderEnum, Context<EnumTemplateData>(), 'enum')
 @Renderer(#renderError, Context<PackageTemplateData>(), '404error')
 @Renderer(#renderExtension, Context<ExtensionTemplateData>(), 'extension')
 @Renderer(#renderExtensionType, Context<ExtensionTypeTemplateData>(),
     'extension_type')
-@Renderer(#renderFunction, Context<FunctionTemplateData>(), 'function')
+//@Renderer(#renderFunction, Context<FunctionTemplateData>(), 'function')
 @Renderer(#renderIndex, Context<PackageTemplateData>(), 'index')
 @Renderer(#renderLibrary, Context<LibraryTemplateData>(), 'library')
-@Renderer(#renderMethod, Context<MethodTemplateData>(), 'method')
+//@Renderer(#renderMethod, Context<MethodTemplateData>(), 'method')
 @Renderer(#renderMixin, Context<MixinTemplateData>(), 'mixin')
-@Renderer(#renderProperty, Context<PropertyTemplateData>(), 'property')
+//@Renderer(#renderProperty, Context<PropertyTemplateData>(), 'property')
 @Renderer(#renderSearchPage, Context<PackageTemplateData>(), 'search')
 @Renderer(
     #renderSidebarForContainer,
@@ -32,9 +32,9 @@
     '_sidebar_for_container')
 @Renderer(#renderSidebarForLibrary,
     Context<TemplateDataWithLibrary<Documentable>>(), '_sidebar_for_library')
-@Renderer(#renderTopLevelProperty, Context<TopLevelPropertyTemplateData>(),
-    'top_level_property')
-@Renderer(#renderTypedef, Context<TypedefTemplateData>(), 'typedef')
+//@Renderer(#renderTopLevelProperty, Context<TopLevelPropertyTemplateData>(),
+//    'top_level_property')
+//@Renderer(#renderTypedef, Context<TypedefTemplateData>(), 'typedef')
 library dartdoc.templates;
 
 import 'package:analyzer/file_system/file_system.dart';
@@ -91,23 +91,23 @@ const _visibleTypes = {
 abstract class Templates {
   String renderCategory(CategoryTemplateData context);
   String renderClass<T extends Class>(ClassTemplateData context);
-  String renderConstructor(ConstructorTemplateData context);
+  //String renderConstructor(ConstructorTemplateData context);
   String renderEnum(EnumTemplateData context);
   String renderError(PackageTemplateData context);
   String renderExtension(ExtensionTemplateData context);
   String renderExtensionType(ExtensionTypeTemplateData context);
-  String renderFunction(FunctionTemplateData context);
+  //String renderFunction(FunctionTemplateData context);
   String renderIndex(PackageTemplateData context);
   String renderLibrary(LibraryTemplateData context);
-  String renderMethod(MethodTemplateData context);
+  //String renderMethod(MethodTemplateData context);
   String renderMixin(MixinTemplateData context);
-  String renderProperty(PropertyTemplateData context);
+  //String renderProperty(PropertyTemplateData context);
   String renderSearchPage(PackageTemplateData context);
   String renderSidebarForContainer(
       TemplateDataWithContainer<Documentable> context);
   String renderSidebarForLibrary(TemplateDataWithLibrary<Documentable> context);
-  String renderTopLevelProperty(TopLevelPropertyTemplateData context);
-  String renderTypedef(TypedefTemplateData context);
+  //String renderTopLevelProperty(TopLevelPropertyTemplateData context);
+  //String renderTypedef(TypedefTemplateData context);
 
   /// Creates a [Templates] instance either from the default set of templates,
   /// or a custom set if the 'templatesDir' Dartdoc option is used.
@@ -142,9 +142,9 @@ class HtmlAotTemplates implements Templates {
   String renderClass<T extends Class>(ClassTemplateData context) =>
       aot_renderers_for_html.renderClass(context);
 
-  @override
-  String renderConstructor(ConstructorTemplateData context) =>
-      aot_renderers_for_html.renderConstructor(context);
+  //@override
+  //String renderConstructor(ConstructorTemplateData context) =>
+  //    aot_renderers_for_html.renderConstructor(context);
 
   @override
   String renderEnum(EnumTemplateData context) =>
@@ -162,9 +162,9 @@ class HtmlAotTemplates implements Templates {
   String renderExtensionType(ExtensionTypeTemplateData context) =>
       aot_renderers_for_html.renderExtensionType(context);
 
-  @override
-  String renderFunction(FunctionTemplateData context) =>
-      aot_renderers_for_html.renderFunction(context);
+  //@override
+  //String renderFunction(FunctionTemplateData context) =>
+  //    aot_renderers_for_html.renderFunction(context);
 
   @override
   String renderIndex(PackageTemplateData context) =>
@@ -174,17 +174,17 @@ class HtmlAotTemplates implements Templates {
   String renderLibrary(LibraryTemplateData context) =>
       aot_renderers_for_html.renderLibrary(context);
 
-  @override
-  String renderMethod(MethodTemplateData context) =>
-      aot_renderers_for_html.renderMethod(context);
+  //@override
+  //String renderMethod(MethodTemplateData context) =>
+  //    aot_renderers_for_html.renderMethod(context);
 
   @override
   String renderMixin(MixinTemplateData context) =>
       aot_renderers_for_html.renderMixin(context);
 
-  @override
-  String renderProperty(PropertyTemplateData context) =>
-      aot_renderers_for_html.renderProperty(context);
+  //@override
+  //String renderProperty(PropertyTemplateData context) =>
+  //    aot_renderers_for_html.renderProperty(context);
 
   @override
   String renderSearchPage(PackageTemplateData context) =>
@@ -200,13 +200,13 @@ class HtmlAotTemplates implements Templates {
           TemplateDataWithLibrary<Documentable> context) =>
       aot_renderers_for_html.renderSidebarForLibrary(context);
 
-  @override
-  String renderTopLevelProperty(TopLevelPropertyTemplateData context) =>
-      aot_renderers_for_html.renderTopLevelProperty(context);
+  //@override
+  //String renderTopLevelProperty(TopLevelPropertyTemplateData context) =>
+  //    aot_renderers_for_html.renderTopLevelProperty(context);
 
-  @override
-  String renderTypedef(TypedefTemplateData context) =>
-      aot_renderers_for_html.renderTypedef(context);
+  //@override
+  //String renderTypedef(TypedefTemplateData context) =>
+  //    aot_renderers_for_html.renderTypedef(context);
 }
 
 /// The collection of [Template] objects parsed at runtime.
@@ -219,9 +219,9 @@ class RuntimeTemplates implements Templates {
   String renderClass<T extends Class>(ClassTemplateData context) =>
       runtime_renderers.renderClass(context, _classTemplate);
 
-  @override
-  String renderConstructor(ConstructorTemplateData context) =>
-      runtime_renderers.renderConstructor(context, _constructorTemplate);
+  //@override
+  //String renderConstructor(ConstructorTemplateData context) =>
+  //    runtime_renderers.renderConstructor(context, _constructorTemplate);
 
   @override
   String renderEnum(EnumTemplateData context) =>
@@ -239,9 +239,9 @@ class RuntimeTemplates implements Templates {
   String renderExtensionType(ExtensionTypeTemplateData context) =>
       runtime_renderers.renderExtensionType(context, _extensionTemplate);
 
-  @override
-  String renderFunction(FunctionTemplateData context) =>
-      runtime_renderers.renderFunction(context, _functionTemplate);
+  //@override
+  //String renderFunction(FunctionTemplateData context) =>
+  //    runtime_renderers.renderFunction(context, _functionTemplate);
 
   @override
   String renderIndex(PackageTemplateData context) =>
@@ -251,17 +251,17 @@ class RuntimeTemplates implements Templates {
   String renderLibrary(LibraryTemplateData context) =>
       runtime_renderers.renderLibrary(context, _libraryTemplate);
 
-  @override
-  String renderMethod(MethodTemplateData context) =>
-      runtime_renderers.renderMethod(context, _methodTemplate);
+  //@override
+  //String renderMethod(MethodTemplateData context) =>
+  //    runtime_renderers.renderMethod(context, _methodTemplate);
 
   @override
   String renderMixin(MixinTemplateData context) =>
       runtime_renderers.renderMixin(context, _mixinTemplate);
 
-  @override
-  String renderProperty(PropertyTemplateData context) =>
-      runtime_renderers.renderProperty(context, _propertyTemplate);
+  //@override
+  //String renderProperty(PropertyTemplateData context) =>
+  //    runtime_renderers.renderProperty(context, _propertyTemplate);
 
   @override
   String renderSearchPage(PackageTemplateData context) =>
@@ -279,32 +279,32 @@ class RuntimeTemplates implements Templates {
       runtime_renderers.renderSidebarForLibrary(
           context, _sidebarLibraryTemplate);
 
-  @override
-  String renderTopLevelProperty(TopLevelPropertyTemplateData context) =>
-      runtime_renderers.renderTopLevelProperty(
-          context, _topLevelPropertyTemplate);
+  //@override
+  //String renderTopLevelProperty(TopLevelPropertyTemplateData context) =>
+  //    runtime_renderers.renderTopLevelProperty(
+  //        context, _topLevelPropertyTemplate);
 
-  @override
-  String renderTypedef(TypedefTemplateData context) =>
-      runtime_renderers.renderTypedef(context, _typedefTemplate);
+  //@override
+  //String renderTypedef(TypedefTemplateData context) =>
+  //    runtime_renderers.renderTypedef(context, _typedefTemplate);
 
   final Template _categoryTemplate;
   final Template _classTemplate;
-  final Template _constructorTemplate;
+  //final Template _constructorTemplate;
   final Template _enumTemplate;
   final Template _errorTemplate;
   final Template _extensionTemplate;
-  final Template _functionTemplate;
+  //final Template _functionTemplate;
   final Template _indexTemplate;
   final Template _libraryTemplate;
-  final Template _methodTemplate;
+  //final Template _methodTemplate;
   final Template _mixinTemplate;
-  final Template _propertyTemplate;
+  //final Template _propertyTemplate;
   final Template _searchPageTemplate;
   final Template _sidebarContainerTemplate;
   final Template _sidebarLibraryTemplate;
-  final Template _topLevelPropertyTemplate;
-  final Template _typedefTemplate;
+  //final Template _topLevelPropertyTemplate;
+  //final Template _typedefTemplate;
 
   /// Creates a [Templates] from a custom set of template files, found in [dir].
   static Future<Templates> _create(Folder dir,
@@ -327,35 +327,35 @@ class RuntimeTemplates implements Templates {
     var sidebarLibraryTemplate = await loadTemplate('_sidebar_for_library');
     var categoryTemplate = await loadTemplate('category');
     var classTemplate = await loadTemplate('class');
-    var constructorTemplate = await loadTemplate('constructor');
+    //var constructorTemplate = await loadTemplate('constructor');
     var enumTemplate = await loadTemplate('enum');
     var errorTemplate = await loadTemplate('404error');
     var extensionTemplate = await loadTemplate('extension');
-    var functionTemplate = await loadTemplate('function');
-    var methodTemplate = await loadTemplate('method');
+    //var functionTemplate = await loadTemplate('function');
+    //var methodTemplate = await loadTemplate('method');
     var mixinTemplate = await loadTemplate('mixin');
-    var propertyTemplate = await loadTemplate('property');
-    var topLevelPropertyTemplate = await loadTemplate('top_level_property');
-    var typeDefTemplate = await loadTemplate('typedef');
+    //var propertyTemplate = await loadTemplate('property');
+    //var topLevelPropertyTemplate = await loadTemplate('top_level_property');
+    //var typeDefTemplate = await loadTemplate('typedef');
 
     return RuntimeTemplates._(
       categoryTemplate,
       libraryTemplate,
       classTemplate,
-      constructorTemplate,
+      //constructorTemplate,
       enumTemplate,
       errorTemplate,
       extensionTemplate,
-      functionTemplate,
+      //functionTemplate,
       indexTemplate,
-      methodTemplate,
+      //methodTemplate,
       mixinTemplate,
-      propertyTemplate,
+      //propertyTemplate,
       searchPageTemplate,
       sidebarContainerTemplate,
       sidebarLibraryTemplate,
-      topLevelPropertyTemplate,
-      typeDefTemplate,
+      //topLevelPropertyTemplate,
+      //typeDefTemplate,
     );
   }
 
@@ -363,19 +363,19 @@ class RuntimeTemplates implements Templates {
     this._categoryTemplate,
     this._libraryTemplate,
     this._classTemplate,
-    this._constructorTemplate,
+    //this._constructorTemplate,
     this._enumTemplate,
     this._errorTemplate,
     this._extensionTemplate,
-    this._functionTemplate,
+    //this._functionTemplate,
     this._indexTemplate,
-    this._methodTemplate,
+    //this._methodTemplate,
     this._mixinTemplate,
-    this._propertyTemplate,
+    //this._propertyTemplate,
     this._searchPageTemplate,
     this._sidebarContainerTemplate,
     this._sidebarLibraryTemplate,
-    this._topLevelPropertyTemplate,
-    this._typedefTemplate,
+    //this._topLevelPropertyTemplate,
+    //this._typedefTemplate,
   );
 }

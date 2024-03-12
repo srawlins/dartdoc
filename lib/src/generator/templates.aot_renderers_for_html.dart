@@ -15,7 +15,6 @@
 import 'dart:convert';
 
 import 'package:dartdoc/src/generator/template_data.dart';
-import 'package:dartdoc/src/model/accessor.dart';
 import 'package:dartdoc/src/model/canonicalization.dart';
 import 'package:dartdoc/src/model/category.dart';
 import 'package:dartdoc/src/model/class.dart';
@@ -380,108 +379,27 @@ String renderClass(ClassTemplateData context0) {
   buffer.writeln();
   buffer.write('''
 
-  </div> <!-- /.main-content -->
+</div>''');
+  buffer.writeln();
+  buffer.write('''
 
-  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    ''');
+<div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+  ''');
   buffer.write(_renderClass_partial_search_sidebar_16(context0));
   buffer.writeln();
   buffer.write('''
-    <h5>''');
+  <h5>''');
   buffer.writeEscaped(context0.parent!.name);
   buffer.write(' ');
   buffer.writeEscaped(context0.parent!.kind.toString());
   buffer.write('''</h5>
-    <div id="dartdoc-sidebar-left-content"></div>
-  </div>
+  <div id="dartdoc-sidebar-left-content"></div>
+</div>
 
-  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-  </div><!--/.sidebar-offcanvas-->
-
-''');
+<div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div>''');
+  buffer.writeln();
   buffer.write(_renderClass_partial_footer_17(context0));
-  buffer.writeln();
-
-  return buffer.toString();
-}
-
-String renderConstructor(ConstructorTemplateData context0) {
-  final buffer = StringBuffer();
-  buffer.write(_renderConstructor_partial_head_0(context0));
-  buffer.writeln();
-  buffer.write('''
-
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="''');
-  buffer.writeEscaped(context0.aboveSidebarPath);
-  buffer.write('''"
-      data-below-sidebar="''');
-  buffer.writeEscaped(context0.belowSidebarPath);
-  buffer.write('''">''');
-  var context1 = context0.self;
-  buffer.writeln();
-  buffer.write('''
-      <div>''');
-  buffer.write(_renderConstructor_partial_source_link_1(context1));
-  buffer.write('''<h1><span class="kind-constructor">''');
-  buffer.write(context1.nameWithGenerics);
-  buffer.write('''</span> ''');
-  buffer.writeEscaped(context1.kind.toString());
-  buffer.write(' ');
-  buffer.write(_renderConstructor_partial_feature_set_2(context1));
-  buffer.write('''</h1></div>''');
-  buffer.writeln();
-  var context2 = context0.constructor;
-  buffer.writeln();
-  buffer.write('''
-    <section class="multi-line-signature">
-      ''');
-  buffer.write(_renderConstructor_partial_annotations_3(context2));
-  if (context2.isConst) {
-    buffer.write('''const''');
-  }
-  buffer.writeln();
-  buffer.write('''
-      <span class="name ''');
-  if (context2.isDeprecated) {
-    buffer.write('''deprecated''');
-  }
-  buffer.write('''">''');
-  buffer.write(context2.nameWithGenerics);
-  buffer.write('''</span>(<wbr>''');
-  if (context2.hasParameters) {
-    buffer.write(context2.linkedParamsLines);
-  }
-  buffer.write(''')
-    </section>
-
-    ''');
-  buffer.write(_renderConstructor_partial_documentation_4(context2));
-  buffer.writeln();
-  buffer.writeln();
-  buffer.write('''
-  </div> <!-- /.main-content -->
-
-  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    ''');
-  buffer.write(_renderConstructor_partial_search_sidebar_5(context0));
-  buffer.writeln();
-  buffer.write('''
-    <h5>''');
-  buffer.writeEscaped(context0.parent!.name);
-  buffer.write(' ');
-  buffer.writeEscaped(context0.parent!.kind.toString());
-  buffer.write('''</h5>
-    <div id="dartdoc-sidebar-left-content"></div>
-  </div><!--/.sidebar-offcanvas-left-->
-
-  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-  </div><!--/.sidebar-offcanvas-->
-
-''');
-  buffer.write(_renderConstructor_partial_footer_6(context0));
   buffer.writeln();
 
   return buffer.toString();
@@ -580,7 +498,9 @@ String renderEnum(EnumTemplateData context0) {
   buffer.write(_renderEnum_partial_static_constants_16(context2));
   buffer.writeln();
   buffer.write('''
-</div><!-- /.main-content -->
+</div>''');
+  buffer.writeln();
+  buffer.write('''
 
 <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
   ''');
@@ -596,9 +516,8 @@ String renderEnum(EnumTemplateData context0) {
 </div>
 
 <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-</div><!-- /.sidebar-offcanvas -->
-
-''');
+</div>''');
+  buffer.write('\n\n');
   buffer.write(_renderEnum_partial_footer_18(context0));
   buffer.writeln();
 
@@ -724,7 +643,9 @@ String renderExtension<T extends Extension>(ExtensionTemplateData<T> context0) {
   buffer.writeln();
   buffer.write('''
 
-</div> <!-- /.main-content -->
+</div>''');
+  buffer.writeln();
+  buffer.write('''
 
 <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
   ''');
@@ -740,9 +661,8 @@ String renderExtension<T extends Extension>(ExtensionTemplateData<T> context0) {
 </div>
 
 <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-</div><!--/.sidebar-offcanvas-->
-
-''');
+</div>''');
+  buffer.write('\n\n');
   buffer.write(_renderExtension_partial_footer_13(context0));
   buffer.writeln();
   buffer.writeln();
@@ -848,7 +768,9 @@ String renderExtensionType<T extends ExtensionType>(
   buffer.writeln();
   buffer.writeln();
   buffer.write('''
-</div><!-- /.main-content -->
+</div>''');
+  buffer.writeln();
+  buffer.write('''
 
 <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
   ''');
@@ -864,81 +786,9 @@ String renderExtensionType<T extends ExtensionType>(
 </div>
 
 <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-</div><!--/.sidebar-offcanvas-->
-
-''');
+</div>''');
+  buffer.write('\n\n');
   buffer.write(_renderExtensionType_partial_footer_15(context0));
-  buffer.writeln();
-
-  return buffer.toString();
-}
-
-String renderFunction(FunctionTemplateData context0) {
-  final buffer = StringBuffer();
-  buffer.write(_renderFunction_partial_head_0(context0));
-  buffer.writeln();
-  buffer.write('''
-
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="''');
-  buffer.writeEscaped(context0.aboveSidebarPath);
-  buffer.write('''"
-      data-below-sidebar="''');
-  buffer.writeEscaped(context0.belowSidebarPath);
-  buffer.write('''">''');
-  var context1 = context0.self;
-  buffer.writeln();
-  buffer.write('''
-      <div>''');
-  buffer.write(_renderFunction_partial_source_link_1(context1));
-  buffer.write('''<h1><span class="kind-function">''');
-  buffer.write(context1.nameWithGenerics);
-  buffer.write('''</span> ''');
-  buffer.writeEscaped(context1.kind.toString());
-  buffer.write(' ');
-  buffer.write(_renderFunction_partial_feature_set_2(context1));
-  buffer.write(' ');
-  buffer.write(_renderFunction_partial_categorization_3(context1));
-  buffer.write('''</h1></div>''');
-  buffer.writeln();
-  var context2 = context0.function;
-  buffer.writeln();
-  buffer.write('''
-    <section class="multi-line-signature">
-        ''');
-  buffer.write(_renderFunction_partial_callable_multiline_4(context2));
-  buffer.write('\n        ');
-  buffer.write(_renderFunction_partial_attributes_5(context2));
-  buffer.writeln();
-  buffer.write('''
-    </section>
-    ''');
-  buffer.write(_renderFunction_partial_documentation_6(context2));
-  buffer.writeln();
-  buffer.writeln();
-  buffer.write('''
-  </div> <!-- /.main-content -->
-
-  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    ''');
-  buffer.write(_renderFunction_partial_search_sidebar_7(context0));
-  buffer.writeln();
-  buffer.write('''
-    <h5>''');
-  buffer.writeEscaped(context0.parent!.name);
-  buffer.write(' ');
-  buffer.writeEscaped(context0.parent!.kind.toString());
-  buffer.write('''</h5>
-    <div id="dartdoc-sidebar-left-content"></div>
-  </div><!--/.sidebar-offcanvas-left-->
-
-  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-  </div><!--/.sidebar-offcanvas-->
-
-''');
-  buffer.write(_renderFunction_partial_footer_8(context0));
   buffer.writeln();
 
   return buffer.toString();
@@ -1336,90 +1186,6 @@ String renderLibrary(LibraryTemplateData context0) {
   return buffer.toString();
 }
 
-String renderMethod(MethodTemplateData context0) {
-  final buffer = StringBuffer();
-  buffer.write(_renderMethod_partial_head_0(context0));
-  buffer.writeln();
-  buffer.write('''
-
-<div
-    id="dartdoc-main-content"
-    class="main-content"
-    data-above-sidebar="''');
-  buffer.writeEscaped(context0.aboveSidebarPath);
-  buffer.write('''"
-    data-below-sidebar="''');
-  buffer.writeEscaped(context0.belowSidebarPath);
-  buffer.write('''">''');
-  var context1 = context0.self;
-  buffer.writeln();
-  buffer.write('''
-    <div>''');
-  buffer.write(_renderMethod_partial_source_link_1(context1));
-  buffer.write('''<h1><span class="kind-method">''');
-  buffer.write(context1.nameWithGenerics);
-  buffer.write('''</span> ''');
-  buffer.writeEscaped(context1.fullkind);
-  buffer.write(' ');
-  buffer.write(_renderMethod_partial_feature_set_2(context1));
-  buffer.write('''</h1></div>''');
-  buffer.writeln();
-  var context2 = context0.method;
-  buffer.writeln();
-  buffer.write('''
-    <section class="multi-line-signature">
-      ''');
-  buffer.write(_renderMethod_partial_callable_multiline_3(context2));
-  buffer.write('\n      ');
-  buffer.write(_renderMethod_partial_attributes_4(context2));
-  buffer.writeln();
-  buffer.write('''
-    </section>
-    ''');
-  buffer.write(_renderMethod_partial_documentation_5(context2));
-  buffer.writeln();
-  buffer.writeln();
-  buffer.write('''
-  </div> <!-- /.main-content -->
-
-  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    ''');
-  buffer.write(_renderMethod_partial_search_sidebar_6(context0));
-  if (context0.isParentExtension) {
-    buffer.writeln();
-    buffer.write('''
-    <h5>''');
-    buffer.writeEscaped(context0.parent!.name);
-    buffer.write(' ');
-    buffer.writeEscaped(context0.parent!.kind.toString());
-    buffer.write(''' on ''');
-    buffer.write(context0.parentAsExtension.extendedType.linkedName);
-    buffer.write('''</h5>''');
-  }
-  if (!context0.isParentExtension) {
-    buffer.writeln();
-    buffer.write('''
-    <h5>''');
-    buffer.writeEscaped(context0.parent!.name);
-    buffer.write(' ');
-    buffer.writeEscaped(context0.parent!.kind.toString());
-    buffer.write('''</h5>''');
-  }
-  buffer.writeln();
-  buffer.write('''
-    <div id="dartdoc-sidebar-left-content"></div>
-  </div><!--/.sidebar-offcanvas-->
-
-  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-</div><!--/.sidebar-offcanvas-->
-
-''');
-  buffer.write(_renderMethod_partial_footer_7(context0));
-  buffer.writeln();
-
-  return buffer.toString();
-}
-
 String renderMixin(MixinTemplateData context0) {
   final buffer = StringBuffer();
   buffer.write(_renderMixin_partial_head_0(context0));
@@ -1521,7 +1287,9 @@ String renderMixin(MixinTemplateData context0) {
   buffer.write(_renderMixin_partial_static_constants_13(context2));
   buffer.writeln();
   buffer.write('''
-</div> <!-- /.main-content -->
+</div>''');
+  buffer.writeln();
+  buffer.write('''
 
 <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
   ''');
@@ -1537,111 +1305,9 @@ String renderMixin(MixinTemplateData context0) {
 </div>
 
 <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-</div><!--/.sidebar-offcanvas-->
-
-''');
+</div>''');
+  buffer.writeln();
   buffer.write(_renderMixin_partial_footer_15(context0));
-  buffer.writeln();
-
-  return buffer.toString();
-}
-
-String renderProperty(PropertyTemplateData context0) {
-  final buffer = StringBuffer();
-  buffer.write(_renderProperty_partial_head_0(context0));
-  buffer.writeln();
-  buffer.write('''
-
-<div
-    id="dartdoc-main-content"
-    class="main-content"
-    data-above-sidebar="''');
-  buffer.writeEscaped(context0.aboveSidebarPath);
-  buffer.write('''"
-    data-below-sidebar="''');
-  buffer.writeEscaped(context0.belowSidebarPath);
-  buffer.write('''">''');
-  var context1 = context0.self;
-  buffer.writeln();
-  buffer.write('''
-    <div>''');
-  buffer.write(_renderProperty_partial_source_link_1(context1));
-  buffer.write('''<h1><span class="kind-property">''');
-  buffer.writeEscaped(context1.name);
-  buffer.write('''</span> ''');
-  buffer.writeEscaped(context1.kind.toString());
-  buffer.write(' ');
-  buffer.write(_renderProperty_partial_feature_set_2(context1));
-  buffer.write('''</h1></div>''');
-  buffer.writeln();
-  var context2 = context0.self;
-  if (context2.hasNoGetterSetter) {
-    buffer.writeln();
-    buffer.write('''
-      <section class="multi-line-signature">
-        ''');
-    buffer.write(_renderProperty_partial_annotations_3(context2));
-    buffer.write('\n        ');
-    buffer.write(context2.modelType.linkedName);
-    buffer.write('\n        ');
-    buffer.write(_renderProperty_partial_name_summary_4(context2));
-    buffer.write('\n        ');
-    buffer.write(_renderProperty_partial_attributes_5(context2));
-    buffer.writeln();
-    buffer.write('''
-      </section>
-      ''');
-    buffer.write(_renderProperty_partial_documentation_6(context2));
-  }
-  buffer.writeln();
-  if (context2.hasGetterOrSetter) {
-    if (context2.hasGetter) {
-      buffer.write('\n        ');
-      buffer.write(_renderProperty_partial_accessor_getter_7(context2));
-    }
-    buffer.writeln();
-    if (context2.hasSetter) {
-      buffer.write('\n        ');
-      buffer.write(_renderProperty_partial_accessor_setter_8(context2));
-    }
-  }
-  buffer.writeln();
-  buffer.write('''
-</div> <!-- /.main-content -->
-
-<div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-  ''');
-  buffer.write(_renderProperty_partial_search_sidebar_9(context0));
-  if (context0.isParentExtension) {
-    buffer.writeln();
-    buffer.write('''
-  <h5>''');
-    buffer.writeEscaped(context0.parent!.name);
-    buffer.write(' ');
-    buffer.writeEscaped(context0.parent!.kind.toString());
-    buffer.write(''' on ''');
-    buffer.write(context0.parentAsExtension.extendedType.linkedName);
-    buffer.write('''</h5>''');
-  }
-  if (!context0.isParentExtension) {
-    buffer.writeln();
-    buffer.write('''
-  <h5>''');
-    buffer.writeEscaped(context0.parent!.name);
-    buffer.write(' ');
-    buffer.writeEscaped(context0.parent!.kind.toString());
-    buffer.write('''</h5>''');
-  }
-  buffer.writeln();
-  buffer.write('''
-  <div id="dartdoc-sidebar-left-content"></div>
-</div><!--/.sidebar-offcanvas-->
-
-<div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-</div><!--/.sidebar-offcanvas-->
-
-''');
-  buffer.write(_renderProperty_partial_footer_10(context0));
   buffer.writeln();
 
   return buffer.toString();
@@ -1723,9 +1389,11 @@ String renderSidebarForContainer<T extends Documentable>(
       for (var context5 in context4) {
         buffer.writeln();
         buffer.write('''
-          <li>''');
-        buffer.write(context5.linkedName);
-        buffer.write('''</li>''');
+          <li><a href="#''');
+        buffer.writeEscaped(context5.htmlId);
+        buffer.write('''">''');
+        buffer.writeEscaped(context5.name);
+        buffer.write('''</a></li>''');
       }
     }
   }
@@ -1751,9 +1419,11 @@ String renderSidebarForContainer<T extends Documentable>(
         if (context7.isInherited) {
           buffer.write(''' class="inherited"''');
         }
-        buffer.write('''>''');
-        buffer.write(context7.linkedName);
-        buffer.write('''</li>''');
+        buffer.write('''><a href="#''');
+        buffer.writeEscaped(context7.htmlId);
+        buffer.write('''">''');
+        buffer.writeEscaped(context7.name);
+        buffer.write('''</a></li>''');
       }
     }
     buffer.writeln();
@@ -1775,9 +1445,11 @@ String renderSidebarForContainer<T extends Documentable>(
         if (context9.isInherited) {
           buffer.write(''' class="inherited"''');
         }
-        buffer.write('''>''');
-        buffer.write(context9.linkedName);
-        buffer.write('''</li>''');
+        buffer.write('''><a href="#''');
+        buffer.writeEscaped(context9.htmlId);
+        buffer.write('''">''');
+        buffer.writeEscaped(context9.name);
+        buffer.write('''</a></li>''');
       }
     }
     buffer.writeln();
@@ -2085,162 +1757,6 @@ String renderSidebarForLibrary<T extends Documentable>(
   return buffer.toString();
 }
 
-String renderTopLevelProperty(TopLevelPropertyTemplateData context0) {
-  final buffer = StringBuffer();
-  buffer.write(_renderTopLevelProperty_partial_head_0(context0));
-  buffer.writeln();
-  buffer.write('''
-
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="''');
-  buffer.writeEscaped(context0.aboveSidebarPath);
-  buffer.write('''"
-      data-below-sidebar="''');
-  buffer.writeEscaped(context0.belowSidebarPath);
-  buffer.write('''">''');
-  var context1 = context0.self;
-  buffer.writeln();
-  buffer.write('''
-      <div>''');
-  buffer.write(_renderTopLevelProperty_partial_source_link_1(context1));
-  buffer.write('''<h1><span class="kind-top-level-property">''');
-  buffer.write(context1.name);
-  buffer.write('''</span> ''');
-  buffer.writeEscaped(context1.kind.toString());
-  buffer.write(' ');
-  buffer.write(_renderTopLevelProperty_partial_feature_set_2(context1));
-  buffer.write(' ');
-  buffer.write(_renderTopLevelProperty_partial_categorization_3(context1));
-  buffer.write('''</h1></div>
-''');
-  if (context1.hasNoGetterSetter) {
-    buffer.writeln();
-    buffer.write('''
-        <section class="multi-line-signature">
-          ''');
-    buffer.write(_renderTopLevelProperty_partial_annotations_4(context1));
-    buffer.write('\n          ');
-    buffer.write(context1.modelType.linkedName);
-    buffer.write('\n          ');
-    buffer.write(_renderTopLevelProperty_partial_name_summary_5(context1));
-    buffer.write('\n          ');
-    buffer.write(_renderTopLevelProperty_partial_attributes_6(context1));
-    buffer.writeln();
-    buffer.write('''
-        </section>
-        ''');
-    buffer.write(_renderTopLevelProperty_partial_documentation_7(context1));
-  }
-  buffer.writeln();
-  if (context1.hasExplicitGetter) {
-    buffer.write('\n        ');
-    buffer.write(_renderTopLevelProperty_partial_accessor_getter_8(context1));
-  }
-  buffer.writeln();
-  if (context1.hasExplicitSetter) {
-    buffer.write('\n        ');
-    buffer.write(_renderTopLevelProperty_partial_accessor_setter_9(context1));
-  }
-  buffer.writeln();
-  buffer.write('''
-  </div> <!-- /.main-content -->
-
-  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    ''');
-  buffer.write(_renderTopLevelProperty_partial_search_sidebar_10(context0));
-  buffer.writeln();
-  buffer.write('''
-    <h5>''');
-  buffer.writeEscaped(context0.parent!.name);
-  buffer.write(' ');
-  buffer.writeEscaped(context0.parent!.kind.toString());
-  buffer.write('''</h5>
-    <div id="dartdoc-sidebar-left-content"></div>
-  </div><!--/.sidebar-offcanvas-left-->
-
-  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-  </div><!--/.sidebar-offcanvas-->
-
-''');
-  buffer.write(_renderTopLevelProperty_partial_footer_11(context0));
-  buffer.writeln();
-
-  return buffer.toString();
-}
-
-String renderTypedef(TypedefTemplateData context0) {
-  final buffer = StringBuffer();
-  buffer.write(_renderTypedef_partial_head_0(context0));
-  buffer.writeln();
-  buffer.write('''
-
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="''');
-  buffer.writeEscaped(context0.aboveSidebarPath);
-  buffer.write('''"
-      data-below-sidebar="''');
-  buffer.writeEscaped(context0.belowSidebarPath);
-  buffer.write('''">''');
-  var context1 = context0.self;
-  buffer.writeln();
-  buffer.write('''
-      <div>''');
-  buffer.write(_renderTypedef_partial_source_link_1(context1));
-  buffer.write('''<h1><span class="kind-typedef">''');
-  buffer.write(context1.nameWithGenerics);
-  buffer.write('''</span> ''');
-  buffer.writeEscaped(context1.kind.toString());
-  buffer.write(' ');
-  buffer.write(_renderTypedef_partial_feature_set_2(context1));
-  buffer.write(' ');
-  buffer.write(_renderTypedef_partial_categorization_3(context1));
-  buffer.write('''</h1></div>''');
-  buffer.writeln();
-  buffer.write('''
-
-    <section class="multi-line-signature">''');
-  var context2 = context0.typeDef;
-  buffer.write('\n        ');
-  buffer.write(_renderTypedef_partial_typedef_multiline_4(context2));
-  buffer.writeln();
-  buffer.write('''
-    </section>
-''');
-  var context3 = context0.typeDef;
-  buffer.write('\n    ');
-  buffer.write(_renderTypedef_partial_documentation_5(context3));
-  buffer.writeln();
-  buffer.write('''
-
-  </div> <!-- /.main-content -->
-
-  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    ''');
-  buffer.write(_renderTypedef_partial_search_sidebar_6(context0));
-  buffer.writeln();
-  buffer.write('''
-    <h5>''');
-  buffer.writeEscaped(context0.parent!.name);
-  buffer.write(' ');
-  buffer.writeEscaped(context0.parent!.kind.toString());
-  buffer.write('''</h5>
-    <div id="dartdoc-sidebar-left-content"></div>
-  </div><!--/.sidebar-offcanvas-left-->
-
-  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-  </div><!--/.sidebar-offcanvas-->
-
-''');
-  buffer.write(_renderTypedef_partial_footer_7(context0));
-  buffer.writeln();
-
-  return buffer.toString();
-}
-
 String _renderCategory_partial_head_0(CategoryTemplateData context0) =>
     _deduplicated_lib_templates__head_html(context0);
 
@@ -2291,21 +1807,32 @@ String _renderCategory_partial_callable_7(ModelFunctionTyped context2) {
       __renderCategory_partial_callable_7_partial_categorization_0(context2));
   buffer.writeln();
   buffer.write('''
-</dt>
-<dd''');
+</dt>''');
   if (context2.isInherited) {
-    buffer.write(''' class="inherited"''');
-  }
-  buffer.write('''>
+    buffer.writeln();
+    buffer.write('''
+<dd class="inherited">
   ''');
-  buffer.write(context2.oneLineDoc);
-  buffer.write('\n  ');
-  buffer.write(
-      __renderCategory_partial_callable_7_partial_attributes_1(context2));
+    buffer.write(
+        __renderCategory_partial_callable_7_partial_attributes_1(context2));
+    buffer.write('\n  ');
+    buffer.write(context2.oneLineDoc);
+    buffer.writeln();
+    buffer.write('''
+  [<a href="''');
+    buffer.writeEscaped(context2.href);
+    buffer.write('''">... full documentation</a>]
+</dd>''');
+  }
+  if (!context2.isInherited) {
+    buffer.write('\n  ');
+    buffer.write(
+        __renderCategory_partial_callable_7_partial_attributes_1(context2));
+    buffer.write('\n  ');
+    buffer.write(
+        __renderCategory_partial_callable_7_partial_documentation_2(context2));
+  }
   buffer.writeln();
-  buffer.write('''
-</dd>
-''');
 
   return buffer.toString();
 }
@@ -2317,6 +1844,10 @@ String __renderCategory_partial_callable_7_partial_categorization_0(
 String __renderCategory_partial_callable_7_partial_attributes_1(
         ModelFunctionTyped context2) =>
     _deduplicated_lib_templates__attributes_html(context2);
+
+String __renderCategory_partial_callable_7_partial_documentation_2(
+        ModelFunctionTyped context2) =>
+    _deduplicated_lib_templates__documentation_html(context2);
 
 String _renderCategory_partial_typedef_8(Typedef context2) =>
     _deduplicated_lib_templates__typedef_html(context2);
@@ -2618,28 +2149,6 @@ String _renderClass_partial_search_sidebar_16(ClassTemplateData context0) =>
 String _renderClass_partial_footer_17(ClassTemplateData context0) =>
     _deduplicated_lib_templates__footer_html(context0);
 
-String _renderConstructor_partial_head_0(ConstructorTemplateData context0) =>
-    _deduplicated_lib_templates__head_html(context0);
-
-String _renderConstructor_partial_source_link_1(Constructor context1) =>
-    _deduplicated_lib_templates__source_link_html(context1);
-
-String _renderConstructor_partial_feature_set_2(Constructor context1) =>
-    _deduplicated_lib_templates__feature_set_html(context1);
-
-String _renderConstructor_partial_annotations_3(Constructor context1) =>
-    _deduplicated_lib_templates__annotations_html(context1);
-
-String _renderConstructor_partial_documentation_4(Constructor context1) =>
-    _deduplicated_lib_templates__documentation_html(context1);
-
-String _renderConstructor_partial_search_sidebar_5(
-        ConstructorTemplateData context0) =>
-    _deduplicated_lib_templates__search_sidebar_html(context0);
-
-String _renderConstructor_partial_footer_6(ConstructorTemplateData context0) =>
-    _deduplicated_lib_templates__footer_html(context0);
-
 String _renderEnum_partial_head_0(EnumTemplateData context0) =>
     _deduplicated_lib_templates__head_html(context0);
 
@@ -2834,65 +2343,6 @@ String _renderExtensionType_partial_footer_15<T extends ExtensionType>(
         ExtensionTypeTemplateData<T> context0) =>
     _deduplicated_lib_templates__footer_html(context0);
 
-String _renderFunction_partial_head_0(FunctionTemplateData context0) =>
-    _deduplicated_lib_templates__head_html(context0);
-
-String _renderFunction_partial_source_link_1(ModelFunction context1) =>
-    _deduplicated_lib_templates__source_link_html(context1);
-
-String _renderFunction_partial_feature_set_2(ModelFunction context1) =>
-    _deduplicated_lib_templates__feature_set_html(context1);
-
-String _renderFunction_partial_categorization_3(ModelFunction context1) =>
-    _deduplicated_lib_templates__categorization_html(context1);
-
-String _renderFunction_partial_callable_multiline_4(ModelFunction context1) {
-  final buffer = StringBuffer();
-  buffer.write(
-      __renderFunction_partial_callable_multiline_4_partial_annotations_0(
-          context1));
-  buffer.writeln();
-  buffer.write('''
-
-<span class="returntype">''');
-  buffer.write(context1.modelType.returnType.linkedName);
-  buffer.write('''</span>
-''');
-  buffer.write(
-      __renderFunction_partial_callable_multiline_4_partial_name_summary_1(
-          context1));
-  buffer.write(context1.genericParameters);
-  buffer.write('''(<wbr>''');
-  if (context1.hasParameters) {
-    buffer.write(context1.linkedParamsLines);
-  }
-  buffer.write(''')
-''');
-
-  return buffer.toString();
-}
-
-String __renderFunction_partial_callable_multiline_4_partial_annotations_0(
-        ModelFunction context1) =>
-    _deduplicated_lib_templates__annotations_html(context1);
-
-String __renderFunction_partial_callable_multiline_4_partial_name_summary_1(
-        ModelFunction context1) =>
-    _deduplicated_lib_templates__name_summary_html(context1);
-
-String _renderFunction_partial_attributes_5(ModelFunction context1) =>
-    _deduplicated_lib_templates__attributes_html(context1);
-
-String _renderFunction_partial_documentation_6(ModelFunction context1) =>
-    _deduplicated_lib_templates__documentation_html(context1);
-
-String _renderFunction_partial_search_sidebar_7(
-        FunctionTemplateData context0) =>
-    _deduplicated_lib_templates__search_sidebar_html(context0);
-
-String _renderFunction_partial_footer_8(FunctionTemplateData context0) =>
-    _deduplicated_lib_templates__footer_html(context0);
-
 String _renderIndex_partial_head_0(PackageTemplateData context0) =>
     _deduplicated_lib_templates__head_html(context0);
 
@@ -3001,21 +2451,32 @@ String _renderLibrary_partial_callable_10(ModelFunctionTyped context3) {
       __renderLibrary_partial_callable_10_partial_categorization_0(context3));
   buffer.writeln();
   buffer.write('''
-</dt>
-<dd''');
+</dt>''');
   if (context3.isInherited) {
-    buffer.write(''' class="inherited"''');
-  }
-  buffer.write('''>
+    buffer.writeln();
+    buffer.write('''
+<dd class="inherited">
   ''');
-  buffer.write(context3.oneLineDoc);
-  buffer.write('\n  ');
-  buffer.write(
-      __renderLibrary_partial_callable_10_partial_attributes_1(context3));
+    buffer.write(
+        __renderLibrary_partial_callable_10_partial_attributes_1(context3));
+    buffer.write('\n  ');
+    buffer.write(context3.oneLineDoc);
+    buffer.writeln();
+    buffer.write('''
+  [<a href="''');
+    buffer.writeEscaped(context3.href);
+    buffer.write('''">... full documentation</a>]
+</dd>''');
+  }
+  if (!context3.isInherited) {
+    buffer.write('\n  ');
+    buffer.write(
+        __renderLibrary_partial_callable_10_partial_attributes_1(context3));
+    buffer.write('\n  ');
+    buffer.write(
+        __renderLibrary_partial_callable_10_partial_documentation_2(context3));
+  }
   buffer.writeln();
-  buffer.write('''
-</dd>
-''');
 
   return buffer.toString();
 }
@@ -3028,6 +2489,10 @@ String __renderLibrary_partial_callable_10_partial_attributes_1(
         ModelFunctionTyped context3) =>
     _deduplicated_lib_templates__attributes_html(context3);
 
+String __renderLibrary_partial_callable_10_partial_documentation_2(
+        ModelFunctionTyped context3) =>
+    _deduplicated_lib_templates__documentation_html(context3);
+
 String _renderLibrary_partial_typedef_11(Typedef context3) =>
     _deduplicated_lib_templates__typedef_html(context3);
 
@@ -3038,61 +2503,6 @@ String _renderLibrary_partial_packages_13(LibraryTemplateData context0) =>
     _deduplicated_lib_templates__packages_html(context0);
 
 String _renderLibrary_partial_footer_14(LibraryTemplateData context0) =>
-    _deduplicated_lib_templates__footer_html(context0);
-
-String _renderMethod_partial_head_0(MethodTemplateData context0) =>
-    _deduplicated_lib_templates__head_html(context0);
-
-String _renderMethod_partial_source_link_1(Method context1) =>
-    _deduplicated_lib_templates__source_link_html(context1);
-
-String _renderMethod_partial_feature_set_2(Method context1) =>
-    _deduplicated_lib_templates__feature_set_html(context1);
-
-String _renderMethod_partial_callable_multiline_3(Method context1) {
-  final buffer = StringBuffer();
-  buffer.write(
-      __renderMethod_partial_callable_multiline_3_partial_annotations_0(
-          context1));
-  buffer.writeln();
-  buffer.write('''
-
-<span class="returntype">''');
-  buffer.write(context1.modelType.returnType.linkedName);
-  buffer.write('''</span>
-''');
-  buffer.write(
-      __renderMethod_partial_callable_multiline_3_partial_name_summary_1(
-          context1));
-  buffer.write(context1.genericParameters);
-  buffer.write('''(<wbr>''');
-  if (context1.hasParameters) {
-    buffer.write(context1.linkedParamsLines);
-  }
-  buffer.write(''')
-''');
-
-  return buffer.toString();
-}
-
-String __renderMethod_partial_callable_multiline_3_partial_annotations_0(
-        Method context1) =>
-    _deduplicated_lib_templates__annotations_html(context1);
-
-String __renderMethod_partial_callable_multiline_3_partial_name_summary_1(
-        Method context1) =>
-    _deduplicated_lib_templates__name_summary_html(context1);
-
-String _renderMethod_partial_attributes_4(Method context1) =>
-    _deduplicated_lib_templates__attributes_html(context1);
-
-String _renderMethod_partial_documentation_5(Method context1) =>
-    _deduplicated_lib_templates__documentation_html(context1);
-
-String _renderMethod_partial_search_sidebar_6(MethodTemplateData context0) =>
-    _deduplicated_lib_templates__search_sidebar_html(context0);
-
-String _renderMethod_partial_footer_7(MethodTemplateData context0) =>
     _deduplicated_lib_templates__footer_html(context0);
 
 String _renderMixin_partial_head_0(MixinTemplateData context0) =>
@@ -3116,8 +2526,29 @@ String _renderMixin_partial_super_chain_5(Mixin context1) =>
 String _renderMixin_partial_interfaces_6(Mixin context1) =>
     _deduplicated_lib_templates__interfaces_html(context1);
 
-String _renderMixin_partial_annotations_7(Mixin context1) =>
-    _deduplicated_lib_templates__annotations_html(context1);
+String _renderMixin_partial_annotations_7(Mixin context1) {
+  final buffer = StringBuffer();
+  if (context1.hasAnnotations) {
+    buffer.writeln();
+    buffer.write('''
+  <div>
+    <ol class="annotation-list">''');
+    var context2 = context1.annotations;
+    for (var context3 in context2) {
+      buffer.writeln();
+      buffer.write('''
+        <li>''');
+      buffer.write(context3.linkedNameWithParameters);
+      buffer.write('''</li>''');
+    }
+    buffer.writeln();
+    buffer.write('''
+    </ol>
+  </div>''');
+  }
+
+  return buffer.toString();
+}
 
 String _renderMixin_partial_instance_fields_8(Mixin context1) =>
     _deduplicated_lib_templates__instance_fields_html(context1);
@@ -3143,40 +2574,6 @@ String _renderMixin_partial_search_sidebar_14(MixinTemplateData context0) =>
 String _renderMixin_partial_footer_15(MixinTemplateData context0) =>
     _deduplicated_lib_templates__footer_html(context0);
 
-String _renderProperty_partial_head_0(PropertyTemplateData context0) =>
-    _deduplicated_lib_templates__head_html(context0);
-
-String _renderProperty_partial_source_link_1(Field context1) =>
-    _deduplicated_lib_templates__source_link_html(context1);
-
-String _renderProperty_partial_feature_set_2(Field context1) =>
-    _deduplicated_lib_templates__feature_set_html(context1);
-
-String _renderProperty_partial_annotations_3(Field context1) =>
-    _deduplicated_lib_templates__annotations_html(context1);
-
-String _renderProperty_partial_name_summary_4(Field context1) =>
-    _deduplicated_lib_templates__name_summary_html(context1);
-
-String _renderProperty_partial_attributes_5(Field context1) =>
-    _deduplicated_lib_templates__attributes_html(context1);
-
-String _renderProperty_partial_documentation_6(Field context1) =>
-    _deduplicated_lib_templates__documentation_html(context1);
-
-String _renderProperty_partial_accessor_getter_7(Field context1) =>
-    _deduplicated_lib_templates__accessor_getter_html(context1);
-
-String _renderProperty_partial_accessor_setter_8(Field context1) =>
-    _deduplicated_lib_templates__accessor_setter_html(context1);
-
-String _renderProperty_partial_search_sidebar_9(
-        PropertyTemplateData context0) =>
-    _deduplicated_lib_templates__search_sidebar_html(context0);
-
-String _renderProperty_partial_footer_10(PropertyTemplateData context0) =>
-    _deduplicated_lib_templates__footer_html(context0);
-
 String _renderSearchPage_partial_head_0(PackageTemplateData context0) =>
     _deduplicated_lib_templates__head_html(context0);
 
@@ -3188,163 +2585,6 @@ String _renderSearchPage_partial_packages_2(PackageTemplateData context0) =>
     _deduplicated_lib_templates__packages_html(context0);
 
 String _renderSearchPage_partial_footer_3(PackageTemplateData context0) =>
-    _deduplicated_lib_templates__footer_html(context0);
-
-String _renderTopLevelProperty_partial_head_0(
-        TopLevelPropertyTemplateData context0) =>
-    _deduplicated_lib_templates__head_html(context0);
-
-String _renderTopLevelProperty_partial_source_link_1(
-        TopLevelVariable context1) =>
-    _deduplicated_lib_templates__source_link_html(context1);
-
-String _renderTopLevelProperty_partial_feature_set_2(
-        TopLevelVariable context1) =>
-    _deduplicated_lib_templates__feature_set_html(context1);
-
-String _renderTopLevelProperty_partial_categorization_3(
-        TopLevelVariable context1) =>
-    _deduplicated_lib_templates__categorization_html(context1);
-
-String _renderTopLevelProperty_partial_annotations_4(
-        TopLevelVariable context1) =>
-    _deduplicated_lib_templates__annotations_html(context1);
-
-String _renderTopLevelProperty_partial_name_summary_5(
-        TopLevelVariable context1) =>
-    _deduplicated_lib_templates__name_summary_html(context1);
-
-String _renderTopLevelProperty_partial_attributes_6(
-        TopLevelVariable context1) =>
-    _deduplicated_lib_templates__attributes_html(context1);
-
-String _renderTopLevelProperty_partial_documentation_7(
-        TopLevelVariable context1) =>
-    _deduplicated_lib_templates__documentation_html(context1);
-
-String _renderTopLevelProperty_partial_accessor_getter_8(
-        TopLevelVariable context1) =>
-    _deduplicated_lib_templates__accessor_getter_html(context1);
-
-String _renderTopLevelProperty_partial_accessor_setter_9(
-        TopLevelVariable context1) =>
-    _deduplicated_lib_templates__accessor_setter_html(context1);
-
-String _renderTopLevelProperty_partial_search_sidebar_10(
-        TopLevelPropertyTemplateData context0) =>
-    _deduplicated_lib_templates__search_sidebar_html(context0);
-
-String _renderTopLevelProperty_partial_footer_11(
-        TopLevelPropertyTemplateData context0) =>
-    _deduplicated_lib_templates__footer_html(context0);
-
-String _renderTypedef_partial_head_0(TypedefTemplateData context0) =>
-    _deduplicated_lib_templates__head_html(context0);
-
-String _renderTypedef_partial_source_link_1(Typedef context1) =>
-    _deduplicated_lib_templates__source_link_html(context1);
-
-String _renderTypedef_partial_feature_set_2(Typedef context1) =>
-    _deduplicated_lib_templates__feature_set_html(context1);
-
-String _renderTypedef_partial_categorization_3(Typedef context1) =>
-    _deduplicated_lib_templates__categorization_html(context1);
-
-String _renderTypedef_partial_typedef_multiline_4(Typedef context1) {
-  final buffer = StringBuffer();
-  if (context1.isCallable) {
-    var context2 = context1.asCallable;
-    if (context2.hasAnnotations) {
-      buffer.writeln();
-      buffer.write('''
-    <div>
-      <ol class="annotation-list">''');
-      var context3 = context2.annotations;
-      for (var context4 in context3) {
-        buffer.writeln();
-        buffer.write('''
-      <li>''');
-        buffer.write(context4.linkedNameWithParameters);
-        buffer.write('''</li>''');
-      }
-      buffer.writeln();
-      buffer.write('''
-    </ol>
-    </div>''');
-    }
-    if (context2.isConst) {
-      buffer.write('''const ''');
-    }
-    buffer.write('''<span class="name ''');
-    if (context2.isDeprecated) {
-      buffer.write('''deprecated''');
-    }
-    buffer.write('''">''');
-    buffer.writeEscaped(context2.name);
-    buffer.write('''</span>''');
-    buffer.write(context2.linkedGenericParameters);
-    buffer.write(''' =
-     <span class="returntype">''');
-    buffer.write(context2.modelType.linkedName);
-    buffer.write('''</span>''');
-  }
-  if (!context1.isCallable) {
-    buffer.write('\n  ');
-    buffer.write(
-        __renderTypedef_partial_typedef_multiline_4_partial_type_multiline_0(
-            context1));
-  }
-  buffer.writeln();
-
-  return buffer.toString();
-}
-
-String __renderTypedef_partial_typedef_multiline_4_partial_type_multiline_0(
-    Typedef context1) {
-  final buffer = StringBuffer();
-  if (context1.hasAnnotations) {
-    buffer.writeln();
-    buffer.write('''
-<div>
-  <ol class="annotation-list">''');
-    var context2 = context1.annotations;
-    for (var context3 in context2) {
-      buffer.writeln();
-      buffer.write('''
-    <li>''');
-      buffer.write(context3.linkedNameWithParameters);
-      buffer.write('''</li>''');
-    }
-    buffer.writeln();
-    buffer.write('''
-  </ol>
-</div>''');
-  }
-  buffer.writeln();
-  buffer.write(
-      ___renderTypedef_partial_typedef_multiline_4_partial_type_multiline_0_partial_name_summary_0(
-          context1));
-  buffer.write(context1.genericParameters);
-  buffer.write(''' = ''');
-  buffer.write(context1.modelType.linkedName);
-  buffer.write('''</span>
-''');
-
-  return buffer.toString();
-}
-
-String
-    ___renderTypedef_partial_typedef_multiline_4_partial_type_multiline_0_partial_name_summary_0(
-            Typedef context1) =>
-        _deduplicated_lib_templates__name_summary_html(context1);
-
-String _renderTypedef_partial_documentation_5(Typedef context1) =>
-    _deduplicated_lib_templates__documentation_html(context1);
-
-String _renderTypedef_partial_search_sidebar_6(TypedefTemplateData context0) =>
-    _deduplicated_lib_templates__search_sidebar_html(context0);
-
-String _renderTypedef_partial_footer_7(TypedefTemplateData context0) =>
     _deduplicated_lib_templates__footer_html(context0);
 
 String _deduplicated_lib_templates__head_html(TemplateDataBase context0) {
@@ -3700,9 +2940,11 @@ String _deduplicated_lib_templates__constant_html(GetterSetterCombo context0) {
 </dt>
 <dd>
   ''');
-  buffer.write(context0.oneLineDoc);
+  buffer.write(
+      __deduplicated_lib_templates__constant_html_partial_documentation_1(
+          context0));
   buffer.write('\n  ');
-  buffer.write(__deduplicated_lib_templates__constant_html_partial_attributes_1(
+  buffer.write(__deduplicated_lib_templates__constant_html_partial_attributes_2(
       context0));
   buffer.writeln();
   buffer.write('''
@@ -3727,7 +2969,25 @@ String __deduplicated_lib_templates__constant_html_partial_categorization_0(
   return buffer.toString();
 }
 
-String __deduplicated_lib_templates__constant_html_partial_attributes_1(
+String __deduplicated_lib_templates__constant_html_partial_documentation_1(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  if (context0.hasDocumentation) {
+    buffer.writeln();
+    buffer.write('''
+<section class="desc markdown">
+  ''');
+    buffer.write(context0.documentationAsHtml);
+    buffer.writeln();
+    buffer.write('''
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String __deduplicated_lib_templates__constant_html_partial_attributes_2(
     GetterSetterCombo context0) {
   final buffer = StringBuffer();
   if (context0.hasAttributes) {
@@ -3775,21 +3035,32 @@ String _deduplicated_lib_templates__property_html(GetterSetterCombo context0) {
           context0));
   buffer.writeln();
   buffer.write('''
-</dt>
-<dd''');
+</dt>''');
   if (context0.isInherited) {
-    buffer.write(''' class="inherited"''');
-  }
-  buffer.write('''>
+    buffer.writeln();
+    buffer.write('''
+<dd class="inherited">
   ''');
-  buffer.write(context0.oneLineDoc);
-  buffer.write('\n  ');
-  buffer.write(__deduplicated_lib_templates__property_html_partial_attributes_1(
-      context0));
+    buffer.write(
+        __deduplicated_lib_templates__property_html_partial_attributes_1(
+            context0));
+    buffer.write('\n  ');
+    buffer.write(context0.oneLineDoc);
+    buffer.writeln();
+    buffer.write('''
+</dd>''');
+  }
+  if (!context0.isInherited) {
+    buffer.write('\n  ');
+    buffer.write(
+        __deduplicated_lib_templates__property_html_partial_attributes_1(
+            context0));
+    buffer.write('\n  ');
+    buffer.write(
+        __deduplicated_lib_templates__property_html_partial_documentation_2(
+            context0));
+  }
   buffer.writeln();
-  buffer.write('''
-</dd>
-''');
 
   return buffer.toString();
 }
@@ -3816,6 +3087,24 @@ String __deduplicated_lib_templates__property_html_partial_attributes_1(
     buffer.write('''<div class="features">''');
     buffer.write(context0.attributesAsString);
     buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String __deduplicated_lib_templates__property_html_partial_documentation_2(
+    GetterSetterCombo context0) {
+  final buffer = StringBuffer();
+  if (context0.hasDocumentation) {
+    buffer.writeln();
+    buffer.write('''
+<section class="desc markdown">
+  ''');
+    buffer.write(context0.documentationAsHtml);
+    buffer.writeln();
+    buffer.write('''
+</section>''');
   }
   buffer.writeln();
 
@@ -4392,6 +3681,9 @@ String _deduplicated_lib_templates__constructors_html(
     for (var context2 in context1) {
       buffer.writeln();
       buffer.write('''
+        <h3>''');
+      buffer.write(context2.linkedName);
+      buffer.write('''(...)</h3> 
         <dt id="''');
       buffer.writeEscaped(context2.htmlId);
       buffer.write('''" class="callable">
@@ -4401,9 +3693,7 @@ String _deduplicated_lib_templates__constructors_html(
       buffer.write(context2.linkedParams);
       buffer.write(''')</span>
         </dt>
-        <dd>
-          ''');
-      buffer.write(context2.oneLineDoc);
+        <dd>''');
       if (context2.isConst) {
         buffer.writeln();
         buffer.write('''
@@ -4414,6 +3704,10 @@ String _deduplicated_lib_templates__constructors_html(
         buffer.write('''
             <div class="constructor-modifier features">factory</div>''');
       }
+      buffer.write('\n          ');
+      buffer.write(
+          __deduplicated_lib_templates__constructors_html_partial_documentation_0(
+              context2));
       buffer.writeln();
       buffer.write('''
         </dd>''');
@@ -4423,6 +3717,24 @@ String _deduplicated_lib_templates__constructors_html(
     </dl>
   </section>''');
   }
+
+  return buffer.toString();
+}
+
+String __deduplicated_lib_templates__constructors_html_partial_documentation_0(
+    Constructor context1) {
+  final buffer = StringBuffer();
+  if (context1.hasDocumentation) {
+    buffer.writeln();
+    buffer.write('''
+<section class="desc markdown">
+  ''');
+    buffer.write(context1.documentationAsHtml);
+    buffer.writeln();
+    buffer.write('''
+</section>''');
+  }
+  buffer.writeln();
 
   return buffer.toString();
 }
@@ -4481,22 +3793,32 @@ String __deduplicated_lib_templates__instance_fields_html_partial_property_0(
           context1));
   buffer.writeln();
   buffer.write('''
-</dt>
-<dd''');
+</dt>''');
   if (context1.isInherited) {
-    buffer.write(''' class="inherited"''');
-  }
-  buffer.write('''>
+    buffer.writeln();
+    buffer.write('''
+<dd class="inherited">
   ''');
-  buffer.write(context1.oneLineDoc);
-  buffer.write('\n  ');
-  buffer.write(
-      ___deduplicated_lib_templates__instance_fields_html_partial_property_0_partial_attributes_1(
-          context1));
+    buffer.write(
+        ___deduplicated_lib_templates__instance_fields_html_partial_property_0_partial_attributes_1(
+            context1));
+    buffer.write('\n  ');
+    buffer.write(context1.oneLineDoc);
+    buffer.writeln();
+    buffer.write('''
+</dd>''');
+  }
+  if (!context1.isInherited) {
+    buffer.write('\n  ');
+    buffer.write(
+        ___deduplicated_lib_templates__instance_fields_html_partial_property_0_partial_attributes_1(
+            context1));
+    buffer.write('\n  ');
+    buffer.write(
+        ___deduplicated_lib_templates__instance_fields_html_partial_property_0_partial_documentation_2(
+            context1));
+  }
   buffer.writeln();
-  buffer.write('''
-</dd>
-''');
 
   return buffer.toString();
 }
@@ -4525,6 +3847,25 @@ String
     buffer.write('''<div class="features">''');
     buffer.write(context1.attributesAsString);
     buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String
+    ___deduplicated_lib_templates__instance_fields_html_partial_property_0_partial_documentation_2(
+        Field context1) {
+  final buffer = StringBuffer();
+  if (context1.hasDocumentation) {
+    buffer.writeln();
+    buffer.write('''
+<section class="desc markdown">
+  ''');
+    buffer.write(context1.documentationAsHtml);
+    buffer.writeln();
+    buffer.write('''
+</section>''');
   }
   buffer.writeln();
 
@@ -4592,22 +3933,35 @@ String __deduplicated_lib_templates__instance_methods_html_partial_callable_0(
           context1));
   buffer.writeln();
   buffer.write('''
-</dt>
-<dd''');
+</dt>''');
   if (context1.isInherited) {
-    buffer.write(''' class="inherited"''');
-  }
-  buffer.write('''>
+    buffer.writeln();
+    buffer.write('''
+<dd class="inherited">
   ''');
-  buffer.write(context1.oneLineDoc);
-  buffer.write('\n  ');
-  buffer.write(
-      ___deduplicated_lib_templates__instance_methods_html_partial_callable_0_partial_attributes_1(
-          context1));
+    buffer.write(
+        ___deduplicated_lib_templates__instance_methods_html_partial_callable_0_partial_attributes_1(
+            context1));
+    buffer.write('\n  ');
+    buffer.write(context1.oneLineDoc);
+    buffer.writeln();
+    buffer.write('''
+  [<a href="''');
+    buffer.writeEscaped(context1.href);
+    buffer.write('''">... full documentation</a>]
+</dd>''');
+  }
+  if (!context1.isInherited) {
+    buffer.write('\n  ');
+    buffer.write(
+        ___deduplicated_lib_templates__instance_methods_html_partial_callable_0_partial_attributes_1(
+            context1));
+    buffer.write('\n  ');
+    buffer.write(
+        ___deduplicated_lib_templates__instance_methods_html_partial_callable_0_partial_documentation_2(
+            context1));
+  }
   buffer.writeln();
-  buffer.write('''
-</dd>
-''');
 
   return buffer.toString();
 }
@@ -4636,6 +3990,25 @@ String
     buffer.write('''<div class="features">''');
     buffer.write(context1.attributesAsString);
     buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String
+    ___deduplicated_lib_templates__instance_methods_html_partial_callable_0_partial_documentation_2(
+        Method context1) {
+  final buffer = StringBuffer();
+  if (context1.hasDocumentation) {
+    buffer.writeln();
+    buffer.write('''
+<section class="desc markdown">
+  ''');
+    buffer.write(context1.documentationAsHtml);
+    buffer.writeln();
+    buffer.write('''
+</section>''');
   }
   buffer.writeln();
 
@@ -4704,22 +4077,35 @@ String __deduplicated_lib_templates__instance_operators_html_partial_callable_0(
           context1));
   buffer.writeln();
   buffer.write('''
-</dt>
-<dd''');
+</dt>''');
   if (context1.isInherited) {
-    buffer.write(''' class="inherited"''');
-  }
-  buffer.write('''>
+    buffer.writeln();
+    buffer.write('''
+<dd class="inherited">
   ''');
-  buffer.write(context1.oneLineDoc);
-  buffer.write('\n  ');
-  buffer.write(
-      ___deduplicated_lib_templates__instance_operators_html_partial_callable_0_partial_attributes_1(
-          context1));
+    buffer.write(
+        ___deduplicated_lib_templates__instance_operators_html_partial_callable_0_partial_attributes_1(
+            context1));
+    buffer.write('\n  ');
+    buffer.write(context1.oneLineDoc);
+    buffer.writeln();
+    buffer.write('''
+  [<a href="''');
+    buffer.writeEscaped(context1.href);
+    buffer.write('''">... full documentation</a>]
+</dd>''');
+  }
+  if (!context1.isInherited) {
+    buffer.write('\n  ');
+    buffer.write(
+        ___deduplicated_lib_templates__instance_operators_html_partial_callable_0_partial_attributes_1(
+            context1));
+    buffer.write('\n  ');
+    buffer.write(
+        ___deduplicated_lib_templates__instance_operators_html_partial_callable_0_partial_documentation_2(
+            context1));
+  }
   buffer.writeln();
-  buffer.write('''
-</dd>
-''');
 
   return buffer.toString();
 }
@@ -4748,6 +4134,25 @@ String
     buffer.write('''<div class="features">''');
     buffer.write(context1.attributesAsString);
     buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String
+    ___deduplicated_lib_templates__instance_operators_html_partial_callable_0_partial_documentation_2(
+        Operator context1) {
+  final buffer = StringBuffer();
+  if (context1.hasDocumentation) {
+    buffer.writeln();
+    buffer.write('''
+<section class="desc markdown">
+  ''');
+    buffer.write(context1.documentationAsHtml);
+    buffer.writeln();
+    buffer.write('''
+</section>''');
   }
   buffer.writeln();
 
@@ -4803,22 +4208,32 @@ String __deduplicated_lib_templates__static_properties_html_partial_property_0(
           context1));
   buffer.writeln();
   buffer.write('''
-</dt>
-<dd''');
+</dt>''');
   if (context1.isInherited) {
-    buffer.write(''' class="inherited"''');
-  }
-  buffer.write('''>
+    buffer.writeln();
+    buffer.write('''
+<dd class="inherited">
   ''');
-  buffer.write(context1.oneLineDoc);
-  buffer.write('\n  ');
-  buffer.write(
-      ___deduplicated_lib_templates__static_properties_html_partial_property_0_partial_attributes_1(
-          context1));
+    buffer.write(
+        ___deduplicated_lib_templates__static_properties_html_partial_property_0_partial_attributes_1(
+            context1));
+    buffer.write('\n  ');
+    buffer.write(context1.oneLineDoc);
+    buffer.writeln();
+    buffer.write('''
+</dd>''');
+  }
+  if (!context1.isInherited) {
+    buffer.write('\n  ');
+    buffer.write(
+        ___deduplicated_lib_templates__static_properties_html_partial_property_0_partial_attributes_1(
+            context1));
+    buffer.write('\n  ');
+    buffer.write(
+        ___deduplicated_lib_templates__static_properties_html_partial_property_0_partial_documentation_2(
+            context1));
+  }
   buffer.writeln();
-  buffer.write('''
-</dd>
-''');
 
   return buffer.toString();
 }
@@ -4847,6 +4262,25 @@ String
     buffer.write('''<div class="features">''');
     buffer.write(context1.attributesAsString);
     buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String
+    ___deduplicated_lib_templates__static_properties_html_partial_property_0_partial_documentation_2(
+        Field context1) {
+  final buffer = StringBuffer();
+  if (context1.hasDocumentation) {
+    buffer.writeln();
+    buffer.write('''
+<section class="desc markdown">
+  ''');
+    buffer.write(context1.documentationAsHtml);
+    buffer.writeln();
+    buffer.write('''
+</section>''');
   }
   buffer.writeln();
 
@@ -4908,22 +4342,35 @@ String __deduplicated_lib_templates__static_methods_html_partial_callable_0(
           context1));
   buffer.writeln();
   buffer.write('''
-</dt>
-<dd''');
+</dt>''');
   if (context1.isInherited) {
-    buffer.write(''' class="inherited"''');
-  }
-  buffer.write('''>
+    buffer.writeln();
+    buffer.write('''
+<dd class="inherited">
   ''');
-  buffer.write(context1.oneLineDoc);
-  buffer.write('\n  ');
-  buffer.write(
-      ___deduplicated_lib_templates__static_methods_html_partial_callable_0_partial_attributes_1(
-          context1));
+    buffer.write(
+        ___deduplicated_lib_templates__static_methods_html_partial_callable_0_partial_attributes_1(
+            context1));
+    buffer.write('\n  ');
+    buffer.write(context1.oneLineDoc);
+    buffer.writeln();
+    buffer.write('''
+  [<a href="''');
+    buffer.writeEscaped(context1.href);
+    buffer.write('''">... full documentation</a>]
+</dd>''');
+  }
+  if (!context1.isInherited) {
+    buffer.write('\n  ');
+    buffer.write(
+        ___deduplicated_lib_templates__static_methods_html_partial_callable_0_partial_attributes_1(
+            context1));
+    buffer.write('\n  ');
+    buffer.write(
+        ___deduplicated_lib_templates__static_methods_html_partial_callable_0_partial_documentation_2(
+            context1));
+  }
   buffer.writeln();
-  buffer.write('''
-</dd>
-''');
 
   return buffer.toString();
 }
@@ -4952,6 +4399,25 @@ String
     buffer.write('''<div class="features">''');
     buffer.write(context1.attributesAsString);
     buffer.write('''</div>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String
+    ___deduplicated_lib_templates__static_methods_html_partial_callable_0_partial_documentation_2(
+        Method context1) {
+  final buffer = StringBuffer();
+  if (context1.hasDocumentation) {
+    buffer.writeln();
+    buffer.write('''
+<section class="desc markdown">
+  ''');
+    buffer.write(context1.documentationAsHtml);
+    buffer.writeln();
+    buffer.write('''
+</section>''');
   }
   buffer.writeln();
 
@@ -5026,10 +4492,12 @@ String __deduplicated_lib_templates__static_constants_html_partial_constant_0(
 </dt>
 <dd>
   ''');
-  buffer.write(context1.oneLineDoc);
+  buffer.write(
+      ___deduplicated_lib_templates__static_constants_html_partial_constant_0_partial_documentation_1(
+          context1));
   buffer.write('\n  ');
   buffer.write(
-      ___deduplicated_lib_templates__static_constants_html_partial_constant_0_partial_attributes_1(
+      ___deduplicated_lib_templates__static_constants_html_partial_constant_0_partial_attributes_2(
           context1));
   buffer.writeln();
   buffer.write('''
@@ -5056,292 +4524,32 @@ String
 }
 
 String
-    ___deduplicated_lib_templates__static_constants_html_partial_constant_0_partial_attributes_1(
+    ___deduplicated_lib_templates__static_constants_html_partial_constant_0_partial_documentation_1(
+        Field context1) {
+  final buffer = StringBuffer();
+  if (context1.hasDocumentation) {
+    buffer.writeln();
+    buffer.write('''
+<section class="desc markdown">
+  ''');
+    buffer.write(context1.documentationAsHtml);
+    buffer.writeln();
+    buffer.write('''
+</section>''');
+  }
+  buffer.writeln();
+
+  return buffer.toString();
+}
+
+String
+    ___deduplicated_lib_templates__static_constants_html_partial_constant_0_partial_attributes_2(
         Field context1) {
   final buffer = StringBuffer();
   if (context1.hasAttributes) {
     buffer.write('''<div class="features">''');
     buffer.write(context1.attributesAsString);
     buffer.write('''</div>''');
-  }
-  buffer.writeln();
-
-  return buffer.toString();
-}
-
-String _deduplicated_lib_templates__annotations_html(ModelElement context0) {
-  final buffer = StringBuffer();
-  if (context0.hasAnnotations) {
-    buffer.writeln();
-    buffer.write('''
-  <div>
-    <ol class="annotation-list">''');
-    var context1 = context0.annotations;
-    for (var context2 in context1) {
-      buffer.writeln();
-      buffer.write('''
-        <li>''');
-      buffer.write(context2.linkedNameWithParameters);
-      buffer.write('''</li>''');
-    }
-    buffer.writeln();
-    buffer.write('''
-    </ol>
-  </div>''');
-  }
-
-  return buffer.toString();
-}
-
-String _deduplicated_lib_templates__name_summary_html(ModelElement context0) {
-  final buffer = StringBuffer();
-  if (context0.isConst) {
-    buffer.write('''const ''');
-  }
-  buffer.write('''<span class="name ''');
-  if (context0.isDeprecated) {
-    buffer.write('''deprecated''');
-  }
-  buffer.write('''">''');
-  buffer.writeEscaped(context0.name);
-  buffer.write('''</span>''');
-
-  return buffer.toString();
-}
-
-String _deduplicated_lib_templates__accessor_getter_html(
-    GetterSetterCombo context0) {
-  final buffer = StringBuffer();
-  var context1 = context0.getter;
-  if (context1 != null) {
-    buffer.writeln();
-    buffer.write('''
-  <section id="getter">
-
-    <section class="multi-line-signature">
-      ''');
-    buffer.write(
-        __deduplicated_lib_templates__accessor_getter_html_partial_annotations_0(
-            context1));
-    buffer.writeln();
-    buffer.write('''
-      <span class="returntype">''');
-    buffer.write(context1.modelType.returnType.linkedName);
-    buffer.write('''</span>
-      ''');
-    buffer.write(
-        __deduplicated_lib_templates__accessor_getter_html_partial_name_summary_1(
-            context1));
-    buffer.write('\n      ');
-    buffer.write(
-        __deduplicated_lib_templates__accessor_getter_html_partial_attributes_2(
-            context1));
-    buffer.writeln();
-    buffer.write('''
-    </section>
-
-    ''');
-    buffer.write(
-        __deduplicated_lib_templates__accessor_getter_html_partial_documentation_3(
-            context1));
-    buffer.writeln();
-    buffer.write('''
-  </section>''');
-  }
-  buffer.writeln();
-
-  return buffer.toString();
-}
-
-String __deduplicated_lib_templates__accessor_getter_html_partial_annotations_0(
-    Accessor context1) {
-  final buffer = StringBuffer();
-  if (context1.hasAnnotations) {
-    buffer.writeln();
-    buffer.write('''
-  <div>
-    <ol class="annotation-list">''');
-    var context2 = context1.annotations;
-    for (var context3 in context2) {
-      buffer.writeln();
-      buffer.write('''
-        <li>''');
-      buffer.write(context3.linkedNameWithParameters);
-      buffer.write('''</li>''');
-    }
-    buffer.writeln();
-    buffer.write('''
-    </ol>
-  </div>''');
-  }
-
-  return buffer.toString();
-}
-
-String
-    __deduplicated_lib_templates__accessor_getter_html_partial_name_summary_1(
-        Accessor context1) {
-  final buffer = StringBuffer();
-  if (context1.isConst) {
-    buffer.write('''const ''');
-  }
-  buffer.write('''<span class="name ''');
-  if (context1.isDeprecated) {
-    buffer.write('''deprecated''');
-  }
-  buffer.write('''">''');
-  buffer.writeEscaped(context1.name);
-  buffer.write('''</span>''');
-
-  return buffer.toString();
-}
-
-String __deduplicated_lib_templates__accessor_getter_html_partial_attributes_2(
-    Accessor context1) {
-  final buffer = StringBuffer();
-  if (context1.hasAttributes) {
-    buffer.write('''<div class="features">''');
-    buffer.write(context1.attributesAsString);
-    buffer.write('''</div>''');
-  }
-  buffer.writeln();
-
-  return buffer.toString();
-}
-
-String
-    __deduplicated_lib_templates__accessor_getter_html_partial_documentation_3(
-        Accessor context1) {
-  final buffer = StringBuffer();
-  if (context1.hasDocumentation) {
-    buffer.writeln();
-    buffer.write('''
-<section class="desc markdown">
-  ''');
-    buffer.write(context1.documentationAsHtml);
-    buffer.writeln();
-    buffer.write('''
-</section>''');
-  }
-  buffer.writeln();
-
-  return buffer.toString();
-}
-
-String _deduplicated_lib_templates__accessor_setter_html(
-    GetterSetterCombo context0) {
-  final buffer = StringBuffer();
-  var context1 = context0.setter;
-  if (context1 != null) {
-    buffer.writeln();
-    buffer.write('''
-  <section id="setter">
-
-    <section class="multi-line-signature">
-      ''');
-    buffer.write(
-        __deduplicated_lib_templates__accessor_setter_html_partial_annotations_0(
-            context1));
-    buffer.writeln();
-    buffer.write('''
-      <span class="returntype">void</span>
-      ''');
-    buffer.write(
-        __deduplicated_lib_templates__accessor_setter_html_partial_name_summary_1(
-            context1));
-    buffer.write('''<span class="signature">(<wbr>''');
-    buffer.write(context1.linkedParamsNoMetadata);
-    buffer.write(''')</span>
-      ''');
-    buffer.write(
-        __deduplicated_lib_templates__accessor_setter_html_partial_attributes_2(
-            context1));
-    buffer.writeln();
-    buffer.write('''
-    </section>
-
-    ''');
-    buffer.write(
-        __deduplicated_lib_templates__accessor_setter_html_partial_documentation_3(
-            context1));
-    buffer.writeln();
-    buffer.write('''
-  </section>''');
-  }
-  buffer.writeln();
-
-  return buffer.toString();
-}
-
-String __deduplicated_lib_templates__accessor_setter_html_partial_annotations_0(
-    Accessor context1) {
-  final buffer = StringBuffer();
-  if (context1.hasAnnotations) {
-    buffer.writeln();
-    buffer.write('''
-  <div>
-    <ol class="annotation-list">''');
-    var context2 = context1.annotations;
-    for (var context3 in context2) {
-      buffer.writeln();
-      buffer.write('''
-        <li>''');
-      buffer.write(context3.linkedNameWithParameters);
-      buffer.write('''</li>''');
-    }
-    buffer.writeln();
-    buffer.write('''
-    </ol>
-  </div>''');
-  }
-
-  return buffer.toString();
-}
-
-String
-    __deduplicated_lib_templates__accessor_setter_html_partial_name_summary_1(
-        Accessor context1) {
-  final buffer = StringBuffer();
-  if (context1.isConst) {
-    buffer.write('''const ''');
-  }
-  buffer.write('''<span class="name ''');
-  if (context1.isDeprecated) {
-    buffer.write('''deprecated''');
-  }
-  buffer.write('''">''');
-  buffer.writeEscaped(context1.name);
-  buffer.write('''</span>''');
-
-  return buffer.toString();
-}
-
-String __deduplicated_lib_templates__accessor_setter_html_partial_attributes_2(
-    Accessor context1) {
-  final buffer = StringBuffer();
-  if (context1.hasAttributes) {
-    buffer.write('''<div class="features">''');
-    buffer.write(context1.attributesAsString);
-    buffer.write('''</div>''');
-  }
-  buffer.writeln();
-
-  return buffer.toString();
-}
-
-String
-    __deduplicated_lib_templates__accessor_setter_html_partial_documentation_3(
-        Accessor context1) {
-  final buffer = StringBuffer();
-  if (context1.hasDocumentation) {
-    buffer.writeln();
-    buffer.write('''
-<section class="desc markdown">
-  ''');
-    buffer.write(context1.documentationAsHtml);
-    buffer.writeln();
-    buffer.write('''
-</section>''');
   }
   buffer.writeln();
 
