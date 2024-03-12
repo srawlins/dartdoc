@@ -4,7 +4,15 @@
   </span>
   {{ >categorization }}
 </dt>
-<dd{{ #isInherited }} class="inherited"{{ /isInherited }}>
+{{ #isInherited }}
+<dd class="inherited">
+  {{ >attributes }}
+  {{{ oneLineDoc }}}
+  [<a href="{{ href }}">... full documentation</a>]
+</dd>
+{{ /isInherited }}
+{{ ^isInherited }}
+  {{ >attributes }}
   {{ #isProvidedByExtension }}
     {{ #enclosingExtension }}
       <p class="from-extension">
@@ -13,6 +21,5 @@
       </p>
     {{ /enclosingExtension }}
   {{ /isProvidedByExtension }}
-  {{{ oneLineDoc }}}
-  {{ >attributes }}
-</dd>
+  {{ >documentation }}
+{{ /isInherited }}

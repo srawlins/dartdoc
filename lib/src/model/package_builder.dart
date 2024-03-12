@@ -110,7 +110,6 @@ class PubPackageBuilder implements PackageBuilder {
       _sdk,
       _embedderSdkUris.isNotEmpty,
       _packageMetaProvider,
-      _analysisContext,
     );
     await _getLibraries(newGraph);
     runtimeStats.endPerfTask();

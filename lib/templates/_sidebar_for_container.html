@@ -12,7 +12,7 @@
       {{ #hasPublicEnumValues }}
         <li class="section-title"><a href="{{{ href }}}#values">Values</a></li>
         {{ #publicEnumValues }}
-          <li>{{{ linkedName }}}</li>
+          <li><a href="#{{ htmlId }}">{{ name }}</a></li>
         {{ /publicEnumValues }}
       {{ /hasPublicEnumValues }}
     {{ /isEnum }}
@@ -23,6 +23,7 @@
         <li class="section-title{{ #publicInheritedInstanceFields }} inherited{{ /publicInheritedInstanceFields }}">
           <a href="{{{ href }}}#instance-properties">Properties</a>
         </li>
+      {{ #hasAvailableInstanceFields }}
         {{ #availableInstanceFieldsSorted }}
           {{ >container_sidebar_item }}
         {{ /availableInstanceFieldsSorted }}

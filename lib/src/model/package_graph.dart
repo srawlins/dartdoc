@@ -4,7 +4,6 @@
 
 import 'dart:collection';
 
-import 'package:analyzer/dart/analysis/analysis_context.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/file_system/file_system.dart';
 import 'package:analyzer/source/source.dart';
@@ -53,7 +52,6 @@ class PackageGraph with CommentReferable, Nameable {
     DartSdk sdk,
     this.hasEmbedderSdk,
     this.packageMetaProvider,
-    this._analysisContext,
   )   : packageMeta = config.topLevelPackageMeta,
         sdkLibrarySources = {
           for (var lib in sdk.sdkLibraries) sdk.mapDartUri(lib.shortName): lib

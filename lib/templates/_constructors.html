@@ -4,17 +4,18 @@
 
     <dl class="constructor-summary-list">
       {{ #publicConstructorsSorted }}
+        <h3>{{{ linkedName }}}(...)</h3> 
         <dt id="{{htmlId}}" class="callable">
           <span class="name">{{{ linkedName }}}</span><span class="signature">({{{ linkedParams }}})</span>
         </dt>
         <dd>
-          {{{ oneLineDoc }}}
           {{ #isConst }}
             <div class="constructor-modifier features">const</div>
           {{ /isConst }}
           {{ #isFactory }}
             <div class="constructor-modifier features">factory</div>
           {{ /isFactory }}
+          {{ >documentation }}
         </dd>
       {{ /publicConstructorsSorted }}
     </dl>
