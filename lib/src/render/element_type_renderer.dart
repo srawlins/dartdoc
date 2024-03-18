@@ -5,13 +5,18 @@
 import 'package:dartdoc/src/element_type.dart';
 import 'package:dartdoc/src/render/parameter_renderer.dart';
 import 'package:dartdoc/src/render/record_type_field_renderer.dart';
+import 'package:dartdoc/src/render/rendered_text.dart';
 
 abstract class ElementTypeRenderer<T extends ElementType> {
   const ElementTypeRenderer();
 
   String renderLinkedName(T elementType);
 
+  RenderBuffer renderedName(T elementType);
+
   String renderNameWithGenerics(T elementType, {bool plain = false}) => '';
+
+  RenderBuffer renderedNameWithGenerics(T elementType);
 
   String wrapNullabilityParens(T elementType, String inner) =>
       elementType.nullabilitySuffix.isEmpty
@@ -25,21 +30,25 @@ abstract class ElementTypeRendererHtml<T extends ElementType>
     extends ElementTypeRenderer<T> {
   const ElementTypeRendererHtml();
 
-  String _renderLinkedName(
+  RenderBuffer _renderedName(
       T elementType, String name, Iterable<ElementType> typeArguments) {
-    var buffer = StringBuffer()..write(name);
+    var buffer = RenderBuffer()..writeText(name);
     if (typeArguments.isNotEmpty &&
         !typeArguments.every((t) => t.name == 'dynamic')) {
-      buffer
+      var htmlBuffer = StringBuffer()
         ..write('<span class="signature">')
         ..write('&lt;<wbr><span class="type-parameter">')
         ..writeAll(typeArguments.map((t) => t.linkedName),
             '</span>, <span class="type-parameter">')
         ..write('</span>&gt;')
         ..write('</span>');
+      buffer.writeHtml(
+        htmlBuffer.toString(),
+        // TODO: not linkedName!
+        '<${typeArguments.map((t) => t.linkedName).join(', ')}>',
+      );
     }
-    buffer.write(elementType.nullabilitySuffix);
-    return buffer.toString();
+    return buffer..writeText(elementType.nullabilitySuffix);
   }
 
   String _renderNameWithGenerics(
@@ -64,6 +73,26 @@ abstract class ElementTypeRendererHtml<T extends ElementType>
     buffer.write(elementType.nullabilitySuffix);
     return buffer.toString();
   }
+
+  RenderBuffer _renderedNameWithGenerics(
+      T elementType, String name, Iterable<ElementType> typeArguments) {
+    var buffer = RenderBuffer()..writeText(name);
+    if (typeArguments.isNotEmpty &&
+        !typeArguments.every((t) => t.name == 'dynamic')) {
+      var htmlBuffer = StringBuffer()
+        ..write('&lt;<wbr><span class="type-parameter">')
+        ..writeAll(typeArguments.map((t) => t.nameWithGenerics),
+            '</span>, <span class="type-parameter">')
+        ..write('</span>&gt;');
+      buffer.writeHtml(
+        htmlBuffer.toString(),
+        // Grr nameWithGenerics
+        '<${typeArguments.map((t) => t.nameWithGenerics).join(', ')}>',
+      );
+    }
+    buffer.writeText(elementType.nullabilitySuffix);
+    return buffer;
+  }
 }
 
 class FunctionTypeElementTypeRendererHtml
@@ -81,6 +110,23 @@ class FunctionTypeElementTypeRendererHtml
           .renderLinkedParams(elementType.parameters))
       ..write(')</span>');
     return wrapNullabilityParens(elementType, buffer.toString());
+  }
+
+  @override
+  RenderBuffer renderedName(FunctionTypeElementType elementType) {
+    var nameWithGenerics = elementType.nameWithGenerics;
+    var parameters = const ParameterRendererHtml()
+        .renderLinkedParams(elementType.parameters);
+
+    return RenderBuffer()
+      ..writeRenderBuffer(elementType.returnType.renderedName)
+      ..writeText(' ')
+      ..writeHtml(nameWithGenerics, nameWithGenerics)
+      ..writeHtml('<span class="signature">(', '(')
+      ..writeHtml(parameters, parameters)
+      ..writeHtml(')</span>', ')');
+
+    //return wrapNullabilityParens(elementType, buffer.toString());
   }
 
   @override
@@ -105,6 +151,25 @@ class FunctionTypeElementTypeRendererHtml
     }
     return buffer.toString();
   }
+
+  @override
+  RenderBuffer renderedNameWithGenerics(FunctionTypeElementType elementType) {
+    var buffer = RenderBuffer()..writeText(elementType.name);
+    if (elementType.typeFormals.isNotEmpty) {
+      if (!elementType.typeFormals.every((t) => t.name == 'dynamic')) {
+        var htmlBuffer = StringBuffer()
+          ..write('&lt;<wbr><span class="type-parameter">')
+          ..writeAll(elementType.typeFormals.map((t) => t.name),
+              '</span>, <span class="type-parameter">')
+          ..write('</span>&gt;');
+        buffer.writeHtml(
+          htmlBuffer.toString(),
+          '<${elementType.typeFormals.map((t) => t.name).join(', ')}>',
+        );
+      }
+    }
+    return buffer;
+  }
 }
 
 class ParameterizedElementTypeRendererHtml
@@ -113,7 +178,15 @@ class ParameterizedElementTypeRendererHtml
 
   @override
   String renderLinkedName(ParameterizedElementType elementType) =>
-      _renderLinkedName(
+      _renderedName(
+        elementType,
+        elementType.modelElement.linkedName,
+        elementType.typeArguments,
+      ).toString();
+
+  @override
+  RenderBuffer renderedName(ParameterizedElementType elementType) =>
+      _renderedName(
         elementType,
         elementType.modelElement.linkedName,
         elementType.typeArguments,
@@ -128,6 +201,14 @@ class ParameterizedElementTypeRendererHtml
         elementType.typeArguments,
         plain: plain,
       );
+
+  @override
+  RenderBuffer renderedNameWithGenerics(ParameterizedElementType elementType) =>
+      _renderedNameWithGenerics(
+        elementType,
+        elementType.modelElement.name,
+        elementType.typeArguments,
+      );
 }
 
 class RecordElementTypeRendererHtml
@@ -135,23 +216,35 @@ class RecordElementTypeRendererHtml
   const RecordElementTypeRendererHtml();
 
   @override
-  String renderLinkedName(RecordElementType elementType) {
-    var buffer = StringBuffer()
-      ..write('(')
-      ..write(const RecordTypeFieldListHtmlRenderer()
-          .renderLinkedFields(elementType)
-          .trim())
-      ..write(')');
+  String renderLinkedName(RecordElementType elementType) =>
+      renderedName.toString();
+
+  @override
+  RenderBuffer renderedName(RecordElementType elementType) {
+    var renderedFields =
+        const RecordTypeFieldListHtmlRenderer().renderLinkedFields(elementType);
+    renderedFields = RenderBuffer()
+      ..writeHtml(renderedFields.toString().trim(), renderedFields.text.trim());
+    var buffer = RenderBuffer()
+      ..writeText('(')
+      ..writeRenderBuffer(renderedFields)
+      ..writeText(')');
     if (elementType.nullabilitySuffix.isNotEmpty) {
-      buffer.write(elementType.nullabilitySuffix);
+      buffer.writeText(elementType.nullabilitySuffix);
     }
-    return buffer.toString();
+    return buffer;
   }
 
   @override
   String renderNameWithGenerics(RecordElementType elementType,
       {bool plain = false}) {
     return '${elementType.name}${elementType.nullabilitySuffix}';
+  }
+
+  @override
+  RenderBuffer renderedNameWithGenerics(RecordElementType elementType) {
+    return RenderBuffer()
+      ..writeText('${elementType.name}${elementType.nullabilitySuffix}');
   }
 }
 
@@ -161,7 +254,15 @@ class AliasedUndefinedElementTypeRendererHtml
 
   @override
   String renderLinkedName(AliasedUndefinedElementType elementType) =>
-      _renderLinkedName(
+      _renderedName(
+        elementType,
+        elementType.aliasElement.linkedName,
+        elementType.aliasArguments,
+      ).toString();
+
+  @override
+  RenderBuffer renderedName(AliasedUndefinedElementType elementType) =>
+      _renderedName(
         elementType,
         elementType.aliasElement.linkedName,
         elementType.aliasArguments,
@@ -176,6 +277,15 @@ class AliasedUndefinedElementTypeRendererHtml
         elementType.aliasArguments,
         plain: plain,
       );
+
+  @override
+  RenderBuffer renderedNameWithGenerics(
+          AliasedUndefinedElementType elementType) =>
+      _renderedNameWithGenerics(
+        elementType,
+        elementType.aliasElement.name,
+        elementType.aliasArguments,
+      );
 }
 
 class AliasedElementTypeRendererHtml
@@ -183,7 +293,14 @@ class AliasedElementTypeRendererHtml
   const AliasedElementTypeRendererHtml();
 
   @override
-  String renderLinkedName(AliasedElementType elementType) => _renderLinkedName(
+  String renderLinkedName(AliasedElementType elementType) => _renderedName(
+        elementType,
+        elementType.aliasElement.linkedName,
+        elementType.aliasArguments,
+      ).toString();
+
+  @override
+  RenderBuffer renderedName(AliasedElementType elementType) => _renderedName(
         elementType,
         elementType.aliasElement.linkedName,
         elementType.aliasArguments,
@@ -197,5 +314,13 @@ class AliasedElementTypeRendererHtml
         elementType.aliasElement.name,
         elementType.aliasArguments,
         plain: plain,
+      );
+
+  @override
+  RenderBuffer renderedNameWithGenerics(AliasedElementType elementType) =>
+      _renderedNameWithGenerics(
+        elementType,
+        elementType.aliasElement.name,
+        elementType.aliasArguments,
       );
 }
