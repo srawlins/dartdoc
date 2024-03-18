@@ -13,6 +13,7 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:dartdoc/src/model/comment_referable.dart';
 import 'package:dartdoc/src/model/model.dart';
 import 'package:dartdoc/src/render/element_type_renderer.dart';
+import 'package:dartdoc/src/render/rendered_text.dart';
 import 'package:dartdoc/src/runtime_stats.dart';
 import 'package:dartdoc/src/type_utils.dart';
 import 'package:meta/meta.dart';
@@ -48,12 +49,16 @@ abstract class ElementType with CommentReferable, Nameable {
 
   String get linkedName;
 
+  RenderBuffer get renderedName;
+
   /// Name with generics and nullability indication, in HTML tags.
   String get nameWithGenerics;
 
   /// Name with generics and nullability indication, in plain text, with
   /// unescaped angle brackets.
   String get nameWithGenericsPlain;
+
+  RenderBuffer get renderedNameWithGenerics;
 
   @override
   String get displayName => throw UnimplementedError();
@@ -107,14 +112,25 @@ class UndefinedElementType extends ElementType {
     return type.documentableElement!.name!;
   }
 
-  @override
-  String get linkedName => name;
+  //@override
+  //String get nameWithGenerics => '$name$nullabilitySuffix';
 
   @override
-  String get nameWithGenerics => '$name$nullabilitySuffix';
+  String get linkedName => renderedName.toString();
+
+  @override
+  RenderBuffer get renderedName =>
+      RenderBuffer.plainText('$name$nullabilitySuffix');
+
+  @override
+  String get nameWithGenerics => renderedNameWithGenerics.toString();
 
   @override
   String get nameWithGenericsPlain => '$name$nullabilitySuffix';
+
+  @override
+  RenderBuffer get renderedNameWithGenerics =>
+      RenderBuffer.plainText('$name$nullabilitySuffix');
 
   @override
   Iterable<ElementType> get typeArguments => const [];
@@ -247,10 +263,17 @@ class TypeParameterElementType extends DefinedElementType {
   String get linkedName => '$name$nullabilitySuffix';
 
   @override
+  RenderBuffer get renderedName =>
+      RenderBuffer.plainText('$name$nullabilitySuffix');
+
+  @override
   String get nameWithGenerics => '$name$nullabilitySuffix';
 
   @override
   String get nameWithGenericsPlain => '$name$nullabilitySuffix';
+
+  RenderBuffer get renderedNameWithGenerics =>
+      RenderBuffer.plainText('$name$nullabilitySuffix');
 }
 
 /// An [ElementType] associated with an [Element].
@@ -349,11 +372,17 @@ mixin Rendered implements ElementType {
   late final String linkedName = _renderer.renderLinkedName(this);
 
   @override
+  RenderBuffer get renderedName => _renderer.renderedName(this);
+
+  @override
   late final String nameWithGenerics = _renderer.renderNameWithGenerics(this);
 
   @override
   late final String nameWithGenericsPlain =
       _renderer.renderNameWithGenerics(this, plain: true);
+
+  RenderBuffer get renderedNameWithGenerics =>
+      _renderer.renderedNameWithGenerics(this);
 
   ElementTypeRenderer<ElementType> get _renderer;
 }

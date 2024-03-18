@@ -5,38 +5,46 @@
 import 'package:analyzer/dart/element/type.dart';
 import 'package:collection/collection.dart';
 import 'package:dartdoc/src/element_type.dart';
+import 'package:dartdoc/src/render/rendered_text.dart';
 
 /// Render HTML suitable for a single, wrapped line.
 class RecordTypeFieldListHtmlRenderer extends _RecordTypeFieldListRenderer {
   const RecordTypeFieldListHtmlRenderer();
 
   @override
-  String listItem(String item) => item;
-  @override
   String orderedList(String listItems) => listItems;
-  @override
-  String annotation(String name) => '<span>$name</span>';
 
   @override
-  String field(String name) => '<span class="field">$name</span>';
+  RenderBuffer annotation(String name) =>
+      RenderBuffer()..writeHtml('<span>$name</span>', name);
+
   @override
-  String fieldName(String name) => '<span class="field-name">$name</span>';
+  RenderBuffer field(RenderBuffer name) => RenderBuffer()
+    ..writeHtml(
+      '<span class="field">${name.toString()}</span>',
+      name.text,
+    );
+
   @override
-  String typeName(String name) => '<span class="type-annotation">$name</span>';
+  RenderBuffer fieldName(String name) =>
+      RenderBuffer()..writeHtml('<span class="field-name">$name</span>', name);
+
+  @override
+  RenderBuffer typeName(String name) => RenderBuffer()
+    ..writeHtml('<span class="type-annotation">$name</span>', name);
 }
 
 abstract class _RecordTypeFieldListRenderer {
   const _RecordTypeFieldListRenderer();
 
-  String listItem(String item);
   String orderedList(String listItems);
-  String annotation(String name);
-  String field(String name);
-  String fieldName(String name);
-  String typeName(String name);
+  RenderBuffer annotation(String name);
+  RenderBuffer field(RenderBuffer name);
+  RenderBuffer fieldName(String name);
+  RenderBuffer typeName(String name);
 
-  String renderLinkedFields(RecordElementType recordElementType) {
-    final buffer = StringBuffer();
+  RenderBuffer renderLinkedFields(RecordElementType recordElementType) {
+    final buffer = RenderBuffer();
 
     void renderLinkedFieldSublist(
       List<RecordTypeField> fields, {
@@ -57,20 +65,20 @@ abstract class _RecordTypeFieldListRenderer {
           suffix += ', ';
         }
 
-        var fieldBuffer = StringBuffer();
-        fieldBuffer.write(prefix);
+        var fieldBuffer = RenderBuffer();
+        fieldBuffer.writeText(prefix);
         var modelType =
             recordElementType.getTypeFor(field.type, recordElementType.library);
-        var linkedTypeName = typeName(modelType.linkedName);
-        if (linkedTypeName.isNotEmpty) {
-          fieldBuffer.write(linkedTypeName);
+        var renderedTypeName = typeName(modelType.linkedName);
+        if (renderedTypeName.toString().isNotEmpty) {
+          fieldBuffer.writeRenderBuffer(renderedTypeName);
         }
         if (field is RecordTypeNamedField) {
-          fieldBuffer.write(' ');
-          fieldBuffer.write(fieldName(field.name));
+          fieldBuffer.writeText(' ');
+          fieldBuffer.writeRenderBuffer(fieldName(field.name));
         }
-        fieldBuffer.write(suffix);
-        buffer.write(listItem(this.field(fieldBuffer.toString())));
+        fieldBuffer.writeText(suffix);
+        buffer.writeRenderBuffer(this.field(fieldBuffer));
       });
     }
 
@@ -88,6 +96,6 @@ abstract class _RecordTypeFieldListRenderer {
         closeBracket: '}',
       );
     }
-    return orderedList(buffer.toString());
+    return buffer;
   }
 }
