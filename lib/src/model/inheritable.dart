@@ -52,6 +52,14 @@ mixin Inheritable on ContainerMember {
       canonicalEnclosingContainer?.canonicalLibrary;
 
   @override
+  bool get isCanonical =>
+      super.isCanonical &&
+      // If this is the defining element, or if the defining element is not in
+      // the set of libraries being documented, then this element should be
+      // treated as canonical (given `library == canonicalLibrary`).
+      enclosingElement == canonicalEnclosingContainer;
+
+  @override
   // TODO(srawlins): Do something about this overridden field. Maybe split out
   // the super implementation.
   // ignore: overridden_fields
@@ -63,7 +71,12 @@ mixin Inheritable on ContainerMember {
 
   @override
   Container? computeCanonicalEnclosingContainer() {
-    if (!isInherited || definingEnclosingContainer is Extension) {
+    // Whether this element is inherited, or is an override without any
+    // documentation comment.
+    var isInheritedOrOverrideWithoutDoc =
+        isInherited || (isOverride && !hasDocumentationComment);
+    if (!isInheritedOrOverrideWithoutDoc ||
+        definingEnclosingContainer is Extension) {
       return super.computeCanonicalEnclosingContainer();
     }
 
@@ -185,8 +198,6 @@ mixin Inheritable on ContainerMember {
 
     final overriddenElement = this.overriddenElement;
     if (overriddenElement == null) {
-      // We have to have an overridden element for it to be possible for this
-      // element to be an override.
       return false;
     }
 
@@ -199,8 +210,9 @@ mixin Inheritable on ContainerMember {
     if (enclosingCanonical != definingCanonical) {
       // The defining class and the enclosing class for this element must be the
       // same (element is defined here).
-      assert(isInherited);
-      return false;
+      //assert(isInherited);
+      //return false;
+      return !isInherited;
     }
 
     // The canonical version of the element we're overriding, if available.
