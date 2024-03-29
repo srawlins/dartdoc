@@ -63,6 +63,49 @@ void f(int _) {}
     expect(f.documentationAsHtml, '<p>Text <code>_</code>.</p>');
   }
 
+  void solo_test_x() async {
+    var library = await bootPackageWithLibrary('''
+class C {
+  /// Comment.
+  void f() {}
+}
+
+class D extends C {
+  void f() {}
+}
+''');
+
+    var c = library.method('C', 'f');
+    var h1 = c.href;
+    var c1 = c.isCanonical;
+    var cc1 = c.canonicalModelElement;
+
+    var one = library.method('D', 'f');
+    var h2 = one.href;
+    var c2 = one.isCanonical;
+    var cc2 = one.canonicalModelElement;
+    print(one.isDocumented);
+    print(one.hasDocumentation);
+    print(one.hasDocumentationComment);
+    print(one.documentationIsLocal);
+    print(one.documentationLocal);
+    expect(one.linkedParams, matchesCompressed(r'''
+        <span class="parameter" id="one-param-f">
+          <span class="type-annotation">
+            <a href=".*/dart-core/int-class\.html">int</a>
+          </span>
+          <span class="parameter-name">f</span>
+          &lt;<wbr>
+          <span class="type-parameter">T</span>
+          &gt;\(
+          <span class="parameter" id="param-">
+            <span class="type-annotation">T</span>
+          </span>
+          \)\?
+        </span>
+      '''));
+  }
+
   void test_formalParameter_generic_method() async {
     var library = await bootPackageWithLibrary('''
 class C {

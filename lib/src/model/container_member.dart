@@ -37,6 +37,8 @@ mixin ContainerMember on ModelElement {
         if (isExtended) Attribute.extended,
       };
 
+  @protected
+  @visibleForTesting
   late final Container? canonicalEnclosingContainer = () {
     final canonicalEnclosingContainer = computeCanonicalEnclosingContainer();
     assert(canonicalEnclosingContainer == null ||
@@ -44,8 +46,15 @@ mixin ContainerMember on ModelElement {
     return canonicalEnclosingContainer;
   }();
 
-  Container? computeCanonicalEnclosingContainer() =>
-      packageGraph.findCanonicalModelElementFor(enclosingElement) as Container?;
+  @protected
+  Container? computeCanonicalEnclosingContainer() {
+    final enclosingElement = this.enclosingElement;
+    //if (name == 'f') {
+    //  print('yay');
+    //}
+    return packageGraph.findCanonicalModelElementFor(enclosingElement)
+        as Container?;
+  }
 
   @override
   // TODO(jcollins-g): dart-lang/dartdoc#2693.

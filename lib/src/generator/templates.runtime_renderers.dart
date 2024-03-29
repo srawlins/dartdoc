@@ -3230,6 +3230,13 @@ class _Renderer_ContainerAccessor extends RendererBase<ContainerAccessor> {
                         parent: r);
                   },
                 ),
+                'isCanonical': Property(
+                  getValue: (CT_ c) => c.isCanonical,
+                  renderVariable: (CT_ c, Property<CT_> self,
+                          List<String> remainingNames) =>
+                      self.renderSimpleVariable(c, remainingNames, 'bool'),
+                  getBool: (CT_ c) => c.isCanonical,
+                ),
                 'isCovariant': Property(
                   getValue: (CT_ c) => c.isCovariant,
                   renderVariable: (CT_ c, Property<CT_> self,
@@ -3301,29 +3308,6 @@ class _Renderer_ContainerMember extends RendererBase<ContainerMember> {
                     return c.attributes.map((e) => renderSimple(
                         e, ast, r.template, sink,
                         parent: r, getters: _invisibleGetters['Attribute']!));
-                  },
-                ),
-                'canonicalEnclosingContainer': Property(
-                  getValue: (CT_ c) => c.canonicalEnclosingContainer,
-                  renderVariable:
-                      (CT_ c, Property<CT_> self, List<String> remainingNames) {
-                    if (remainingNames.isEmpty) {
-                      return self.getValue(c).toString();
-                    }
-                    var name = remainingNames.first;
-                    var nextProperty =
-                        _Renderer_Container.propertyMap().getValue(name);
-                    return nextProperty.renderVariable(
-                        self.getValue(c) as Container,
-                        nextProperty,
-                        [...remainingNames.skip(1)]);
-                  },
-                  isNullValue: (CT_ c) => c.canonicalEnclosingContainer == null,
-                  renderValue: (CT_ c, RendererBase<CT_> r,
-                      List<MustachioNode> ast, StringSink sink) {
-                    _render_Container(
-                        c.canonicalEnclosingContainer!, ast, r.template, sink,
-                        parent: r);
                   },
                 ),
                 'enclosingElement': Property(
@@ -7031,6 +7015,13 @@ class _Renderer_Inheritable extends RendererBase<Inheritable> {
                         e, ast, r.template, sink,
                         parent: r));
                   },
+                ),
+                'isCanonical': Property(
+                  getValue: (CT_ c) => c.isCanonical,
+                  renderVariable: (CT_ c, Property<CT_> self,
+                          List<String> remainingNames) =>
+                      self.renderSimpleVariable(c, remainingNames, 'bool'),
+                  getBool: (CT_ c) => c.isCanonical,
                 ),
                 'isCovariant': Property(
                   getValue: (CT_ c) => c.isCovariant,
@@ -16300,6 +16291,7 @@ const _invisibleGetters = {
     'canonicalLibrary',
     'canonicalModelElement',
     'inheritance',
+    'isCanonical',
     'isCovariant',
     'isInherited',
     'isOverride',

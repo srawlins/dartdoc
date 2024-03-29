@@ -197,6 +197,9 @@ class ContainerAccessor extends Accessor with ContainerMember, Inheritable {
   }
 
   @override
+  bool get isCanonical => enclosingCombo.isCanonical;
+
+  @override
   bool get isCovariant => isSetter && parameters.first.isCovariant;
 
   @override

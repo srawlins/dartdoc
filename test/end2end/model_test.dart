@@ -2822,8 +2822,9 @@ void main() async {
       expect(documentOnceReexportTwo.isCanonical, isTrue);
     });
 
-    test('classes know about applicableExtensions', () {
+    test('classes know about applicableExtensions', solo: true, () {
       expect(apple.potentiallyApplicableExtensionsSorted, orderedEquals([ext]));
+      print(string.potentiallyApplicableExtensionsSorted);
       expect(string.potentiallyApplicableExtensionsSorted,
           contains(documentOnceReexportTwo));
       expect(baseTest.potentiallyApplicableExtensionsSorted, isEmpty);

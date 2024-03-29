@@ -266,8 +266,12 @@ abstract class ModelElement
       {Container? enclosingContainer}) {
     // TODO(jcollins-g): Reenable Parameter caching when dart-lang/sdk#30146
     //                   is fixed?
-    assert(enclosingContainer == null || enclosingContainer.library == library,
-        '$enclosingContainer.library != $library');
+    assert(
+        enclosingContainer == null ||
+            enclosingContainer.library == library ||
+            enclosingContainer.canonicalLibrary == library,
+        '$enclosingContainer.library (${enclosingContainer.library}) != $library, '
+        'canonicalLib: ${enclosingContainer.canonicalLibrary}');
     if (library != Library.sentinel && newModelElement is! Parameter) {
       runtimeStats.incrementAccumulator('modelElementCacheInsertion');
       var key = ConstructedModelElementsKey(e, enclosingContainer);
@@ -578,17 +582,7 @@ abstract class ModelElement
   }
 
   @override
-  bool get isCanonical {
-    if (!isPublic) return false;
-    if (this is Library && library != canonicalLibrary) return false;
-    // If there's no inheritance to deal with, we're done.
-    if (this is! Inheritable) return true;
-    final self = this as Inheritable;
-    // If we're the defining element, or if the defining element is not in the
-    // set of libraries being documented, then this element should be treated as
-    // canonical (given `library == canonicalLibrary`).
-    return self.enclosingElement == self.canonicalEnclosingContainer;
-  }
+  bool get isCanonical => isPublic && library == canonicalLibrary;
 
   /// The documentaion, stripped of its comment syntax, like `///` characters.
   @override

@@ -772,6 +772,9 @@ class PackageGraph with CommentReferable, Nameable {
       if (canonicalClass != null) preferredClass = canonicalClass;
     }
     var library = modelElement.canonicalLibrary;
+    //if (modelElement.name == 'FutureExtensions') {
+    //  print('FutureExtensions canonical lib: $library');
+    //}
     if (modelElement is Library) return library;
 
     if (library == null && preferredClass != null) {

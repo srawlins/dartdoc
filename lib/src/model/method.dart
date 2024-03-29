@@ -75,7 +75,7 @@ class Method extends ModelElement
   String? get belowSidebarPath => null;
 
   String get fullkind {
-    // A method cannot be abstract and static at the same time.
+    // A method can be abstract or static, but not both.
     if (element.isAbstract) return 'abstract $kind';
     if (element.isStatic) return 'static $kind';
     return kind.toString();
