@@ -92,8 +92,9 @@ mixin Inheritable on ContainerMember {
           definingEnclosingContainer.isPublic) {
         assert(
             definingEnclosingContainer == found,
-            'For $element, expected $definingEnclosingContainer to be Object '
-            'or $found, but was neither.');
+            "For '$element', expected '$definingEnclosingContainer', which is "
+            "canonical and public, to be '$found', but was not. "
+            "Here's inherited: ${inheritance.reversed}");
       }
       if (found != null) {
         return found;
@@ -112,8 +113,19 @@ mixin Inheritable on ContainerMember {
     ];
     var object = packageGraph.specialClasses[SpecialClass.object]!;
 
-    assert(definingEnclosingContainer == object ||
-        inheritance.contains(definingEnclosingContainer));
+    assert(
+        definingEnclosingContainer == object ||
+            inheritance.contains(definingEnclosingContainer), () {
+      var inheritanceDescriptions = inheritance
+          .map((e) =>
+              "'$e' (hashCode: ${e.hashCode}, in library '${e.library}')")
+          .toList();
+      return "Given '$this', on '$enclosingElement' in library '$library', "
+          "the defining enclosing container, '$definingEnclosingContainer' "
+          '(hashCode: ${definingEnclosingContainer.hashCode}, '
+          "in library '${definingEnclosingContainer.library}'), should have "
+          'been Object or contained in: $inheritanceDescriptions';
+    }());
     // Unless the code explicitly extends dart:core's Object, we won't get
     // an entry here.  So add it.
     if (inheritance.last != object) {

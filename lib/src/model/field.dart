@@ -78,7 +78,7 @@ class Field extends ModelElement
 
   @override
   String get filePath =>
-      '${enclosingElement.library.dirName}/${enclosingElement.name}/$fileName';
+      '${enclosingElement.canonicalLibrary?.dirName}/${enclosingElement.name}/$fileName';
 
   @override
   String? get href {

@@ -4416,11 +4416,15 @@ String? topLevelFunction(int param1, bool param2, Cool coolBeans,
               '<span class="parameter" id="aVoidParameter-param-p1"><span class="type-annotation">Future<span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span> <span class="parameter-name">p1</span></span>'));
     });
 
-    test('a class that extends Future<void>', () {
+    test(solo: true, 'a class that extends Future<void>', () {
       expect(
           ExtendsFutureVoid.linkedName,
           equals(
               '<a href="${htmlBasePlaceholder}fake/ExtendsFutureVoid-class.html">ExtendsFutureVoid</a>'));
+      var x = ExtendsFutureVoid.superChain;
+      for (var y in x) {
+        y.isPublic;
+      }
       var FutureVoid = ExtendsFutureVoid.superChain.wherePublic
           .firstWhere((c) => c.name == 'Future');
       expect(

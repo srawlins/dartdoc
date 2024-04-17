@@ -164,7 +164,7 @@ class GeneratorFrontEnd implements Generator {
         indexAccumulator.add(lib);
         _generatorBackend.generateLibrary(packageGraph, lib);
 
-        for (var class_ in lib.classesAndExceptions.whereDocumented) {
+        for (var class_ in lib.classesAndExceptions.whereDocumentedIn(lib)) {
           indexAccumulator.add(class_);
           _generatorBackend.generateClass(packageGraph, lib, class_);
 
@@ -177,7 +177,7 @@ class GeneratorFrontEnd implements Generator {
           generateStaticProperties(class_);
         }
 
-        for (var extension in lib.extensions.whereDocumented) {
+        for (var extension in lib.extensions.whereDocumentedIn(lib)) {
           indexAccumulator.add(extension);
           _generatorBackend.generateExtension(packageGraph, lib, extension);
 
@@ -189,7 +189,7 @@ class GeneratorFrontEnd implements Generator {
           generateStaticProperties(extension);
         }
 
-        for (var extensionType in lib.extensionTypes.whereDocumented) {
+        for (var extensionType in lib.extensionTypes.whereDocumentedIn(lib)) {
           indexAccumulator.add(extensionType);
           _generatorBackend.generateExtensionType(
               packageGraph, lib, extensionType);
@@ -203,7 +203,7 @@ class GeneratorFrontEnd implements Generator {
           generateStaticProperties(extensionType);
         }
 
-        for (var mixin in lib.mixins.whereDocumented) {
+        for (var mixin in lib.mixins.whereDocumentedIn(lib)) {
           indexAccumulator.add(mixin);
           _generatorBackend.generateMixin(packageGraph, lib, mixin);
 
@@ -215,7 +215,7 @@ class GeneratorFrontEnd implements Generator {
           generateStaticProperties(mixin);
         }
 
-        for (var enum_ in lib.enums.whereDocumented) {
+        for (var enum_ in lib.enums.whereDocumentedIn(lib)) {
           indexAccumulator.add(enum_);
           _generatorBackend.generateEnum(packageGraph, lib, enum_);
 
@@ -228,24 +228,24 @@ class GeneratorFrontEnd implements Generator {
           generateStaticProperties(enum_);
         }
 
-        for (var constant in lib.constants.whereDocumented) {
+        for (var constant in lib.constants.whereDocumentedIn(lib)) {
           indexAccumulator.add(constant);
           _generatorBackend.generateTopLevelProperty(
               packageGraph, lib, constant);
         }
 
-        for (var property in lib.properties.whereDocumented) {
+        for (var property in lib.properties.whereDocumentedIn(lib)) {
           indexAccumulator.add(property);
           _generatorBackend.generateTopLevelProperty(
               packageGraph, lib, property);
         }
 
-        for (var function in lib.functions.whereDocumented) {
+        for (var function in lib.functions.whereDocumentedIn(lib)) {
           indexAccumulator.add(function);
           _generatorBackend.generateFunction(packageGraph, lib, function);
         }
 
-        for (var typeDef in lib.typedefs.whereDocumented) {
+        for (var typeDef in lib.typedefs.whereDocumentedIn(lib)) {
           indexAccumulator.add(typeDef);
           _generatorBackend.generateTypeDef(packageGraph, lib, typeDef);
         }

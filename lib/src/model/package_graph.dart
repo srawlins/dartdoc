@@ -704,6 +704,9 @@ class PackageGraph with CommentReferable, Nameable {
       return _canonicalLibraryFor[e];
     }
     _canonicalLibraryFor[e] = null;
+    if (e.name == 'Future') {
+      print('hey Future._findCanonicalLibraryFor');
+    }
 
     var searchElement = switch (e) {
       PropertyAccessorElement() => e.variable2,
@@ -714,7 +717,8 @@ class PackageGraph with CommentReferable, Nameable {
     for (var library in publicLibraries) {
       var modelElements = library.modelElementsMap[searchElement];
       if (modelElements != null) {
-        if (modelElements.any((element) => element.isCanonical)) {
+        // TODO(srawlins): Why is this important??
+        if (modelElements.any((element) => element.isPublic)) {
           return _canonicalLibraryFor[e] = library;
         }
       }
@@ -741,6 +745,9 @@ class PackageGraph with CommentReferable, Nameable {
     var lib = _findCanonicalLibraryFor(e);
     if (lib == null && preferredClass != null) {
       lib = _findCanonicalLibraryFor(preferredClass.element);
+    }
+    if (e.name == 'Future') {
+      print('for Future, canonical lib so far is $lib');
     }
     // For elements defined in extensions, they are canonical.
     var enclosingElement = e.enclosingElement;
@@ -789,12 +796,12 @@ class PackageGraph with CommentReferable, Nameable {
     var candidates = <ModelElement>{};
     if (lib != null) {
       var constructedWithKey = allConstructedModelElements[
-          ConstructedModelElementsKey(e, lib, null)];
+          ConstructedModelElementsKey(e, /*lib,*/ null)];
       if (constructedWithKey != null) {
         candidates.add(constructedWithKey);
       }
       var constructedWithKeyWithClass = allConstructedModelElements[
-          ConstructedModelElementsKey(e, lib, preferredClass)];
+          ConstructedModelElementsKey(e, /*lib,*/ preferredClass)];
       if (constructedWithKeyWithClass != null) {
         candidates.add(constructedWithKeyWithClass);
       }
@@ -1009,20 +1016,20 @@ class PackageGraph with CommentReferable, Nameable {
 
 class ConstructedModelElementsKey {
   final Element element;
-  final Library library;
+  //final Library library;
   final Container? enclosingElement;
 
   ConstructedModelElementsKey(
-      this.element, this.library, this.enclosingElement);
+      this.element, /*this.library,*/ this.enclosingElement);
 
   @override
-  late final int hashCode = Object.hash(element, library, enclosingElement);
+  late final int hashCode = Object.hash(element, /*library,*/ enclosingElement);
 
   @override
   bool operator ==(Object other) {
     if (other is! ConstructedModelElementsKey) return false;
     return other.element == element &&
-        other.library == library &&
+        //other.library == library &&
         other.enclosingElement == enclosingElement;
   }
 }

@@ -42,7 +42,7 @@ class TopLevelVariable extends ModelElement
   Library get enclosingElement => library;
 
   @override
-  String get filePath => '${library.dirName}/$fileName';
+  String get filePath => '${canonicalLibrary?.dirName}/$fileName';
 
   @override
   String get aboveSidebarPath => enclosingElement.sidebarPath;

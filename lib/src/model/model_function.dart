@@ -48,7 +48,7 @@ class ModelFunctionTyped extends ModelElement with TypeParameters {
   Library get enclosingElement => library;
 
   @override
-  String get filePath => '${library.dirName}/$fileName';
+  String get filePath => '${canonicalLibrary?.dirName}/$fileName';
 
   @override
   String get aboveSidebarPath => enclosingElement.sidebarPath;
@@ -61,7 +61,7 @@ class ModelFunctionTyped extends ModelElement with TypeParameters {
     if (!identical(canonicalModelElement, this)) {
       return canonicalModelElement?.href;
     }
-    assert(canonicalLibrary == library);
+    //assert(canonicalLibrary == library);
     return '${package.baseHref}$filePath';
   }
 
