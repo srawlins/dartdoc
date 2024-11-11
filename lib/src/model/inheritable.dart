@@ -86,6 +86,17 @@ mixin Inheritable on ContainerMember {
     var candidates = _enclosingSuperTypes;
     for (var i = 0; i < candidates.length; i++) {
       var container = candidates[i];
+
+      // var name2 = Name(searchElement.library2!.firstFragment.source.uri,
+      //     searchElement.name3!);
+      // /*var superMember = packageGraph.inheritanceManager.getMember(
+      //     c.element.thisType,
+      //     name2,
+      //     //forMixinIndex: mixinIndex,
+      //   );*/
+      // var superMember =
+      //     packageGraph.inheritanceManager.getMember4(container.element, name2);
+
       if (container.containsElement(searchElement)) {
         var thisIsHiddenAndDefining = _isHiddenInterface(container) &&
             container == definingEnclosingContainer;

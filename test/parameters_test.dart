@@ -57,6 +57,49 @@ class C {
       '''));
   }
 
+  void solo_test_x() async {
+    var library = await bootPackageWithLibrary('''
+class C {
+  /// Comment.
+  void f() {}
+}
+
+class D extends C {
+  void f() {}
+}
+''');
+
+    var c = library.method('C', 'f');
+    var h1 = c.href;
+    var c1 = c.isCanonical;
+    var cc1 = c.canonicalModelElement;
+
+    var one = library.method('D', 'f');
+    var h2 = one.href;
+    var c2 = one.isCanonical;
+    var cc2 = one.canonicalModelElement;
+    print('D.f isDoc: ${one.isDocumented}');
+    print('D.f hasDoc: ${one.hasDocumentation}');
+    print('D.f hasDC: ${one.hasDocumentationComment}');
+    print('D.f local: "${one.documentationLocal}"');
+    print('D.f canonModelEl: ${cc2!.enclosingElement!.name}.${cc2.name}');
+    //expect(one.linkedParams, matchesCompressed(r'''
+    //    <span class="parameter" id="one-param-f">
+    //      <span class="type-annotation">
+    //        <a href=".*/dart-core/int-class\.html">int</a>
+    //      </span>
+    //      <span class="parameter-name">f</span>
+    //      &lt;<wbr>
+    //      <span class="type-parameter">T</span>
+    //      &gt;\(
+    //      <span class="parameter" id="param-">
+    //        <span class="type-annotation">T</span>
+    //      </span>
+    //      \)\?
+    //    </span>
+    //  '''));
+  }
+
   void test_formalParameter_referenced() async {
     var library = await bootPackageWithLibrary('''
 /// Text [p].
