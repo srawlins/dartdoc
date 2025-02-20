@@ -41,6 +41,10 @@ mixin ContainerMember on ModelElement {
   @visibleForTesting
   late final Container? canonicalEnclosingContainer = () {
     final canonicalEnclosingContainer = computeCanonicalEnclosingContainer();
+    if (name == 'mm1' || name == 'mm2' || name == 'mm3') {
+      print(
+          '${enclosingElement.name}.$name canonical enclosing: ${canonicalEnclosingContainer?.name}');
+    }
     assert(canonicalEnclosingContainer == null ||
         canonicalEnclosingContainer.isDocumented);
     return canonicalEnclosingContainer;

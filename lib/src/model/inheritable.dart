@@ -25,6 +25,9 @@ mixin Inheritable on ContainerMember {
   /// Whether this is inherited from a different class or mixin.
   bool get isInherited;
 
+  bool get isInherited2 => /* isInheritedOrOverrideWithoutDoc */
+      isInherited || (isOverride && !hasDocumentationComment);
+
   /// Whether this has a parameter whose type is overridden by a subtype.
   bool get isCovariant;
 
@@ -87,15 +90,20 @@ mixin Inheritable on ContainerMember {
     for (var i = 0; i < candidates.length; i++) {
       var container = candidates[i];
 
-      // var name2 = Name(searchElement.library2!.firstFragment.source.uri,
-      //     searchElement.name3!);
-      // /*var superMember = packageGraph.inheritanceManager.getMember(
-      //     c.element.thisType,
-      //     name2,
-      //     //forMixinIndex: mixinIndex,
-      //   );*/
-      // var superMember =
-      //     packageGraph.inheritanceManager.getMember4(container.element, name2);
+      var name2 = Name(searchElement.library2!.firstFragment.source.uri,
+          searchElement.name3!);
+      /*var superMember = packageGraph.inheritanceManager.getMember(
+          c.element.thisType,
+          name2,
+          //forMixinIndex: mixinIndex,
+        );*/
+      /*var superMember = packageGraph.inheritanceManager
+            .getMember4(container.element, name2);
+        if (name == 'mm1' || name == 'mm2' || name == 'mm3') {
+          print('does ${container.name} contain $searchElement? '
+              '${superMember != null}/${container.containsElement(searchElement)}; '
+              '(${superMember?.name3} in ${superMember?.enclosingElement2?.name3})');
+        }*/
 
       if (container.containsElement(searchElement)) {
         var thisIsHiddenAndDefining = _isHiddenInterface(container) &&

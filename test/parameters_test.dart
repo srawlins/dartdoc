@@ -57,7 +57,7 @@ class C {
       '''));
   }
 
-  void solo_test_x() async {
+  void test_x() async {
     var library = await bootPackageWithLibrary('''
 class C {
   /// Comment.
@@ -83,6 +83,49 @@ class D extends C {
     print('D.f hasDC: ${one.hasDocumentationComment}');
     print('D.f local: "${one.documentationLocal}"');
     print('D.f canonModelEl: ${cc2!.enclosingElement!.name}.${cc2.name}');
+    //expect(one.linkedParams, matchesCompressed(r'''
+    //    <span class="parameter" id="one-param-f">
+    //      <span class="type-annotation">
+    //        <a href=".*/dart-core/int-class\.html">int</a>
+    //      </span>
+    //      <span class="parameter-name">f</span>
+    //      &lt;<wbr>
+    //      <span class="type-parameter">T</span>
+    //      &gt;\(
+    //      <span class="parameter" id="param-">
+    //        <span class="type-annotation">T</span>
+    //      </span>
+    //      \)\?
+    //    </span>
+    //  '''));
+  }
+
+  void test_y() async {
+    var library = await bootPackageWithLibrary('''
+class C {
+  /// Comment.
+  int? f;
+}
+
+mixin M on C {
+  @override
+  int? f;
+}
+
+class D extends C with M {
+  //@override
+  //int? f;
+}
+''');
+
+    var one = library.field('D', 'f');
+    var cc2 = one.canonicalModelElement as ContainerMember;
+    print('D.f isDoc: ${one.isDocumented}');
+    print('D.f hasDoc: ${one.hasDocumentation}');
+    print('D.f hasDC: ${one.hasDocumentationComment}');
+    print('D.f local: "${one.documentationLocal}"');
+    print('D.f canonModelEl: ${cc2.enclosingElement.name}.${cc2.name}');
+    print('D.f canonEnclosing: ${cc2.canonicalEnclosingContainer}');
     //expect(one.linkedParams, matchesCompressed(r'''
     //    <span class="parameter" id="one-param-f">
     //      <span class="type-annotation">
@@ -576,7 +619,13 @@ extension on Library {
   }
 
   Method method(String className, String methodName) => classes
-      .firstWhere((clas) => clas.name == className)
+      .firstWhere((c) => c.name == className)
       .declaredMethods
+      .firstWhere((method) => method.name == methodName);
+
+  Field field(String className, String methodName) => classes
+      .firstWhere((c) => c.name == className)
+      //.declaredFields
+      .instanceFields
       .firstWhere((method) => method.name == methodName);
 }

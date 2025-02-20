@@ -729,7 +729,7 @@ abstract class ModelElement
   }
 
   @override
-  bool get isDocumented => isCanonical && isPublic;
+  bool get isDocumented => isCanonical /*&& isPublic*/;
 
   /// Whether this element is an enum value.
   bool get isEnumValue => false;

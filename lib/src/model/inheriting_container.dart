@@ -236,7 +236,8 @@ abstract class InheritingContainer extends Container {
   Iterable<Field> get constantFields => _allFields.where((f) => f.isConst);
 
   @override
-  Iterable<Field> get declaredFields => _allFields.where((f) => !f.isInherited);
+  Iterable<Field> get declaredFields =>
+      _allFields.where((f) => !f.isInherited2);
 
   /// The [InheritingContainer] with the library in which [element] is defined.
   InheritingContainer get definingContainer =>
@@ -270,7 +271,8 @@ abstract class InheritingContainer extends Container {
   bool get hasPublicSuperChainReversed => superChain.any((e) => e.isPublic);
 
   @visibleForTesting
-  Iterable<Field> get inheritedFields => _allFields.where((f) => f.isInherited);
+  Iterable<Field> get inheritedFields =>
+      _allFields.where((f) => f.isInherited2);
 
   @override
   Iterable<Field> get instanceFields => _allFields.where((f) => !f.isStatic);
@@ -351,15 +353,15 @@ abstract class InheritingContainer extends Container {
   // `publicInheritedInstanceOperators` after custom template support is
   // removed. Maybe `areAllInstanceFieldsInherited`.
   bool get publicInheritedInstanceFields =>
-      instanceFields.wherePublic.every((f) => f.isInherited);
+      instanceFields.wherePublic.every((f) => f.isInherited2);
 
   @override
   bool get publicInheritedInstanceMethods =>
-      instanceMethods.every((f) => f.isInherited);
+      instanceMethods.every((f) => f.isInherited2);
 
   @override
   bool get publicInheritedInstanceOperators =>
-      instanceOperators.wherePublic.every((f) => f.isInherited);
+      instanceOperators.wherePublic.every((f) => f.isInherited2);
 
   @visibleForTesting
   late final List<DefinedElementType> directInterfaces = [
