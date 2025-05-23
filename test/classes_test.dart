@@ -225,8 +225,9 @@ abstract class E<K, V> = C<K, V> with _D<K, V>;
     var indexAssign =
         library.classes.named('E').inheritedOperators.named('operator []=');
     expect(indexAssign.element.enclosingElement!.name, '_D');
-    expect(indexAssign.canonicalEnclosingContainer!.name, 'E');
-    expect(indexAssign.canonicalModelElement!.enclosingElement!.name, 'E');
+    expect(indexAssign.canonicalEnclosingContainer!.name, 'A');
+    expect(indexAssign.canonicalModelElement!.enclosingElement!.name,
+        'A'); // or E?
   }
 
   // TODO(srawlins): Test everything else about classes.

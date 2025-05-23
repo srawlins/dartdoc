@@ -97,9 +97,12 @@ mixin Inheritable on ContainerMember {
           name2,
           //forMixinIndex: mixinIndex,
         );*/
-      /*var superMember = packageGraph.inheritanceManager
-            .getMember4(container.element, name2);
-        if (name == 'mm1' || name == 'mm2' || name == 'mm3') {
+      //var superMember =
+      //    packageGraph.inheritanceManager.getMember4(container.element, name2);
+      Annotatable? superMember = container.element.getMethod2(name) ??
+          container.element.getGetter2(name) ??
+          container.element.getSetter2(name);
+      /*if (name == 'mm1' || name == 'mm2' || name == 'mm3') {
           print('does ${container.name} contain $searchElement? '
               '${superMember != null}/${container.containsElement(searchElement)}; '
               '(${superMember?.name3} in ${superMember?.enclosingElement2?.name3})');
