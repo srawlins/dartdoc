@@ -103,10 +103,6 @@ final class Package extends LibraryContainer
   @override
   String? get belowSidebarPath => null;
 
-  /// Return true if the code has defined non-default categories for libraries
-  /// in this package.
-  bool get hasCategories => categories.isNotEmpty;
-
   @override
   late final String documentationAsHtml = Documentation.forElement(this).asHtml;
 

@@ -22,7 +22,7 @@ String generateCategoryJson(
         'href': categorization.href,
         // TODO(srawlins): Rename to 'kind'.
         'type': categorization.kind.toString(),
-        if (categorization.hasCategoryNames)
+        if (categorization.categoryNames.isNotEmpty)
           'categories': categorization.categoryNames,
         if (categorization.subCategoryNames.isNotEmpty)
           'subcategories': categorization.subCategoryNames,

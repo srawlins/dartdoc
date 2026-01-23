@@ -54,7 +54,8 @@ class Generator {
     var indexElements = _generateDocs(packageGraph);
     var categorizedElements = indexElements
         .whereType<ModelElement>()
-        .where((e) => e.hasCategorization)
+        .where(
+            (e) => e.categoryNames.isNotEmpty || e.subCategoryNames.isNotEmpty)
         .toList(growable: false);
     _generatorBackend.generateCategoryJson(categorizedElements);
     _generatorBackend.generateSearchIndex(indexElements);

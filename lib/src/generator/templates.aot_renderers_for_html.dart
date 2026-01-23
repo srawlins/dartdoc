@@ -2100,12 +2100,10 @@ String _deduplicated__available_extensions(InheritingContainer context0) {
 
 String _deduplicated__categorization(ModelElement context0) {
   final buffer = StringBuffer();
-  if (context0.hasCategoryNames) {
-    var context1 = context0.displayedCategories;
-    for (var context2 in context1) {
-      buffer.write('\n    ');
-      buffer.write(context2.categoryLabel);
-    }
+  var context1 = context0.displayedCategories;
+  for (var context2 in context1) {
+    buffer.write('\n  ');
+    buffer.write(context2.categoryLabel);
   }
   buffer.writeln();
 

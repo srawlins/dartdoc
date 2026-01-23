@@ -37,7 +37,7 @@ final _htmlInjectRegExp = RegExp(r'<dartdoc-html>([a-f0-9]+)</dartdoc-html>');
 ///
 /// [_processCommentWithoutTools] and [processComment] are the primary
 /// entrypoints.
-mixin DocumentationComment implements Warnable, SourceCode {
+mixin HasDocumentationComment implements Warnable, SourceCode {
   @override
   Element get element;
 
@@ -68,24 +68,33 @@ mixin DocumentationComment implements Warnable, SourceCode {
   bool get hasNodoc =>
       hasDocumentationComment && documentationComment.contains('@nodoc');
 
+  DocumentationComment? _processedComment;
+
+  DocumentationComment get processedComment {
+    return _processedComment ??= _processCommentWithoutTools();
+  }
+
   /// Processes a [documentationComment], performing various actions based on
   /// `{@}`-style directives (except tool directives), returning the processed
   /// result.
-  String _processCommentWithoutTools() {
+  DocumentationComment _processCommentWithoutTools() {
+    var builder = DocumentationCommentBuilder();
     // We must first strip the comment of directives like `@docImport`, since
     // the offsets are for the source text.
     var docs = _stripDocImports(documentationComment);
     docs = stripCommentDelimiters(docs);
     // TODO(srawlins): Processing templates here causes #2281. But leaving
     // them unprocessed causes #2272.
-    docs = _processCommentDirectives(docs, processMacros: false);
-    return docs;
+    docs =
+        _processCommentDirectives(docs, processMacros: false, builder: builder);
+    return builder.build(docs);
   }
 
   /// Process [documentationComment], performing various actions based on
   /// `{@}`-style directives, returning the processed result.
   @visibleForTesting
-  Future<String> processComment() async {
+  Future<DocumentationComment> processComment() async {
+    var builder = DocumentationCommentBuilder();
     // We must first strip the comment of directives like `@docImport`, since
     // the offsets are for the source text.
     var docs = _stripDocImports(documentationComment);
@@ -93,11 +102,15 @@ mixin DocumentationComment implements Warnable, SourceCode {
     // Then we evaluate tools, in case they insert any other directives that
     // would need to be processed by `processCommentDirectives`.
     docs = await _evaluateTools(docs);
-    docs = _processCommentDirectives(docs);
-    return docs;
+    docs = _processCommentDirectives(docs, builder: builder);
+    return builder.build(docs);
   }
 
-  String _processCommentDirectives(String docs, {bool processMacros = true}) {
+  String _processCommentDirectives(
+    String docs, {
+    bool processMacros = true,
+    DocumentationCommentBuilder? builder,
+  }) {
     // The vast, vast majority of doc comments have no directives.
     if (docs.contains('{@')) {
       _checkForUnknownDirectives(docs);
@@ -108,8 +121,9 @@ mixin DocumentationComment implements Warnable, SourceCode {
       }
       docs = _stripHtmlAndAddToIndex(docs);
     }
-    docs = _stripAndSetCategories(docs);
-    return _stripCanonicalFor(docs);
+    docs = _stripAndSetCategories(docs, builder);
+    docs = _stripCanonicalFor(docs);
+    return docs;
   }
 
   String? get sourceFileName;
@@ -664,31 +678,11 @@ mixin DocumentationComment implements Warnable, SourceCode {
     });
   }
 
-  /// The documentation for this element.
-  ///
-  /// Macro definitions are stripped, but macros themselves are not injected.
-  /// This is a two stage process to avoid ordering problems.
-  ///
-  /// This getter has side-effects which are relied upon in a few places (see
-  /// call-sites). This is not ideal.
-  String get documentationLocal {
-    if (!_docsHaveBeenBuilt) {
-      _docsHaveBeenBuilt = true;
-      _documentationLocal = _processCommentWithoutTools();
-    }
-    return _documentationLocal;
-  }
-
-  late final String _documentationLocal;
-
-  /// Unconditionally precache local documentation.
+  /// Precache local documentation.
   ///
   /// Use only in factory for [PackageGraph].
   Future<void> precacheLocalDocs() async {
-    assert(!_docsHaveBeenBuilt,
-        'reentrant calls to _buildDocumentation* not allowed');
-    _docsHaveBeenBuilt = true;
-    _documentationLocal = await processComment();
+    _processedComment = await processComment();
   }
 
   /// Removes `{@canonicalFor}` from [docs] and checks that they're valid.
@@ -705,8 +699,6 @@ mixin DocumentationComment implements Warnable, SourceCode {
 
     return docs;
   }
-
-  bool _docsHaveBeenBuilt = false;
 
   /// Replace `<dartdoc-html>[digest]</dartdoc-html>` in API comments with
   /// the contents of the HTML fragment earlier defined by the
@@ -796,7 +788,8 @@ mixin DocumentationComment implements Warnable, SourceCode {
   /// Parse `{@category ...}` and related information in API comments, stripping
   /// out that information from the given comments and returning the stripped
   /// version.
-  String _stripAndSetCategories(String rawDocs) {
+  String _stripAndSetCategories(
+      String rawDocs, DocumentationCommentBuilder? builder) {
     Set<String>? categorySet;
     Set<String>? subCategorySet;
 
@@ -810,10 +803,10 @@ mixin DocumentationComment implements Warnable, SourceCode {
       return '';
     });
 
-    _categoryNames = categorySet == null
+    builder?.categoryNames = categorySet == null
         ? const []
         : (categorySet!.toList(growable: false)..sort());
-    _subCategoryNames = subCategorySet == null
+    builder?.subCategoryNames = subCategorySet == null
         ? const []
         : (subCategorySet!.toList(growable: false)..sort());
     return rawDocs;
@@ -822,24 +815,11 @@ mixin DocumentationComment implements Warnable, SourceCode {
   static final RegExp _categoryRegExp =
       RegExp(r'[ ]*{@(category|subCategory) (.+?)}[ ]*\n?', multiLine: true);
 
-  List<String>? _subCategoryNames;
-
   /// A set of strings containing all declared subcategories for this element.
-  List<String> get subCategoryNames {
-    // TODO(srawlins): avoid side-effect dependency.
-    documentationLocal;
-    return _subCategoryNames!;
-  }
-
-  bool get hasCategoryNames => categoryNames.isNotEmpty;
-  List<String>? _categoryNames;
+  List<String> get subCategoryNames => processedComment.subCategoryNames;
 
   /// A set of strings containing all declared categories for this element.
-  List<String> get categoryNames {
-    // TODO(srawlins): avoid side-effect dependency.
-    documentationLocal;
-    return _categoryNames!;
-  }
+  List<String> get categoryNames => processedComment.categoryNames;
 
   @visibleForTesting
   List<Category> get categories =>
@@ -850,13 +830,6 @@ mixin DocumentationComment implements Warnable, SourceCode {
     return categories.where((c) => c.isDocumented);
   }
 
-  /// True if categories or subcategories were parsed.
-  bool get hasCategorization {
-    // TODO(srawlins): avoid side-effect dependency.
-    documentationLocal;
-    return categoryNames.isNotEmpty || subCategoryNames.isNotEmpty;
-  }
-
   /// The set of libraries which this [Library] is canonical for.
   late final Set<String> canonicalFor = {
     for (var match in _canonicalForRegExp.allMatches(documentationComment))
@@ -865,4 +838,34 @@ mixin DocumentationComment implements Warnable, SourceCode {
 
   static final _canonicalForRegExp =
       RegExp(r'[ ]*{@canonicalFor\s([^}]+)}[ ]*\n?');
+}
+
+class DocumentationComment {
+  DocumentationComment({
+    required this.text,
+    required this.categoryNames,
+    required this.subCategoryNames,
+  });
+
+  /// The documentation text for this element.
+  ///
+  /// Macro definitions are stripped, but macros themselves are not injected.
+  /// This is a two stage process to avoid ordering problems.
+  final String text;
+
+  final List<String> categoryNames;
+
+  final List<String> subCategoryNames;
+}
+
+class DocumentationCommentBuilder {
+  List<String>? categoryNames;
+
+  List<String>? subCategoryNames;
+
+  DocumentationComment build(String processedComment) => DocumentationComment(
+        text: processedComment,
+        categoryNames: categoryNames ?? const [],
+        subCategoryNames: subCategoryNames ?? const [],
+      );
 }

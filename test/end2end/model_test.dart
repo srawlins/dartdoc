@@ -608,7 +608,6 @@ void main() async {
   group('Category', () {
     test('Verify categories for test_package', () {
       expect(packageGraph.localPackages, hasLength(1));
-      expect(packageGraph.localPackages.first.hasCategories, isTrue);
       var packageCategories = packageGraph.localPackages.first.categories;
       expect(packageCategories, hasLength(6));
       expect(packageGraph.localPackages.first.categoriesWithPublicLibraries,

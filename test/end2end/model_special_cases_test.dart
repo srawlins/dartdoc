@@ -354,7 +354,7 @@ void main() {
           .classes
           .wherePublic
           .named('IAmAClassWithCategories');
-      expect(IAmAClassWithCategories.hasCategoryNames, isTrue);
+      expect(IAmAClassWithCategories.categoryNames, isNotEmpty);
       expect(IAmAClassWithCategories.categories, hasLength(1));
       expect(
           IAmAClassWithCategories.categories.first.name, equals('Excellent'));
@@ -371,7 +371,7 @@ void main() {
           fakeLibrary.classes.wherePublic.named('BaseForDocComments');
       var SubForDocComments =
           fakeLibrary.classes.wherePublic.named('SubForDocComments');
-      expect(BaseForDocComments.hasCategoryNames, isTrue);
+      expect(BaseForDocComments.categoryNames, isNotEmpty);
       // Display both, with the correct order and display name.
       expect(BaseForDocComments.displayedCategories, hasLength(2));
       expect(
@@ -379,7 +379,7 @@ void main() {
       expect(
           BaseForDocComments.displayedCategories.last.name, equals('Unreal'));
       // Subclasses do not inherit category information.
-      expect(SubForDocComments.hasCategoryNames, isTrue);
+      expect(SubForDocComments.categoryNames, isNotEmpty);
       expect(SubForDocComments.categories, hasLength(1));
       expect(SubForDocComments.categories.first.isDocumented, isFalse);
       expect(SubForDocComments.displayedCategories, isEmpty);

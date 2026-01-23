@@ -192,7 +192,7 @@ End text.'''));
 ''',
       ),
     ]);
-    var docA = await libraryModel.processComment();
+    var docA = (await libraryModel.processComment()).text;
     var docB = packageGraph.defaultPackage.libraries[1].documentation;
 
     expectNoWarnings();
@@ -415,7 +415,7 @@ Three.'''));
     var doc = await libraryModel.processComment();
 
     expectNoWarnings();
-    expect(doc, equals('''
+    expect(doc.text, equals('''
 Text.
 
 {@macro abc}
@@ -434,7 +434,7 @@ End text.'''));
     var doc = await libraryModel.processComment();
 
     expectNoWarnings();
-    expect(doc, equals('''
+    expect(doc.text, equals('''
 {@macro abc}
 
 End text.'''));
@@ -451,7 +451,7 @@ End text.'''));
     var doc = await libraryModel.processComment();
 
     expectNoWarnings();
-    expect(doc, equals('''
+    expect(doc.text, equals('''
 Text.
 
 {@macro abc}'''));
@@ -469,7 +469,7 @@ Text.
     var doc = await libraryModel.processComment();
 
     expectNoWarnings();
-    expect(doc, equals('''
+    expect(doc.text, equals('''
 Text.
 
 {@macro abc}
@@ -485,7 +485,7 @@ End text.'''));
     var doc = await libraryModel.processComment();
 
     expectNoWarnings();
-    expect(doc, equals('{@macro abc}'));
+    expect(doc.text, equals('{@macro abc}'));
   }
 
   void test_leavesInjectHtmlDirectiveUnprocessedWhenDisabled() async {

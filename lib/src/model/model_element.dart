@@ -58,7 +58,12 @@ import 'package:path/path.dart' as p show Context;
 /// ModelElement will reference itself as part of the "wrong" [Library] from the
 /// public interface perspective.
 abstract class ModelElement
-    with CommentReferable, Warnable, Nameable, SourceCode, DocumentationComment
+    with
+        CommentReferable,
+        Warnable,
+        Nameable,
+        SourceCode,
+        HasDocumentationComment
     implements Comparable<ModelElement>, Documentable {
   /// The [Library] of a model can be `null` in three cases:
   ///
@@ -537,7 +542,7 @@ abstract class ModelElement
 
   @override
   String get documentation => injectMacros(
-      documentationFrom.map((e) => e.documentationLocal).join('<p>'));
+      documentationFrom.map((e) => e.processedComment.text).join('<p>'));
 
   /// The [ModelElement]s from which we will get documentation.
   ///

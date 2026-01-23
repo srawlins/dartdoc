@@ -437,7 +437,6 @@ int x;
         var packageGraph =
             await utils.bootBasicPackage(projectPath, packageMetaProvider);
 
-        expect(packageGraph.localPackages.first.hasCategories, isFalse);
         expect(packageGraph.localPackages.first.categories, isEmpty);
       });
     });
