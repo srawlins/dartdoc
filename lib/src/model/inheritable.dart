@@ -90,8 +90,8 @@ mixin Inheritable on ContainerMember {
     for (var i = 0; i < candidates.length; i++) {
       var container = candidates[i];
 
-      var name2 = Name(searchElement.library2!.firstFragment.source.uri,
-          searchElement.name3!);
+      var name2 = Name(
+          searchElement.library!.firstFragment.source.uri, searchElement.name!);
       /*var superMember = packageGraph.inheritanceManager.getMember(
           c.element.thisType,
           name2,
@@ -99,9 +99,9 @@ mixin Inheritable on ContainerMember {
         );*/
       //var superMember =
       //    packageGraph.inheritanceManager.getMember4(container.element, name2);
-      Annotatable? superMember = container.element.getMethod2(name) ??
-          container.element.getGetter2(name) ??
-          container.element.getSetter2(name);
+      var superMember = container.element.getMethod(name) ??
+          container.element.getGetter(name) ??
+          container.element.getSetter(name);
       /*if (name == 'mm1' || name == 'mm2' || name == 'mm3') {
           print('does ${container.name} contain $searchElement? '
               '${superMember != null}/${container.containsElement(searchElement)}; '
